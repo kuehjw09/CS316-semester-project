@@ -8,6 +8,7 @@ public class HelloWorld {
 		System.out.println("Hello World!");
 		System.out.println("you did a git pull");
 		System.out.println("Got the git pull!");
+		System.out.println("This is another edit");
 	}
 
 }
