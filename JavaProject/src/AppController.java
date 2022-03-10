@@ -38,7 +38,6 @@ public class AppController {
 	// fields to be used in scene change methods
 	private Stage stage;
 	private Scene scene;
-	private Parent root;
 	
 	/**
 	 * This method attaches a new scene graph to the stage to display the Dashboard when called
@@ -54,7 +53,7 @@ public class AppController {
 		
 		// access the controller and call a method
 		DashboardController controller = loader.getController();
-		controller.initializeData(currentAccountNumber, accountDatabase); // passing current account and database
+		controller.initializeData(currentAccountNumber, accountDatabase); // passing current account number and database
 
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		stage.setScene(scene);

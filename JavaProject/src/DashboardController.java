@@ -22,7 +22,6 @@ public class DashboardController {
 	// fields to be used in scene change methods
 	private Stage stage;
 	private Scene scene;
-	private Parent root;
 	
 	@FXML
 	private Label AvailableBalanceLabel;
@@ -32,6 +31,9 @@ public class DashboardController {
 	
 	@FXML
 	private Label PendingFundsLabel;
+	
+	@FXML 
+	private Label AccountNumberLabel;
 	
 	/**
 	 * This method will switch back to the login scene when a user selects the log out button.
@@ -60,6 +62,7 @@ public class DashboardController {
 		double totalBalance = accountDatabase.getTotalBalance(currentAccountNumber);
 		double pendingFunds = totalBalance - availableBalance;
 		
+		AccountNumberLabel.setText("AccountNo.\t" + currentAccountNumber);
 		AvailableBalanceLabel.setText(String.format("$%.2f", availableBalance));
 		TotalBalanceLabel.setText(String.format("$%.2f", totalBalance));
 		PendingFundsLabel.setText(String.format("-$%.2f", pendingFunds));

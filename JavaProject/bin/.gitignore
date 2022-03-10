@@ -12,3 +12,6 @@
 /App.class
 /SceneController.class
 /AppController.class
+/TransactionLog.class
+/Transaction.class
+/Transaction$Type.class
