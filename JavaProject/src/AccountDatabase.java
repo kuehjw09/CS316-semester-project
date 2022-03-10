@@ -6,7 +6,7 @@ public class AccountDatabase {
 
 	// no-argument AccountDatabse constructor initializes accounts
 	public AccountDatabase() {
-		accounts = new ArrayList<Account>(); // just 2 accounts for testing
+		accounts = new ArrayList<Account>(); 
 		accounts.add(new Account(12345, 54321, 1000.0, 1200.0));
 		accounts.add(new Account(98765, 56789, 200.0, 200.0));
 	}
