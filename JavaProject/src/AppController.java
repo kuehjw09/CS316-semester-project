@@ -91,7 +91,6 @@ public class AppController {
 			// check whether authentication succeeded
 			if (userAuthenticated) {
 				currentAccountNumber = accountNumber; // save user's account
-				System.out.printf("Success%n%s", accountDatabase.getPublicAccount(currentAccountNumber));
 				switchToDashboard(event); 
 			} else {
 				MessageLabel.setText("Invalid account number or PIN.");
