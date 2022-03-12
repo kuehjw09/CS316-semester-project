@@ -1,3 +1,8 @@
+import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+
 // Account class represents an online ATM account
 
 public class Account {
@@ -12,6 +17,14 @@ public class Account {
 		this.pin = pin;
 		this.availableBalance = availableBalance;
 		this.totalBalance = totalBalance;
+	}
+	// Overloaded constructor when passed a Result Set
+	public Account(ResultSet resultSet) throws SQLException {
+		this.accountNumber = resultSet.getInt(1);
+		this.pin = resultSet.getInt(2);
+		this.availableBalance = resultSet.getDouble(3);
+		this.totalBalance = resultSet.getDouble(4);
+	
 	}
 
 	public int getAccountNumber() {
@@ -62,10 +75,5 @@ public class Account {
 		totalBalance -= amount; // subtract amount from totalBalance
 	}
 
-	@Override
-	public String toString() {
-		return String.format("Account #%d:%nAvailable Balance: $%.2f%nTotalBalance: $%.2f%n", getAccountNumber(),
-				getAvailableBalance(), getTotalBalance());
-	}
 }
 

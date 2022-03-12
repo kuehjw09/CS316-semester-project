@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,8 +44,9 @@ public class AppController {
 	 * This method attaches a new scene graph to the stage to display the Dashboard when called
 	 * @param event
 	 * @throws IOException
+	 * @throws SQLException 
 	 */
-	public void switchToDashboard(ActionEvent event) throws IOException{
+	public void switchToDashboard(ActionEvent event) throws IOException, SQLException{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("Dashboard.fxml"));
 		Parent root = loader.load();
@@ -67,9 +69,10 @@ public class AppController {
 	 * 
 	 * @param event
 	 * @throws IOException
+	 * @throws SQLException 
 	 */
 	@FXML
-	void loginButtonPressed(ActionEvent event) throws IOException {
+	void loginButtonPressed(ActionEvent event) throws IOException, SQLException {
 		if (AccountTextField.getText().length() > 5 || PINTextField.getText().length() > 5) {
 			MessageLabel.setText("Invalid account number or pin (too many digits).");
 		} else if (AccountTextField.getText().length() < 0 || PINTextField.getText().length() < 0) {
@@ -99,7 +102,7 @@ public class AppController {
 
 	}
 
-	public void initialize() {
+	public void initialize() throws SQLException {
 		userAuthenticated = false;
 		currentAccountNumber = 0;
 		accountDatabase = new AccountDatabase(); // create account information database

@@ -2,5 +2,6 @@
 <classpath>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/Java SE 8 [1.8.0_281]"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/Users/owner/Desktop/Spring 2022/CS316/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

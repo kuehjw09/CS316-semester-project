@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,8 +54,9 @@ public class DashboardController {
 	 * This method accepts an account number and database to initialize the view
 	 * 
 	 * @param account
+	 * @throws SQLException 
 	 */
-	public void initializeData(int accountNumber, AccountDatabase database) {
+	public void initializeData(int accountNumber, AccountDatabase database) throws SQLException {
 		currentAccountNumber = accountNumber;
 		accountDatabase = database;
 		
