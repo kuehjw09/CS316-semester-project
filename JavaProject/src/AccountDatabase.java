@@ -3,6 +3,7 @@
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -20,12 +21,14 @@ public class AccountDatabase {
 
 	// no-argument AccountDatabse constructor initializes accounts
 	public AccountDatabase() throws SQLException {
+		System.out.printf("Connecting to database %s...%n%n...%n%n", DATABASE_URL);
+
 		try {
 			// connect to database
 			connection = DriverManager.getConnection(DATABASE_URL, "admin", "adminpassword");
 
 			connectedToDatabase = true;
-			System.out.printf("Connected to Project_Database.%n%n%n");
+			System.out.printf("Connected to Project_Database%n%n%n");
 
 		} catch (SQLException exception) {
 			exception.printStackTrace();
@@ -42,19 +45,48 @@ public class AccountDatabase {
 		try {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery("SELECT * FROM Accounts WHERE accountID = " + accountNumber);
-
-			resultSet.next();
-			Account account = new Account(resultSet);
-			if (account.getAccountNumber() == accountNumber) {
-				return account;
+			if (resultSet.next()) { // if the query returned a value
+				Account account = new Account(resultSet); // create an account object 
+				if (account.getAccountNumber() == accountNumber) { 
+					return account; // return Account object to caller 
+				}
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 		return null; // if no matching account was found, return null
 	}
+	
+	/**
+	 * This method is used primarily on account creation to make sure that the account number entered
+	 * does not match any account numbers currently in the database.
+	 * @param accountNumber
+	 * @return
+	 * @throws SQLException
+	 */
+	public boolean search(int accountNumber) throws SQLException {
+		try {
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery("SELECT * FROM Accounts WHERE accountID = " + accountNumber);
 
+			if (resultSet.next()) {
+				return true;
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false; // if no matching account was found, return null
+	}
+
+	/**
+	 * This method will diplay a table view of Project_Database's Accounts table in the console.
+	 * @param resultSet
+	 * @throws SQLException
+	 */
 	public void getAccountDatabase(ResultSet resultSet) throws SQLException {
 		if (!connectedToDatabase) {
 			throw new IllegalStateException("Not Connected to Database.");
@@ -67,7 +99,7 @@ public class AccountDatabase {
 			ResultSetMetaData metaData = resultSet.getMetaData();
 			int numberOfColumns = metaData.getColumnCount();
 
-			System.out.printf("Accounts Table of Project-Database:%n%n");
+			System.out.printf("Accounts Table of Project-Database:%n");
 
 			// display the names of the columns in the ResultSet
 			for (int i = 1; i <= numberOfColumns; i++) {
@@ -78,7 +110,15 @@ public class AccountDatabase {
 			// display query results
 			while (resultSet.next()) {
 				for (int i = 1; i <= numberOfColumns; i++) {
-					System.out.printf("%-20s\t", resultSet.getObject(i));
+					if (i == 1 || i == 2) {
+						String formatted = String.format("%05d", resultSet.getInt(i));
+						System.out.printf("%-18s\t", formatted);
+
+					} 
+					else {
+						System.out.printf("$%-18s\t", resultSet.getObject(i).toString());
+
+					}
 				}
 
 				System.out.println();
@@ -88,6 +128,7 @@ public class AccountDatabase {
 		}
 	}
 
+	
 	public boolean authenticateUser(int userAccountNumber, int userPIN) throws SQLException {
 		// attempt to retrieve the account with the account number
 		Account userAccount = getAccount(userAccountNumber);
@@ -98,6 +139,37 @@ public class AccountDatabase {
 		}
 
 		return false;
+	}
+	
+	/**
+	 * This method performs an INSERT query on the database. 
+	 * 
+	 * @param accountNumber
+	 * @param accountPIN
+	 * @param totalBalance
+	 * @param availableBalance
+	 * @throws SQLException
+	 */
+	public void addRowToAccounts(int accountNumber, int accountPIN, 
+			double totalBalance, double availableBalance) throws SQLException {
+		String createString = "INSERT INTO Accounts VALUES (?, ?, ?, ?)";
+
+		try (PreparedStatement createStatement = connection.prepareStatement(createString)) {
+		      createStatement.setInt(1, accountNumber);
+		      createStatement.setInt(2, accountPIN);
+		      createStatement.setDouble(3, totalBalance);
+		      createStatement.setDouble(4, availableBalance);
+		      
+
+		      createStatement.executeUpdate();
+		      System.out.printf("Project_Database updated successfully.%n%n");
+
+		} catch (SQLException e) {
+		     System.out.printf("%nINSERT Query failed.%n");
+
+			e.printStackTrace();
+		}
+		
 	}
 
 	// return available balance of Account with specified account number

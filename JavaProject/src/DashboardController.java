@@ -43,6 +43,8 @@ public class DashboardController {
 	 * @throws IOException
 	 */
 	public void switchToLogin(ActionEvent event) throws IOException {
+		String formatted = String.format("%05d", currentAccountNumber);
+		System.out.printf("%nAccountNo. %s logging out...%n", formatted);
 		Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
@@ -68,5 +70,9 @@ public class DashboardController {
 		AvailableBalanceLabel.setText(String.format("$%.2f", availableBalance));
 		TotalBalanceLabel.setText(String.format("$%.2f", totalBalance));
 		PendingFundsLabel.setText(String.format("-$%.2f", pendingFunds));
+		
+		// Display account number when login is successful
+		String formatted = String.format("%05d", currentAccountNumber);
+		System.out.printf("%nAccountNo. %s login successful%n", formatted);
 	}
 }

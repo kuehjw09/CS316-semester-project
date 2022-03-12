@@ -29,6 +29,9 @@ public class AppController {
 
 	@FXML
 	private Button LoginButton;
+	
+	@FXML 
+	private Button SignupButton;
 
 	@FXML
 	private TextField PINTextField;
@@ -61,6 +64,29 @@ public class AppController {
 		stage.setScene(scene);
 		stage.show();
 	}
+	
+	/**
+	 * This method attaches a new scene graph to the stage to display the Signup page when called
+	 * @param event
+	 * @throws IOException
+	 * @throws SQLException 
+	 */
+	public void switchToSignUp(ActionEvent event) throws IOException, SQLException{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("Signup.fxml"));
+		Parent root = loader.load();
+		
+		scene = new Scene(root);
+		
+		// access the controller and call a method
+		SignupController controller = loader.getController();
+		controller.initializeData(accountDatabase); // passing current account number and database
+
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
+	}
+
 
 	/**
 	 * This method is called when a user attempts to log in. It verifies the account information
@@ -99,7 +125,15 @@ public class AppController {
 				MessageLabel.setText("Invalid account number or PIN.");
 			}
 		}
-
+	}
+	
+	@FXML
+	void signUpButtonPressed(ActionEvent event) throws IOException, SQLException {
+		try {
+			switchToSignUp(event);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void initialize() throws SQLException {

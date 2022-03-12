@@ -8,14 +8,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AppController">
    <children>
-      <ImageView fitHeight="408.0" fitWidth="609.0" layoutX="-7.0" layoutY="-2.0" opacity="0.82" pickOnBounds="true">
-         <image>
+	<ImageView fitHeight="445.0" fitWidth="781.0" pickOnBounds="true" preserveRatio="true">         <image>
             <Image url="@gradient-02.jpeg" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="154.0" layoutY="55.0" prefHeight="293.0" prefWidth="294.0" style="-fx-background-color: #212121; -fx-border-color: #e9e9e9;">
+      <AnchorPane layoutX="241.0" layoutY="73.0" prefHeight="293.0" prefWidth="294.0" style="-fx-background-color: #212121; -fx-border-color: #e9e9e9;">
          <children>
             <Label layoutX="110.0" layoutY="24.0" text="Login" textFill="WHITE">
                <font>
@@ -50,7 +49,7 @@
             </Label>
             <Label fx:id="MessageLabel" alignment="CENTER_RIGHT" layoutX="27.0" layoutY="73.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="17.0" prefWidth="241.0" textFill="#d7284e" />
             <Label layoutX="32.0" layoutY="247.0" text="Need to create an account?" textFill="#a1a1a1" />
-            <Button fx:id="LoginButton1" layoutX="196.0" layoutY="242.0" mnemonicParsing="false" onAction="#loginButtonPressed" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #d7284e;" text="Sign up" textFill="WHITE">
+            <Button fx:id="SignupButton" layoutX="196.0" layoutY="242.0" mnemonicParsing="false" onAction="#signUpButtonPressed" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #d7284e;" text="Sign up" textFill="WHITE">
                <font>
                   <Font name="Tahoma" size="13.0" />
                </font>
