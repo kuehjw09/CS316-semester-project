@@ -1,5 +1,4 @@
-
-// AccountDatabase class represents ATM account information database
+// AccountDatabase class interacts with the account information database and supports CRUD operations on the database.
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
@@ -19,9 +18,10 @@ public class AccountDatabase {
 	// keep track of database connection status
 	private boolean connectedToDatabase = false;
 
-	// no-argument AccountDatabse constructor initializes accounts
+	// no-argument AccountDatabse constructor initializes database connection
 	public AccountDatabase() throws SQLException {
-		System.out.printf("Connecting to database %s...%n%n...%n%n", DATABASE_URL);
+		System.out.print("_____________________________________________________________________________\n");
+		System.out.printf("Connecting to database %s...%n%n . . .%n%n", DATABASE_URL);
 
 		try {
 			// connect to database
@@ -36,11 +36,18 @@ public class AccountDatabase {
 
 		if (connectedToDatabase) {
 			getAccountDatabase(resultSet);
-
 		}
 	}
 
-	// retrieve Account object containing specified account number
+	/**
+	 * This method queries the database to find the row in the Accounts table with PRIMARY KEY equal to the 
+	 * integer passed into the method. If an account with that number exists, the method creates 
+	 * an object of the Account class using the corresponding data obtained from the database.
+	 * 
+	 * @param accountNumber
+	 * @return
+	 * @throws SQLException
+	 */
 	private Account getAccount(int accountNumber) throws SQLException {
 		try {
 			statement = connection.createStatement();
@@ -62,6 +69,7 @@ public class AccountDatabase {
 	/**
 	 * This method is used primarily on account creation to make sure that the account number entered
 	 * does not match any account numbers currently in the database.
+	 * 
 	 * @param accountNumber
 	 * @return
 	 * @throws SQLException
@@ -128,7 +136,13 @@ public class AccountDatabase {
 		}
 	}
 
-	
+	/**
+	 * This method is called when a user logs in to verify the account information they entered.
+	 * @param userAccountNumber
+	 * @param userPIN
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean authenticateUser(int userAccountNumber, int userPIN) throws SQLException {
 		// attempt to retrieve the account with the account number
 		Account userAccount = getAccount(userAccountNumber);
@@ -142,7 +156,7 @@ public class AccountDatabase {
 	}
 	
 	/**
-	 * This method performs an INSERT query on the database. 
+	 * This method performs an INSERT query on the database. Called when creating a new Account from the signup page.
 	 * 
 	 * @param accountNumber
 	 * @param accountPIN
