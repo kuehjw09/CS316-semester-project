@@ -19,11 +19,14 @@ public class AccountDatabase {
 
 	// keep track of database connection status
 	private boolean connectedToDatabase = false;
+	
+	// keep track of times loaded in a session
+	private static int count = 0; 
 
 	// no-argument AccountDatabse constructor initializes database connection
 	public AccountDatabase() throws SQLException {
 		System.out.printf("_____________________________________________________________________________%n%n");
-		System.out.printf("Connecting to database %s...%n%n . . .%n%n", DATABASE_URL);
+		System.out.printf("Connecting to database %s ...%n%n%n", DATABASE_URL);
 
 		try {
 			// connect to database
@@ -35,9 +38,13 @@ public class AccountDatabase {
 		} catch (SQLException exception) {
 			exception.printStackTrace();
 		}
+		
+		count++;
+		// only display Accounts table once 
+		if (connectedToDatabase && count == 1) {
+			getAccountDatabase(resultSet); // display Accounts table for development and testing
+			System.out.printf("%n%n_____________________________________________________________________________%n%n");
 
-		if (connectedToDatabase) {
-			getAccountDatabase(resultSet);
 		}
 	}
 
