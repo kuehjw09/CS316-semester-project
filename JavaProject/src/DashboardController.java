@@ -1,6 +1,10 @@
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 /**
@@ -35,6 +40,13 @@ public class DashboardController {
 	
 	@FXML 
 	private Label AccountNumberLabel;
+	
+	@FXML
+	private ListView<Transaction> transactionsListView;
+	
+	// stores the list of Transaction objects
+	private final ObservableList<Transaction> transactions =
+			FXCollections.observableArrayList();
 	
 	/**
 	 * This method will switch back to the login scene when a user selects the log out button.
@@ -66,13 +78,20 @@ public class DashboardController {
 		double totalBalance = accountDatabase.getTotalBalance(currentAccountNumber);
 		double pendingFunds = totalBalance - availableBalance;
 		
-		AccountNumberLabel.setText("AccountNo.\t" + currentAccountNumber);
+		String formatted = String.format("%05d", currentAccountNumber);
+		AccountNumberLabel.setText("AccountNo. " + formatted);
 		AvailableBalanceLabel.setText(String.format("$%.2f", availableBalance));
 		TotalBalanceLabel.setText(String.format("$%.2f", totalBalance));
 		PendingFundsLabel.setText(String.format("-$%.2f", pendingFunds));
 		
 		// Display account number when login is successful
-		String formatted = String.format("%05d", currentAccountNumber);
 		System.out.printf("%nAccountNo. %s login successful%n", formatted);
+		
+		for (Transaction transaction : accountDatabase.getTransactions(accountNumber)) {
+				transactions.add(transaction);
+			
+		}
+
+		transactionsListView.setItems(transactions);
 	}
 }

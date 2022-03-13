@@ -1,72 +1,56 @@
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Transaction {
 
-	private Date date; 
-	private String description;
+	private Timestamp timeStamp;
 	private String type;
 	private double amount;
 
-	// constructor
-	public Transaction(Date date, String description,
-			String type, double amount) {
-		if (type == "credit") {
-			this.type = "credit";	
-		} else if (type == "debit") {
-			this.type = "debit";
-		} else {
-			throw new IllegalArgumentException("transaction type is invalid.");
-		}
-		
-		this.date = date;
-		this.description = description;
+	public Transaction(Timestamp timeStamp, String type, double amount) {
+		super();
+		this.timeStamp = timeStamp;
+		this.type = type;
 		this.amount = amount;
 	}
 	
-	
-	public Date getDate() {
-		return date;
+	// Overloaded constructor that accepts a ResultSet
+	public Transaction(ResultSet resultSet) throws SQLException {
+		this.timeStamp = resultSet.getTimestamp(5);
+		this.type = resultSet.getString(4);
+		this.amount= resultSet.getDouble(3);
+		
 	}
 
-
-	public void setDate(Date date) {
-		this.date = date;
+	public Timestamp getTimeStamp() {
+		return timeStamp;
 	}
 
-
-	public String getDescription() {
-		return description;
+	public void setTimeStamp(Timestamp timeStamp) {
+		this.timeStamp = timeStamp;
 	}
-
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 
 	public String getType() {
 		return type;
 	}
 
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
 
 	public double getAmount() {
 		return amount;
 	}
 
-
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 
-
 	@Override
 	public String toString() {
-		return String.format("%s\t%s\t%s\t$%.2f%n", getDate(), getDescription(), getType(), getAmount());
-				
+		return String.format("%s\t%s\t$%.2f%n", getTimeStamp(), getType(), getAmount());
+
 	}
 }

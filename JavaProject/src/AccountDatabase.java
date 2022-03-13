@@ -9,6 +9,8 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 
+import javafx.collections.ObservableList;
+
 public class AccountDatabase {
 	private ResultSet resultSet;
 	private Connection connection;
@@ -20,7 +22,7 @@ public class AccountDatabase {
 
 	// no-argument AccountDatabse constructor initializes database connection
 	public AccountDatabase() throws SQLException {
-		System.out.print("_____________________________________________________________________________\n");
+		System.out.printf("_____________________________________________________________________________%n%n");
 		System.out.printf("Connecting to database %s...%n%n . . .%n%n", DATABASE_URL);
 
 		try {
@@ -67,7 +69,7 @@ public class AccountDatabase {
 	}
 	
 	/**
-	 * This method is used primarily on account creation to make sure that the account number entered
+	 * This method is used primarily on account creation to ensure that the account number entered
 	 * does not match any account numbers currently in the database.
 	 * 
 	 * @param accountNumber
@@ -87,11 +89,32 @@ public class AccountDatabase {
 			e.printStackTrace();
 		}
 
-		return false; // if no matching account was found, return null
+		return false; // if no matching account was found
+	}
+	
+	public ArrayList<Transaction> getTransactions(int accountNumber) throws SQLException {
+		try {
+			ArrayList<Transaction> list = new ArrayList<>();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery("SELECT * FROM Transactions"
+					+ " WHERE (accountID = " + accountNumber + ")");
+
+			
+			while (resultSet.next() && resultSet != null) {
+				list.add(new Transaction(resultSet));
+			}
+			
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 	/**
 	 * This method will diplay a table view of Project_Database's Accounts table in the console.
+	 * 
 	 * @param resultSet
 	 * @throws SQLException
 	 */
@@ -122,7 +145,11 @@ public class AccountDatabase {
 						String formatted = String.format("%05d", resultSet.getInt(i));
 						System.out.printf("%-18s\t", formatted);
 
-					} 
+					} else if (i == 5) {
+						System.out.printf("$%-18s\t", resultSet.getDate(i).toString());
+					} else if (i == 6) {
+						System.out.printf("$%-18s\t", resultSet.getTimestamp(i).toString());
+					}
 					else {
 						System.out.printf("$%-18s\t", resultSet.getObject(i).toString());
 
@@ -166,23 +193,26 @@ public class AccountDatabase {
 	 */
 	public void addRowToAccounts(int accountNumber, int accountPIN, 
 			double totalBalance, double availableBalance) throws SQLException {
-		String createString = "INSERT INTO Accounts VALUES (?, ?, ?, ?)";
+		String createString = "INSERT INTO Accounts "
+				+ "(accountID, accountPIN, availableBalance, totalBalance )"
+				+ " VALUES (?, ?, ?, ?)";
 
 		try (PreparedStatement createStatement = connection.prepareStatement(createString)) {
 		      createStatement.setInt(1, accountNumber);
 		      createStatement.setInt(2, accountPIN);
-		      createStatement.setDouble(3, totalBalance);
-		      createStatement.setDouble(4, availableBalance);
+		      createStatement.setDouble(3, availableBalance);
+		      createStatement.setDouble(4, totalBalance);
 		      
 
 		      createStatement.executeUpdate();
 		      System.out.printf("Project_Database updated successfully.%n%n");
+		      createStatement.close();
 
 		} catch (SQLException e) {
 		     System.out.printf("%nINSERT Query failed.%n");
 
 			e.printStackTrace();
-		}
+		} 
 		
 	}
 

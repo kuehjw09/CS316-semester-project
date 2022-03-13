@@ -100,9 +100,9 @@ public class AppController {
 	@FXML
 	void loginButtonPressed(ActionEvent event) throws IOException, SQLException {
 		if (AccountTextField.getText().length() > 5 || PINTextField.getText().length() > 5) {
-			MessageLabel.setText("Invalid account number or pin (too many digits).");
-		} else if (AccountTextField.getText().length() < 0 || PINTextField.getText().length() < 0) {
-			MessageLabel.setText("Invalid account number or pin (must enter a value).");
+			MessageLabel.setText("Please enter an integer having 5 digits or less.");
+		} else if (AccountTextField.getText().isEmpty() || PINTextField.getText().isEmpty()) {
+			MessageLabel.setText("One or more fields is empty.");
 		} else {
 			int accountNumber = Integer.valueOf(AccountTextField.getText()); // input account number
 			int accountPIN = Integer.valueOf(PINTextField.getText()); // input PIN
