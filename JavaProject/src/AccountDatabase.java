@@ -23,7 +23,7 @@ public class AccountDatabase {
 	// keep track of times loaded in a session
 	private static int count = 0; 
 
-	// no-argument AccountDatabse constructor initializes database connection
+	// no-argument AccountDatabase constructor initializes database connection
 	public AccountDatabase() throws SQLException {
 		System.out.printf("_____________________________________________________________________________%n%n");
 		System.out.printf("Connecting to database %s ...%n%n%n", DATABASE_URL);
@@ -33,7 +33,7 @@ public class AccountDatabase {
 			connection = DriverManager.getConnection(DATABASE_URL, "admin", "adminpassword");
 
 			connectedToDatabase = true;
-			System.out.printf("Connected to Project_Database%n%n%n");
+			System.out.printf("Connected to `Project_Database`%n%n%n");
 
 		} catch (SQLException exception) {
 			exception.printStackTrace();
@@ -49,12 +49,12 @@ public class AccountDatabase {
 	}
 
 	/**
-	 * This method queries the database to find the row in the Accounts table with PRIMARY KEY equal to the 
-	 * integer passed into the method. If an account with that number exists, the method creates 
-	 * an object of the Account class using the corresponding data obtained from the database.
+	 * This method queries the database to find a row in Accounts table with accountID equal to the 
+	 * integer passed into the method. If an account with that number exists in the table, the method
+	 * returns an instance of Account with the data obtained from the row in Accounts.
 	 * 
 	 * @param accountNumber
-	 * @return
+	 * @return Account account
 	 * @throws SQLException
 	 */
 	private Account getAccount(int accountNumber) throws SQLException {
@@ -80,7 +80,7 @@ public class AccountDatabase {
 	 * does not match any account numbers currently in the database.
 	 * 
 	 * @param accountNumber
-	 * @return
+	 * @return either true or false
 	 * @throws SQLException
 	 */
 	public boolean search(int accountNumber) throws SQLException {

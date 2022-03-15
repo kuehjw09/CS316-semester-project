@@ -51,6 +51,5 @@ public class Transaction {
 	@Override
 	public String toString() {
 		return String.format("%s\t%s\t$%.2f%n", getTimeStamp(), getType(), getAmount());
-
 	}
 }
