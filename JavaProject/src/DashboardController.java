@@ -65,6 +65,78 @@ public class DashboardController {
 	}
 	
 	/**
+	 * This method will display to the withdrawal form when the appropriate button is pressed. 
+	 * The form controller will be initialized with the current account number and database connection.
+	 * @param event
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public void withdrawalButtonPressed(ActionEvent event) throws IOException, SQLException {
+		// withdrawal button pressed
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("Withdrawal.fxml"));
+		Parent root = loader.load();
+		
+		scene = new Scene(root);
+		
+		// access the controller and call a method
+		WithdrawalController controller = loader.getController();
+		controller.initializeData(currentAccountNumber, accountDatabase); // passing current account number and database
+
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	/**
+	 * This method will display to the deposit form when the appropriate button is pressed. 
+	 * The form controller will be initialized with the current account number and database connection.
+	 * @param event
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public void depositButtonPressed(ActionEvent event) throws IOException, SQLException {
+		// depositButtonPressed
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("Deposit.fxml"));
+		Parent root = loader.load();
+		
+		scene = new Scene(root);
+		
+		// access the controller and call a method
+		DepositController controller = loader.getController();
+		controller.initializeData(currentAccountNumber, accountDatabase); // passing current account number and database
+
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	/**
+	 * This method will display to the transfer form when the appropriate button is pressed. 
+	 * The form controller will be initialized with the current account number and database connection.
+	 * @param event
+	 * @throws IOException
+	 * @throws SQLException
+	 */
+	public void transferButtonPressed(ActionEvent event) throws IOException, SQLException {
+		// transfer button pressed
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("Transfer.fxml"));
+		Parent root = loader.load();
+		
+		scene = new Scene(root);
+		
+		// access the controller and call a method
+		TransferController controller = loader.getController();
+		controller.initializeData(currentAccountNumber, accountDatabase); // passing current account number and database
+
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
+	}
+ 	
+	/**
 	 * This method accepts an account number and database to initialize the view
 	 * 
 	 * @param account
@@ -82,10 +154,10 @@ public class DashboardController {
 		AccountNumberLabel.setText("AccountNo. " + formatted);
 		AvailableBalanceLabel.setText(String.format("$%.2f", availableBalance));
 		TotalBalanceLabel.setText(String.format("$%.2f", totalBalance));
-		PendingFundsLabel.setText(String.format("-$%.2f", pendingFunds));
+		PendingFundsLabel.setText(String.format("+$%.2f", pendingFunds));
 		
 		// Display account number when login is successful
-		System.out.printf("%nAccountNo. %s login successful%n", formatted);
+		System.out.printf("%nDashboard loaded for AccountNo. %s%n", formatted);
 		
 		for (Transaction transaction : accountDatabase.getTransactions(accountNumber)) {
 				transactions.add(transaction);

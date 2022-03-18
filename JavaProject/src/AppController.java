@@ -139,6 +139,6 @@ public class AppController {
 	public void initialize() throws SQLException {
 		userAuthenticated = false;
 		currentAccountNumber = 0;
-		accountDatabase = new AccountDatabase(); // create account information database
+		accountDatabase = new AccountDatabase(); // initialize account information database
 	}
 }

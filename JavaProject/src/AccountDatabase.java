@@ -222,6 +222,61 @@ public class AccountDatabase {
 		} 
 		
 	}
+	
+	/**
+	 * 
+	 * @param accountNumber
+	 * @param availableBalance
+	 * @throws SQLException
+	 */
+	public void withdrawal(int accountNumber, double availableBalance, double totalBalance) throws SQLException {
+		String createString = "UPDATE Accounts SET availableBalance = ? "
+				+ "SET totalBalance = ? "
+				+ "WHERE accountID = ? ";
+		
+		try (PreparedStatement createStatement = connection.prepareStatement(createString)) {
+			createStatement.setInt(1, accountNumber);
+			createStatement.setDouble(2, availableBalance);
+			createStatement.setDouble(3, totalBalance);
+			
+			createStatement.executeUpdate();
+		    System.out.printf("Project_Database updated successfully.%n%n");
+		    createStatement.close();
+
+			
+		} catch (SQLException e) {
+			System.out.printf("UPDATE Query failed.%n");
+			e.printStackTrace();
+		}
+	} 
+	
+	/**
+	 * 
+	 * @param accountNumber
+	 * @param availableBalance
+	 * @throws SQLException
+	 */
+	public void deposit(int accountNumber, double totalBalance) throws SQLException {
+		String createString = "UPDATE Accounts SET totalBalance = ? WHERE accountID = ? ";
+
+		try (PreparedStatement createStatement = connection.prepareStatement(createString)) {
+			createStatement.setInt(1, accountNumber);
+			createStatement.setDouble(2, totalBalance);
+			
+			createStatement.executeUpdate();
+		    System.out.printf("Project_Database updated successfully.%n%n");
+		    createStatement.close();
+		    
+		} catch (SQLException e) {
+			System.out.printf("UPDATE Query failed.%n");
+			e.printStackTrace();
+		}
+	} 
+	
+	
+	public void transfer() throws SQLException {
+		// transfer funds from one account to another
+	}
 
 	// return available balance of Account with specified account number
 	public double getAvailableBalance(int userAccountNumber) throws SQLException {
