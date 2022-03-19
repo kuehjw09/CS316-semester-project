@@ -13,6 +13,18 @@
   -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 3, 0, 0, 1);
 }
 .button:hover {
-  -fx-background-color: linear-gradient(#ec9f25, #de3154);
+  -fx-background-color: linear-gradient(#f85717, #de3154);
+  -fx-text-fill: white;
+}
+
+.login {
+  -fx-background-color: #d7284e;
+  -fx-background-radius: 10;
+  -fx-background-insets: 0, 1, 1;
+  -fx-text-fill: white;
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 3, 0, 0, 1);
+}
+.login:hover {
+  -fx-background-color: linear-gradient(#f85717, #de3154);
   -fx-text-fill: white;
 }
