@@ -54,7 +54,7 @@ public class DepositController {
 			throw new IllegalArgumentException("Must enter/select a value for deposit.");
 		} else {
 			try {
-				accountDatabase.credit(currentAccountNumber, depositAmount);
+				accountDatabase.credit(currentAccountNumber, depositAmount); 
 				Transaction transaction = new Transaction(currentAccountNumber, depositAmount, "credit");
 				transaction.addTransaction();
 			} catch (SQLException exception) {
@@ -73,7 +73,9 @@ public class DepositController {
 
 	@FXML
 	void enterSelectionButtonPressed(ActionEvent event) {
-		depositAmount = Double.valueOf(amountTextField.getText());
+		if (depositAmount == 0) {
+			depositAmount = Double.valueOf(amountTextField.getText());
+		}
 		amountTextField.setText(currency.format(depositAmount));
 		pendingDepositLabel.setText(amountTextField.getText());
 		previewBalanceLabel.setText(currency.format(totalBalance + depositAmount));
@@ -139,7 +141,7 @@ public class DepositController {
 		this.totalBalance = accountDatabase.getTotalBalance(accountNumber);
 
 		String formatted = String.format("%05d", currentAccountNumber);
-		System.out.printf("Deposit form loaded with accountNo. %s%n", formatted);
+		System.out.printf("Deposit form loaded with accountNo. %s%n%n", formatted);
 		totalBalanceLabel.setText(currency.format(totalBalance));
 		previewBalanceLabel.setText(currency.format(totalBalance));
 	}
