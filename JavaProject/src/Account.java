@@ -1,8 +1,12 @@
 import java.math.BigDecimal;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 
 // Account class represents an online ATM account
@@ -88,13 +92,42 @@ public class Account {
 		return false;
 	}
 
-	public void credit(double amount) {
+	public void credit(double amount) throws SQLException {
 		totalBalance += amount; // add amount to totalBalance
+		updateTotals(); // update Accounts table to reflect changes
 	}
 
-	public void debit(double amount) {
+	public void debit(double amount) throws SQLException {
 		availableBalance -= amount; // subtract amount from availableBalance
 		totalBalance -= amount; // subtract amount from totalBalance
+		updateTotals(); // update Accounts table to reflect changes
+
 	}
 
+	/**
+	 * This method updates this Account's corresponding row in the Accounts table of
+	 * `Project_Database` to match the updated balances following a transaction.
+	 */
+	public void updateTotals() throws SQLException {
+		Connection connection = AccountDatabase.getConnection();
+
+		String createString = "UPDATE Accounts SET availableBalance = ?, totalBalance = ? " 
+								+ "WHERE accountID = ? ;";
+
+		try (PreparedStatement createStatement = connection.prepareStatement(createString)) {
+			createStatement.setDouble(1, availableBalance);
+			createStatement.setDouble(2, totalBalance);
+			createStatement.setInt(3, accountNumber);
+
+			createStatement.executeUpdate();
+			System.out.printf("Project_Database updated successfully.%n%n");
+			createStatement.close();
+
+		} catch (SQLException e) {
+			System.out.printf("UPDATE Query failed.%n");
+			e.printStackTrace();
+		} finally {
+			connection.close();
+		}
+	}
 }

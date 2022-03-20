@@ -1,4 +1,5 @@
 // AccountDatabase class interacts with the account information database and supports CRUD operations on the database.
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
@@ -15,13 +16,43 @@ public class AccountDatabase {
 	private ResultSet resultSet;
 	private Connection connection;
 	private Statement statement;
-	final String DATABASE_URL = "jdbc:mysql://project-database.cfkat6ss9oqw.us-east-2.rds.amazonaws.com/Project_Database?";
+	final static String DATABASE_URL = "jdbc:mysql://project-database.cfkat6ss9oqw.us-east-2.rds.amazonaws.com/Project_Database?";
 
 	// keep track of database connection status
 	private boolean connectedToDatabase = false;
 	
 	// keep track of times loaded in a session
 	private static int count = 0; 
+
+	// static method to obtain database connection when called
+	public static Connection getConnection() {
+		Connection connection;
+		try {
+			// connect to database
+			connection = DriverManager.getConnection(DATABASE_URL, "admin", "adminpassword");
+			return connection;
+
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static void callUpdateTotalsProcedure() {
+		Connection connection;
+
+		try {
+			connection = DriverManager.getConnection(DATABASE_URL, "admin", "adminpassword");
+			// call the stored procedure UPDATE_TOTALS to update availableBalance to match totalBalance on each account
+			CallableStatement cs = connection.prepareCall("CALL UPDATE_TOTALS;"); // execute database update on first load
+			cs.executeUpdate();
+			System.out.printf("Successfully executed stored procedure call%n%n");
+
+		} catch (SQLException exception) {
+			System.out.printf("Stored procedure call failed.");
+			exception.printStackTrace();
+		}
+	}
 
 	// no-argument AccountDatabase constructor initializes database connection
 	public AccountDatabase() throws SQLException {
@@ -31,7 +62,7 @@ public class AccountDatabase {
 		try {
 			// connect to database
 			connection = DriverManager.getConnection(DATABASE_URL, "admin", "adminpassword");
-
+			
 			connectedToDatabase = true;
 			System.out.printf("Connected to `Project_Database`%n%n%n");
 
@@ -42,9 +73,9 @@ public class AccountDatabase {
 		count++;
 		// only display Accounts table once 
 		if (connectedToDatabase && count == 1) {
+			callUpdateTotalsProcedure();
 			getAccountDatabase(resultSet); // display Accounts table for development and testing
 			System.out.printf("%n%n_____________________________________________________________________________%n%n");
-
 		}
 	}
 
@@ -104,7 +135,7 @@ public class AccountDatabase {
 			ArrayList<Transaction> list = new ArrayList<>();
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery("SELECT * FROM Transactions"
-					+ " WHERE (accountID = " + accountNumber + ")");
+					+ " WHERE (accountID = " + accountNumber + ") ORDER BY processed DESC");
 
 			
 			while (resultSet.next() && resultSet != null) {
@@ -221,61 +252,6 @@ public class AccountDatabase {
 			e.printStackTrace();
 		} 
 		
-	}
-	
-	/**
-	 * 
-	 * @param accountNumber
-	 * @param availableBalance
-	 * @throws SQLException
-	 */
-	public void withdrawal(int accountNumber, double availableBalance, double totalBalance) throws SQLException {
-		String createString = "UPDATE Accounts SET availableBalance = ? "
-				+ "SET totalBalance = ? "
-				+ "WHERE accountID = ? ";
-		
-		try (PreparedStatement createStatement = connection.prepareStatement(createString)) {
-			createStatement.setInt(1, accountNumber);
-			createStatement.setDouble(2, availableBalance);
-			createStatement.setDouble(3, totalBalance);
-			
-			createStatement.executeUpdate();
-		    System.out.printf("Project_Database updated successfully.%n%n");
-		    createStatement.close();
-
-			
-		} catch (SQLException e) {
-			System.out.printf("UPDATE Query failed.%n");
-			e.printStackTrace();
-		}
-	} 
-	
-	/**
-	 * 
-	 * @param accountNumber
-	 * @param availableBalance
-	 * @throws SQLException
-	 */
-	public void deposit(int accountNumber, double totalBalance) throws SQLException {
-		String createString = "UPDATE Accounts SET totalBalance = ? WHERE accountID = ? ";
-
-		try (PreparedStatement createStatement = connection.prepareStatement(createString)) {
-			createStatement.setInt(1, accountNumber);
-			createStatement.setDouble(2, totalBalance);
-			
-			createStatement.executeUpdate();
-		    System.out.printf("Project_Database updated successfully.%n%n");
-		    createStatement.close();
-		    
-		} catch (SQLException e) {
-			System.out.printf("UPDATE Query failed.%n");
-			e.printStackTrace();
-		}
-	} 
-	
-	
-	public void transfer() throws SQLException {
-		// transfer funds from one account to another
 	}
 
 	// return available balance of Account with specified account number

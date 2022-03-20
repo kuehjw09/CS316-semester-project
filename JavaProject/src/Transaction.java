@@ -1,6 +1,9 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Transaction {
@@ -8,10 +11,11 @@ public class Transaction {
 	private Timestamp timeStamp;
 	private String type;
 	private double amount;
+	private int accountNumber;
 
-	public Transaction(Timestamp timeStamp, String type, double amount) {
+	public Transaction(int accountNumber, double amount, String type) {
 		super();
-		this.timeStamp = timeStamp;
+		this.accountNumber = accountNumber;
 		this.type = type;
 		this.amount = amount;
 	}
@@ -24,14 +28,24 @@ public class Transaction {
 		
 	}
 
-	public Timestamp getTimeStamp() {
-		return timeStamp;
+	public String getTimeStamp() {
+		String formatted = new SimpleDateFormat("MM/dd/yyyy").format(timeStamp);
+
+		return formatted;
 	}
 
 	public void setTimeStamp(Timestamp timeStamp) {
 		this.timeStamp = timeStamp;
 	}
+	
+	public int getAccountNumber() {
+		return accountNumber;
+	}
 
+	public void setAccountNumber(int accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+	
 	public String getType() {
 		return type;
 	}
@@ -46,6 +60,30 @@ public class Transaction {
 
 	public void setAmount(double amount) {
 		this.amount = amount;
+	}
+	
+
+	public void addTransaction() throws SQLException {
+		Connection connection = AccountDatabase.getConnection();
+		
+		String createString = "INSERT INTO Transactions "
+					+ "(accountID, amount, transaction_type) "
+					+ "VALUES (?, ?, ?);";
+		try (PreparedStatement createStatement = connection.prepareStatement(createString)) {
+			createStatement.setInt(1, getAccountNumber());
+			createStatement.setDouble(2, getAmount());
+			createStatement.setString(3, getType());
+			
+			createStatement.executeUpdate();
+			System.out.printf("Transaction receipt created.%n%n");
+			createStatement.close();
+			
+		} catch (SQLException e) {
+			System.out.printf("INSERT Query failed.%n");
+			e.printStackTrace();
+		} finally {
+			connection.close();
+		}
 	}
 
 	@Override
