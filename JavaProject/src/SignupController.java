@@ -1,4 +1,9 @@
-
+/**
+ * FXML Controller Class for Signup.fxml
+ * 
+ * @author jkuehl
+ *
+ */
 import java.io.IOException;
 import java.sql.SQLException;
 

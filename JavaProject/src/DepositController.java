@@ -1,3 +1,9 @@
+/**
+ *  Controller class for Deposit.fxml
+ *  
+ *  @author jkuehl
+ */
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -46,6 +52,15 @@ public class DepositController {
 		depositAmount = 0;
 	}
 
+	/**
+	 * This method ensures that a deposit is executed succesfully by validating the credit
+	 * amount, calling method credit() of the AccountDatabase class, and creating a Transaction 
+	 * object that will represent the deposit for the account being credited. 
+	 * 
+	 * @param event
+	 * @throws SQLException
+	 * @throws IOException
+	 */
 	@FXML
 	void confirmDepositButtonPressed(ActionEvent event) throws SQLException, IOException {
 		// perform deposit transaction with selected options
@@ -112,8 +127,7 @@ public class DepositController {
 	}
 
 	/**
-	 * This method attaches a new scene graph to the stage to display the Dashboard
-	 * when called
+	 * This method with display the Dashboard when called
 	 * 
 	 * @param event
 	 * @throws IOException

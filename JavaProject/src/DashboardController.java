@@ -1,3 +1,9 @@
+/**
+ * FXML Controller Class for Dashboard.fxml
+ * 
+ * @author jkuehl
+ *
+ */
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,12 +21,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller Class
- * 
- * @author jkuehl
- *
- */
 public class DashboardController {
 	private int currentAccountNumber;
 	private AccountDatabase accountDatabase;

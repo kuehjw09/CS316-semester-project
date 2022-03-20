@@ -1,3 +1,8 @@
+/**
+ * Class Transaction represents a credit or debit transaction receipt for all account transactions. 
+ * 
+ * @author jkuehl
+ */
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -63,8 +68,15 @@ public class Transaction {
 	}
 	
 
+	/**
+	 * Each transaction object has a method addTransaction() that will INSERT a row into the
+	 * Transactions heap table of the project database with the information provided during this 
+	 * Transaction object's instantiation.
+	 * 
+	 * @throws SQLException
+	 */
 	public void addTransaction() throws SQLException {
-		Connection connection = AccountDatabase.getConnection();
+		Connection connection = AccountDatabase.getConnection(); // call AccountDatabase static method getConnection()
 		
 		String createString = "INSERT INTO Transactions "
 					+ "(accountID, amount, transaction_type) "
@@ -86,6 +98,7 @@ public class Transaction {
 		}
 	}
 
+	// return a String representation of a Transaction object
 	@Override
 	public String toString() {
 		return String.format("%s\t%s\t$%.2f%n", getTimeStamp(), getType(), getAmount());
