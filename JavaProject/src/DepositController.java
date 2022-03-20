@@ -18,14 +18,14 @@ public class DepositController {
 	private AccountDatabase accountDatabase;
 	private double depositAmount;
 	private double totalBalance;
-	
+
 	// fields to be used in scene change methods
 	private Stage stage;
 	private Scene scene;
 
 	// formatter for currency
 	private static final NumberFormat currency = NumberFormat.getCurrencyInstance();
-	
+
 	@FXML
 	private Label pendingDepositLabel;
 
@@ -34,8 +34,8 @@ public class DepositController {
 
 	@FXML
 	private Label totalBalanceLabel;
-	
-	@FXML 
+
+	@FXML
 	private TextField amountTextField;
 
 	@FXML
@@ -49,15 +49,20 @@ public class DepositController {
 	@FXML
 	void confirmDepositButtonPressed(ActionEvent event) throws SQLException, IOException {
 		// perform deposit transaction with selected options
-		try {
-			accountDatabase.credit(currentAccountNumber, depositAmount);
-			Transaction transaction = new Transaction(currentAccountNumber, depositAmount, "credit");
-			transaction.addTransaction();
-		} catch (SQLException exception) {
-			System.out.printf("Transaction failed.%n");
-			exception.printStackTrace();
+
+		if (depositAmount == 0) {
+			throw new IllegalArgumentException("Must enter/select a value for deposit.");
+		} else {
+			try {
+				accountDatabase.credit(currentAccountNumber, depositAmount);
+				Transaction transaction = new Transaction(currentAccountNumber, depositAmount, "credit");
+				transaction.addTransaction();
+			} catch (SQLException exception) {
+				System.out.printf("Transaction failed.%n");
+				exception.printStackTrace();
+			}
+			switchToDashboard(event);
 		}
-		switchToDashboard(event);
 	}
 
 	@FXML
