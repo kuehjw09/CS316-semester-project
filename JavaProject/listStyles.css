@@ -1,14 +1,14 @@
 .list-cell {
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
-    -fx-font-family: "monospaced";
-    -fx-font-size: 11;
+  -fx-background-color: transparent;
+  -fx-text-fill: white;
+  -fx-font-family: 'monospaced';
+  -fx-font-size: 11;
 }
 .list-cell:filled:hover {
-	-fx-background-color: #f27d7d;
-	-fx-text-fill: white;
+  -fx-background-color: #f27d7d;
+  -fx-text-fill: white;
 }
 .list-view {
-    -fx-background-color: transparent;
-    -fx-text-fill: white;   
+  -fx-background-color: transparent;
+  -fx-text-fill: white;
 }

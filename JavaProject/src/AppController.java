@@ -1,6 +1,7 @@
 /**
  * FXML Application Controller Class
- * 
+ *  - Handles user login and authentication, then initializes the Dashboard component 
+ *  with validated account information.
  * @author jkuehl
  *
  */

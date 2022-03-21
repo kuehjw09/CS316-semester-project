@@ -19,7 +19,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class SignupController {
-	private AccountDatabase accountDatabase;
+	private AccountDatabase accountDatabase; // store reference to database connection
+	
 	// fields to be used in scene change methods
 	private Stage stage;
 	private Scene scene;
@@ -41,7 +42,6 @@ public class SignupController {
 
 	@FXML
 	void submitButtonPressed(ActionEvent event) throws SQLException, IOException {
-
 		if (AccountTextField.getText().isEmpty() || PINTextField.getText().isEmpty()) {
 			MessageLabel.setText("One or more fields is empty.");
 		} else {
@@ -56,7 +56,8 @@ public class SignupController {
 					String formatted = String.format("%05d", accountNumber);
 					System.out.printf("%nAdding accountNo. %s to Project_Database...%n%n...%n%n", formatted);
 
-					accountDatabase.addRowToAccounts(accountNumber, accountPIN, 0.00, 0.00);
+					Account account = new Account(accountNumber, accountPIN, 0.00, 0.00);
+					accountDatabase.addRowToAccounts(account);
 					switchToLogin(event);
 
 				} else {
@@ -87,7 +88,7 @@ public class SignupController {
 	}
 
 	public void initializeData(AccountDatabase database) {
-		accountDatabase = database;
+		accountDatabase = database; // obtaining reference to database connection
 	}
 
 }

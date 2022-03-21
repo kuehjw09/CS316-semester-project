@@ -108,7 +108,7 @@ public class Account {
 	 * This method calls AccountDatabase static method getConnection() to obtain a connection to the 
 	 * project database. When called, the method will select the row in the Accounts table of the project 
 	 * database and update the appropriate columns representing the available balance and total balance of the 
-	 * row matching the accountNumber of the Account object that was called. 
+	 * row matching the corresponding accountNumber of the Account object that was called. 
 	 * 
 	 * @throws SQLException
 	 */

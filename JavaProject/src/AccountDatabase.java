@@ -1,6 +1,6 @@
 
 /**
- * Class AccountDatabase acts as the connection interface for the application. This class establishes 
+ * Class AccountDatabase acts as the database connection for the application. This class establishes 
  * a connection to `Project_Database`, provides a static method for obtaining a connection outside of the
  * class, and supports CRUD operations on the database.
  * 
@@ -21,9 +21,12 @@ import java.util.ArrayList;
 import javafx.collections.ObservableList;
 
 public class AccountDatabase {
+	// for interacting with sql
 	private ResultSet resultSet;
 	private Connection connection;
 	private Statement statement;
+
+	// final static hostname for use in AccountDatabase methods
 	final static String DATABASE_URL = "jdbc:mysql://project-database.cfkat6ss9oqw.us-east-2.rds.amazonaws.com/Project_Database?";
 
 	// keep track of database connection status
@@ -32,7 +35,8 @@ public class AccountDatabase {
 	// keep track of times loaded in a session
 	private static int count = 0;
 
-	// static method to obtain database connection when called
+	// provide static method to obtain a Connection object reference to a database
+	// connection
 	public static Connection getConnection() {
 		Connection connection;
 		try {
@@ -49,9 +53,9 @@ public class AccountDatabase {
 	/**
 	 * When called, this method will call the UPDATE_TOTALS() stored procedure
 	 * defined in the schema for `Project_Database`. The stored procedure simulates
-	 * the update of pending funds in a bank database to represent available balance
-	 * after the update. i.e. The totalBalance of an Account object will match the
-	 * availableBalance after this method is called.
+	 * the update of pending funds to available funds in a bank database. The
+	 * totalBalance of an Account object will match its availableBalance after this
+	 * method is executed succesfully.
 	 */
 	public static void callUpdateTotalsProcedure() {
 		Connection connection;
@@ -71,7 +75,7 @@ public class AccountDatabase {
 		}
 	}
 
-	// no-argument AccountDatabase constructor to initialize database connection
+	// no-argument AccountDatabase constructor initializes database connection
 	public AccountDatabase() throws SQLException {
 		System.out.printf("_____________________________________________________________________________%n%n");
 		System.out.printf("Connecting to database %s ...%n%n%n", DATABASE_URL);
@@ -87,7 +91,7 @@ public class AccountDatabase {
 			exception.printStackTrace();
 		}
 
-		count++; // increment static session counter 
+		count++; // increment static session counter
 		// only display Accounts table once
 		if (connectedToDatabase && count == 1) {
 			callUpdateTotalsProcedure();
@@ -97,9 +101,10 @@ public class AccountDatabase {
 	}
 
 	/**
-	 * This method performs a SELECT query on the database to return the row in the Accounts table with
-	 * accountID equal to the integer passed into the method. If an account with that number exists in 
-	 * the table, the method returns an instance of Account with the data obtained from the ResultSet.
+	 * This method performs a SELECT query on the database to return the row in the
+	 * Accounts table with accountID equal to the integer passed into the method. If
+	 * an account with that number exists in the table, the method returns an
+	 * instance of Account with the data obtained from a ResultSet object.
 	 * 
 	 * @param accountNumber
 	 * @return Account account
@@ -148,7 +153,8 @@ public class AccountDatabase {
 	}
 
 	/**
-	 * This method will create and return an ArrayList of all transactions associated with a given account.
+	 * This method will create and return an ArrayList of all transactions
+	 * associated with a given account.
 	 * 
 	 * @author jkuehl
 	 * @param accountNumber
@@ -162,11 +168,12 @@ public class AccountDatabase {
 			resultSet = statement.executeQuery("SELECT * FROM Transactions" + " WHERE (accountID = " + accountNumber
 					+ ") ORDER BY processed DESC");
 
-			while (resultSet.next() && resultSet != null) {  // while there is a row that is not null to read
+			while (resultSet.next() && resultSet != null) { // while there is a row that is not null to read
 				list.add(new Transaction(resultSet)); // add the row to the ArrayList
 			}
 
 			return list; // return the ArrayList
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -226,8 +233,9 @@ public class AccountDatabase {
 	}
 
 	/**
-	 * This method is called to verify the account information. If an row with the accountID entered exists in the database, 
-	 * call validatePIN of the Account class to validate the PIN matches the Account. Otherwise, return false.
+	 * This method is called to verify the account information. If an row with the
+	 * accountID entered exists in the database, call validatePIN of the Account
+	 * class to validate the PIN matches the Account. Otherwise, return false.
 	 * 
 	 * @param userAccountNumber
 	 * @param userPIN
@@ -256,16 +264,16 @@ public class AccountDatabase {
 	 * @param availableBalance
 	 * @throws SQLException
 	 */
-	public void addRowToAccounts(int accountNumber, int accountPIN, double totalBalance, double availableBalance)
+	public void addRowToAccounts(Account account)
 			throws SQLException {
 		String createString = "INSERT INTO Accounts " + "(accountID, accountPIN, availableBalance, totalBalance )"
 				+ " VALUES (?, ?, ?, ?)";
 
 		try (PreparedStatement createStatement = connection.prepareStatement(createString)) {
-			createStatement.setInt(1, accountNumber);
-			createStatement.setInt(2, accountPIN);
-			createStatement.setDouble(3, availableBalance);
-			createStatement.setDouble(4, totalBalance);
+			createStatement.setInt(1, account.getAccountNumber());
+			createStatement.setInt(2, account.getPin());
+			createStatement.setDouble(3, account.getAvailableBalance());
+			createStatement.setDouble(4, account.getTotalBalance());
 
 			createStatement.executeUpdate();
 			System.out.printf("Project_Database updated successfully.%n%n");
