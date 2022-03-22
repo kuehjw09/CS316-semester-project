@@ -15,6 +15,7 @@ Description
    -We used a database connection for storing user data because it allows for accounts to be added, saved, and used later in the projects life. This makes it feel like a real experience of creating an account unique to a user. 
    
    -We also used scene builder to create navigable interfaces to allow easy use of the ATM/Banking program. They allow for buttons to be used to navigate and edit account data or even just log on to view balances. 
+   
 ---
 
 
