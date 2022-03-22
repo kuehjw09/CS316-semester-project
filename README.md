@@ -1,6 +1,6 @@
 Readme
 1.	Project Title
-a.	 The Project is an ATM/Banking interface that allows people to manage and edit a bank account.
+  a.	 The Project is an ATM/Banking interface that allows people to manage and edit a bank account.
 2.	Description
 a.	The project incorporates a connection to a database that allows users to create accounts and connect to the account to make deposits transfers and withdrawals all on a computer. 
 b.	 We used a database connection for storing user data because it allows for accounts to be added, saved, and used later in the projects life. This makes it feel like a real experience of creating an account unique to a user. 
