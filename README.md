@@ -6,7 +6,9 @@ CS316-semester-project
 Project Title ATM Interface
 
    -The Project is an ATM/Banking interface that allows people to manage and edit a bank account.
+   
 ---
+
 Description
 
    -The project incorporates a connection to a database that allows users to create accounts and connect to the account to make deposits transfers and withdrawals all on a computer. 
@@ -16,6 +18,12 @@ Description
    -We also used scene builder to create navigable interfaces to allow easy use of the ATM/Banking program. They allow for buttons to be used to navigate and edit account data or even just log on to view balances. 
    
 ---
+
+How to use the project. 
+
+-Download the zip file and copy the source contents to eclipse and run the App.java to view and use the interface. 
+
+
 
 
 
