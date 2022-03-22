@@ -60,15 +60,15 @@
                   <Font name="Bangla Sangam MN" size="12.0" />
                </font>
             </Label>
-            <AnchorPane layoutX="42.0" layoutY="161.0" opacity="0.8" prefHeight="2.0" prefWidth="288.0" style="-fx-background-color: #ffffff;" />
-            <AnchorPane layoutX="29.0" layoutY="163.0" prefHeight="249.0" prefWidth="315.0">
+            <AnchorPane layoutX="44.0" layoutY="155.0" opacity="0.8" prefHeight="2.0" prefWidth="282.0" style="-fx-background-color: #e9e9e9;" />
+            <AnchorPane layoutX="27.0" layoutY="180.0" prefHeight="225.0" prefWidth="315.0">
                <children>
                   <ListView fx:id="transactionsListView" layoutX="16.0" layoutY="40.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="249.0" prefWidth="315.0" stylesheets="@../listStyles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <padding>
                         <Insets bottom="9.0" left="3.0" right="3.0" top="12.0" />
                      </padding>
                   </ListView>
-                  <Label layoutX="14.0" layoutY="7.0" text="Posted Transactions" textFill="#ffffffb8">
+                  <Label layoutX="14.0" layoutY="1.0" text="Posted Transactions" textFill="#ffffffb8">
                      <font>
                         <Font name="Arial Black" size="10.0" />
                      </font>

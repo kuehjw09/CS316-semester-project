@@ -27,13 +27,16 @@ public class WithdrawalController {
 	private static final NumberFormat currency = NumberFormat.getCurrencyInstance();
 
 	@FXML
-	private Label pendingDepositLabel;
+	private Label pendingWithdrawalLabel;
 
 	@FXML
 	private Label previewBalanceLabel;
 
 	@FXML
 	private Label totalBalanceLabel;
+	
+	@FXML 
+	private Label messageLabel;
 
 	@FXML
 	private TextField amountTextField;
@@ -41,7 +44,8 @@ public class WithdrawalController {
 	@FXML
 	void clearFormButtonPressed(ActionEvent event) {
 		amountTextField.clear();
-		pendingDepositLabel.setText("$0.00");
+		messageLabel.setText("");
+		pendingWithdrawalLabel.setText("$0.00");
 		previewBalanceLabel.setText(currency.format(availableBalance));
 		withdrawAmount = 0;
 	}
@@ -51,7 +55,7 @@ public class WithdrawalController {
 		// perform deposit transaction with selected options
 
 		if (withdrawAmount == 0) {
-			throw new IllegalArgumentException("Must enter/select a value for deposit.");
+			messageLabel.setText("Must enter/select a value for deposit.");
 		} else {
 			try {
 				accountDatabase.debit(currentAccountNumber, withdrawAmount); 
@@ -77,11 +81,15 @@ public class WithdrawalController {
 			withdrawAmount = Double.valueOf(amountTextField.getText());
 		}
 		if (withdrawAmount > availableBalance) { // ammount cannot exceed available balance
-			throw new IllegalArgumentException("Withdraw amount exceeds available balance.");
+			messageLabel.setText("Amount exceeds available balance.");
+			amountTextField.clear();
+			withdrawAmount = 0;
+		} else {
+			messageLabel.setText("");
+			amountTextField.setText(currency.format(withdrawAmount));
+			pendingWithdrawalLabel.setText(amountTextField.getText());
+			previewBalanceLabel.setText(currency.format(availableBalance - withdrawAmount));
 		}
-		amountTextField.setText(currency.format(withdrawAmount));
-		pendingDepositLabel.setText(amountTextField.getText());
-		previewBalanceLabel.setText(currency.format(availableBalance - withdrawAmount));
 	}
 
 	@FXML

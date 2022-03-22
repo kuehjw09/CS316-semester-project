@@ -15,7 +15,7 @@
          </image>
       </ImageView>
       <AnchorPane accessibleRole="PAGE_ITEM" layoutX="170.0" layoutY="44.0" opacity="0.81" prefHeight="354.0" prefWidth="436.0" style="-fx-background-color: #212121;" />
-      <AnchorPane layoutX="170.0" layoutY="43.0" prefHeight="354.0" prefWidth="436.0" style="-fx-background-color: transparent; -fx-border-color: #e9e9e9;">
+      <AnchorPane layoutX="170.0" layoutY="43.0" prefHeight="354.0" prefWidth="436.0" style="-fx-background-color: transparent;">
          <children>
             <Label layoutX="105.0" layoutY="31.0" text="Sign in to JavaATM" textFill="WHITE">
                <font>

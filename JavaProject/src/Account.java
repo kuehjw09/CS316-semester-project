@@ -33,6 +33,7 @@ public class Account {
 		this.pin = resultSet.getInt(2);
 		this.availableBalance = resultSet.getDouble(3);
 		this.totalBalance = resultSet.getDouble(4);
+		// sql handles dateCreated and lastUpdated
 //		this.dateCreated = resultSet.getDate(5);
 //		this.lastUpdated = resultSet.getTimestamp(6);
 	}

@@ -72,6 +72,11 @@
                   </TextField>
                   <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="305.0" spacing="3.0">
                      <children>
+                        <Label fx:id="messageLabel" prefHeight="22.0" prefWidth="178.0" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Bold" size="11.0" />
+                           </font>
+                        </Label>
                         <Button mnemonicParsing="false" onAction="#clearFormButtonPressed" text="Clear">
                            <font>
                               <Font name="Arial" size="13.0" />
@@ -98,7 +103,7 @@
                         <Font name="Arial" size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="pendingDepositLabel" alignment="CENTER_RIGHT" layoutX="35.0" layoutY="87.0" prefHeight="27.0" prefWidth="223.0" text="\$0.00" textFill="WHITE">
+                  <Label fx:id="pendingWithdrawalLabel" alignment="CENTER_RIGHT" layoutX="35.0" layoutY="87.0" prefHeight="27.0" prefWidth="223.0" text="\$0.00" textFill="WHITE">
                      <font>
                         <Font name="Arial" size="24.0" />
                      </font>
