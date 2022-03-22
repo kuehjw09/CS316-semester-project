@@ -9,8 +9,9 @@ Project Title ATM Interface
 ---
 
 Description
-    -a.	The project incorporates a connection to a database that allows users to create accounts and connect to the account to make deposits transfers and withdrawals         all on a computer. 
 
+       -The project incorporates a connection to a database that allows users to create accounts and connect to the account to make deposits transfers and withdrawals         all on a computer. 
+---
 
 ## Collaborators
 
