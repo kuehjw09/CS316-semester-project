@@ -119,7 +119,7 @@ BEGIN
     SET name2 = lastname;
     SET ssNumber = ssn;
     SET name3 = user;
-    SET passkey = PASSWORD(pass);
+    SET passkey = MD5(pass);
     
     INSERT INTO Users (first_name, last_name, ssn, username, pass) VALUES (
 		name1, name2, ssNumber, name3, passkey
@@ -127,6 +127,21 @@ BEGIN
 END$$
 SET SQL_SAFE_UPDATES = 1;
 DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE CHECK_PASS(IN id INT, IN word VARCHAR(50), OUT VERIFIED BOOLEAN)
+BEGIN
+	DECLARE hashkey VARCHAR(32);    
+    SELECT pass FROM Users WHERE user_id = id INTO hashkey;
+    
+    IF hashkey = word THEN SET VERIFIED = TRUE;
+	ELSE SET VERIFIED = FALSE;
+    END IF;
+    
+END $$
+DELIMITER ;
+
+
 
 -- UPDATE_TOTALS procedure simulates the bank processing deposits and updating the available_balance of an account
 DELIMITER $$

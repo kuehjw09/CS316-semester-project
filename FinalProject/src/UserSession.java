@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+
 /**
  * UserSession class represents all data required to accommodate a user session
  * 
@@ -9,19 +6,24 @@ import java.util.ArrayList;
  *
  */
 
-public class UserSession {
-	private User user; 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class UserSession { // holds all objects associated with a given user session
+
+	private User user;
 	private ArrayList<Account> accounts;
-	
+
 	private DatabaseConnection databaseConnection;
-	
-	public UserSession(User user) {
+
+	public UserSession(User user) throws SQLException {
 		this.user = user;
-		
+		this.accounts = databaseConnection.getAccounts();
 	}
 	
-	// holds all objects associated with a user's account and interacts with these
-	// composed classes
-	
-	
+	@Override
+	public String toString() {
+		return String.format("UserSession for user %s:%n%s", user.getUsername(), 
+				user.toString());
+	}
 }
