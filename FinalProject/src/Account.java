@@ -5,29 +5,29 @@
  */
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 
 public class Account {
 	private String name;
 	private int accountNumber;
-//	private enum Type {CHECKING, SAVINGS}; // may become subclasses of Account
+	//	private enum Type {CHECKING, SAVINGS}; // may become subclasses of Account
 	private BigDecimal availableBalance;
 	private BigDecimal totalBalance;
 	private ArrayList<Transaction> transactions;
-	
-	// need a reference to a database connection in order to call getTransactions()
-	private DatabaseConnection databaseConnection;
 
-	
 	// constructor
-	public Account(String name, int accountNumber, BigDecimal availableBalance, BigDecimal totalBalance) {
+	public Account(String name, int accountNumber, BigDecimal availableBalance, BigDecimal totalBalance)
+			throws SQLException {
 		this.name = name;
 		this.accountNumber = accountNumber;
 		this.availableBalance = availableBalance;
 		this.totalBalance = totalBalance;
+		this.transactions = getTransactions();
 	}
 	
 	public Account(ResultSet resultSet) throws SQLException {
@@ -35,7 +35,7 @@ public class Account {
 		this.accountNumber = resultSet.getInt(5);
 		this.availableBalance = resultSet.getBigDecimal(6);
 		this.totalBalance = resultSet.getBigDecimal(7);
-		this.transactions = getTransactions(); 
+		this.transactions = getTransactions();
 	}
 
 	public String getName() {
@@ -73,12 +73,29 @@ public class Account {
 	public int getTransactionsCount() {
 		return transactions.size();
 	}
-	
-	public ArrayList<Transaction> getTransactions() throws SQLException {
-		return databaseConnection.getTransactions(accountNumber);
-	}
 
-	public void setTransactions(ArrayList<Transaction> transactions) {
+	public ArrayList<Transaction> getTransactions() throws SQLException {
+		ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+		Connection connection = DatabaseConnection.getConnection();
+
+		String selectString = "SELECT * FROM DB2.Transactions WHERE account_number = ?";
+
+		try (PreparedStatement selectStatement = connection.prepareStatement(selectString)){
+			selectStatement.setInt(1, accountNumber);
+			ResultSet resultSet = selectStatement.executeQuery();
+			while (resultSet.next()) {
+				if (resultSet != null) {
+					transactions.add(new Transaction(resultSet));
+				}
+			}
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+		
+		return transactions;
+	}
+	
+	public void setTransactions(ArrayList<Transaction> transactions) throws SQLException {
 		this.transactions = transactions;
 	}
 	

@@ -14,16 +14,23 @@ public class UserSession { // holds all objects associated with a given user ses
 	private User user;
 	private ArrayList<Account> accounts;
 
-	private DatabaseConnection databaseConnection;
-
-	public UserSession(User user) throws SQLException {
+	public UserSession(User user, ArrayList<Account> accounts) throws SQLException {
 		this.user = user;
-		this.accounts = databaseConnection.getAccounts();
+		this.accounts = accounts;
 	}
+	
+	public int getCountOfAccounts() {
+		return accounts.size();
+	}
+	
 	
 	@Override
 	public String toString() {
-		return String.format("UserSession for user %s:%n%s", user.getUsername(), 
-				user.toString());
+		String accountString = "Summary of accounts:\n";
+		for (Account account : accounts) {
+			accountString += account;
+		}
+		return String.format("UserSession for user %s:%n%snumber of accounts: %d%n%n%s", user.getUsername(), 
+				user.toString(), getCountOfAccounts(), accountString);
 	}
 }

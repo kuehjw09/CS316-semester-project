@@ -161,7 +161,6 @@ public class DashboardController {
 		
 		for (Transaction transaction : accountDatabase.getTransactions(accountNumber)) {
 				transactions.add(transaction);
-			
 		}
 
 		transactionsListView.setItems(transactions);

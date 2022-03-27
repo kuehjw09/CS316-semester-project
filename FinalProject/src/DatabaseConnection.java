@@ -50,7 +50,6 @@ public class DatabaseConnection {
 		
 			if (resultSet.next()) { // if the query returned a value
 				User user = new User(resultSet); // create a User object
-				System.out.printf(user.toString());
 				return user; // return User object to caller
 				
 			}
@@ -114,20 +113,19 @@ public class DatabaseConnection {
 	}
 	
 	public UserSession getUserSession() throws SQLException {
-		UserSession currentUserSession = new UserSession(currentUser);
+		UserSession currentUserSession = new UserSession(currentUser, getAccounts(currentUser));
 		return currentUserSession;
 	}
 	
-	public ArrayList<Account> getAccounts() throws SQLException {
+	public ArrayList<Account> getAccounts(User user) throws SQLException {
 		ArrayList<Account> accounts = new ArrayList<Account>();
 		try {
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM DB2.Accounts WHERE user_id = " + currentUser.getUser_id());
-			while (resultSet.next()) {
-				accounts.add(new Account(resultSet));
-			}
-			if (resultSet.next()) { // if the query returned a value
-				accounts.add(new Account(resultSet));
+			resultSet = statement.executeQuery("SELECT * FROM DB2.Accounts WHERE user_id = " + user.getUser_id());
+			while (resultSet.next()) { 
+				if (resultSet!= null) { // must include to avoid null pointer exception
+					accounts.add(new Account(resultSet));
+				}
 			}
 		} catch (SQLException exception) {
 			exception.printStackTrace();
@@ -135,21 +133,20 @@ public class DatabaseConnection {
 		
 		return accounts;
 	}
-	
-	public ArrayList<Transaction> getTransactions(int accountNumber) throws SQLException {
-		ArrayList<Transaction> transactions = new ArrayList<>();
+
+	// provide static method to obtain a Connection object reference to a database
+	// connection
+	public static Connection getConnection() {
+		Connection connection;
 		try {
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM DB2.Transactions WHERE accountNumber = " + accountNumber);
-			while (resultSet.next()) {
-				transactions.add(new Transaction(resultSet));
-			}
+			// connect to database
+			connection = DriverManager.getConnection(DATABASE_URL, "admin", "adminpassword");
+			return connection;
+
 		} catch (SQLException exception) {
 			exception.printStackTrace();
 		}
-		
-		return transactions;
-		
+		return null;
 	}
 }	
 

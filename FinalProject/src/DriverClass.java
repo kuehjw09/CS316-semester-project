@@ -18,18 +18,14 @@ public class DriverClass {
 			DatabaseConnection connection = new DatabaseConnection(); // create a DatabaseConnection object
 			boolean authenticated = connection.authenticateUser(username, password);
 			if (authenticated == true) {
-				System.out.println("User authenticated and verified");
+				System.out.println("User authenticated and verified\n");
+				UserSession currentUserSession = connection.getUserSession();
+				System.out.printf("%s", currentUserSession);
 			} else {
 				System.out.println("Could not verify user");
 			}
-			
-
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-
-		
-		
+		}		
 	}
-
 }

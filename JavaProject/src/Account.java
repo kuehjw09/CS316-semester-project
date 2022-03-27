@@ -95,7 +95,8 @@ public class Account {
 
 	public void credit(double amount) throws SQLException {
 		totalBalance += amount; // add amount to totalBalance
-		updateTotals(); // update Accounts table to reflect changes
+		updateTotals(); // update Accounts table to reflect changes'
+		
 	}
 
 	public void debit(double amount) throws SQLException {
