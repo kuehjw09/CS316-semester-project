@@ -10,9 +10,7 @@ public class DriverClass {
 		String username = input.nextLine();
 		System.out.print("Enter password: ");
 		String password = input.nextLine();
-		
-		System.out.printf("%n%nFields entered:%nusername: %s%npassword: %s%n", username, password);
-		
+				
 		System.out.println("Attempting to authenticate user...");
 		try {
 			DatabaseConnection connection = new DatabaseConnection(); // create a DatabaseConnection object
