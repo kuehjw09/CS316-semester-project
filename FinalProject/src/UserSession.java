@@ -23,7 +23,10 @@ public class UserSession { // holds all objects associated with a given user ses
 		return accounts.size();
 	}
 	
-	
+	public ArrayList<Account> getAccounts() {
+		return accounts;
+	}
+ 	
 	@Override
 	public String toString() {
 		String accountString = "Summary of accounts:\n";
