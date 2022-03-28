@@ -1,0 +1,4 @@
+.button:hover {
+  -fx-border-width: 0 0 2px 0;
+  -fx-border-color: linear-gradient(#f85717, #de3154, #67008d);
+}

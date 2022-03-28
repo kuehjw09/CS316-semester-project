@@ -24,4 +24,7 @@
          </children>
       </AnchorPane>
    </center>
+   <bottom>
+   <fx:include source="Footer.fxml" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

@@ -30,14 +30,13 @@ public class App extends Application {
 				
 				// access the controller and call a method
 				DashboardController controller = loader.getController();
-				controller.initializeData(currentUserSession); // passing current account number and database
+				controller.initializeData(currentUserSession); // passing current UserSession
 
 				
 				primaryStage.setScene(scene);
 				primaryStage.show();
 			} else {
 				System.out.println("Could not verify user");
-
 			}
 
 		} catch (Exception exception) {

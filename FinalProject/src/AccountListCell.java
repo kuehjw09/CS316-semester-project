@@ -30,7 +30,6 @@ public class AccountListCell extends ListCell<Account> {
 		
 		nameLabel.setFont(Font.font("arial", 15 ));
 		numberLabel.setFont(Font.font("arial", 15 ));
-		label.setStyle("-fx-text-fill: #263238");
 
 		balanceLabel.setFont(Font.font("helvatica", 24));
 		
