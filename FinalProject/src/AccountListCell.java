@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 public class AccountListCell extends ListCell<Account> {
 	private VBox vbox = new VBox(8.0);
@@ -27,6 +28,12 @@ public class AccountListCell extends ListCell<Account> {
 		vbox.getChildren().add(balanceLabel);
 		vbox.getChildren().add(label);
 		
+		nameLabel.setFont(Font.font("arial", 15 ));
+		numberLabel.setFont(Font.font("arial", 15 ));
+		label.setStyle("-fx-text-fill: #263238");
+
+		balanceLabel.setFont(Font.font("helvatica", 24));
+		
 		setPrefWidth(USE_PREF_SIZE);
 	}
 	
@@ -41,7 +48,7 @@ public class AccountListCell extends ListCell<Account> {
 			nameLabel.setText(account.getName());
 			numberLabel.setText("..." + String.valueOf(account.getAccountNumber() % 110000));
 			balanceLabel.setText(currency.format(account.getAvailableBalance()));
-			label.setText("available balance");
+			label.setText("Available balance");
 			setGraphic(vbox);
 		}
 	}

@@ -121,7 +121,8 @@ public class DatabaseConnection {
 		ArrayList<Account> accounts = new ArrayList<Account>();
 		try {
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM DB2.Accounts WHERE user_id = " + user.getUser_id());
+			resultSet = statement.executeQuery("SELECT * FROM DB2.Accounts WHERE user_id = " + user.getUser_id()
+					+" ORDER BY date_created DESC");
 			while (resultSet.next()) { 
 				if (resultSet!= null) { // must include to avoid null pointer exception
 					accounts.add(new Account(resultSet));
