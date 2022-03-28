@@ -2,8 +2,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class FooterController {
+	private static UserSession currentUserSession;
+	
 
-    @FXML
+    public UserSession getCurrentUserSession() {
+		return currentUserSession;
+	}
+
+	public static void setCurrentUserSession(UserSession currentUserSession) {
+		FooterController.currentUserSession = currentUserSession;
+	}
+
+	@FXML
     void depositButtonPressed(ActionEvent event) {
     	System.out.println("deposit/withdrawal button pressed");
     }

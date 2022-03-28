@@ -49,6 +49,10 @@ public class DashboardController {
 	 */
 	public void initializeData(UserSession currentUserSession) {
 		this.currentUserSession = currentUserSession;
+		
+		// set static variable in header and footer in order for them have have the current UserSession object
+		FooterController.setCurrentUserSession(currentUserSession);
+		HeaderController.setCurrentUserSession(currentUserSession);
 
 		for (Account account : getCurrentUserSession().getAccounts()) {
 			accounts.add(account);
