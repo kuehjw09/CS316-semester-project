@@ -7,11 +7,13 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DashboardController">
-
+   <top>
+   <fx:include source="Header.fxml" BorderPane.alignment="CENTER" />
+   </top>
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane layoutX="164.0" layoutY="48.0" prefHeight="238.0" prefWidth="266.0">
+            <AnchorPane layoutX="165.0" layoutY="14.0" prefHeight="238.0" prefWidth="266.0">
                <children>
                   <ListView fx:id="accountsListView" layoutX="-59.0" layoutY="-35.0" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="259.0" style="-fx-background-color: transparent;" stylesheets="@ListStyles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <padding>
@@ -20,7 +22,7 @@
                   </ListView>
                </children>
             </AnchorPane>
-            <Button layoutX="232.0" layoutY="298.0" mnemonicParsing="false" onAction="#newAccountButtonPressed" stylesheets="@ListStyles.css" text="Open a new account" />
+            <Button layoutX="233.0" layoutY="252.0" mnemonicParsing="false" onAction="#newAccountButtonPressed" stylesheets="@ListStyles.css" text="Open a new account" />
          </children>
       </AnchorPane>
    </center>

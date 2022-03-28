@@ -26,9 +26,5 @@ public class FooterController {
 
     }
 
-    @FXML
-    void userButtonPressed(ActionEvent event) {
-    	System.out.println("user button pressed");
-    }
 
 }

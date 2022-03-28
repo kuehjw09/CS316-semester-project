@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: TRANSPARENT;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HeaderController">
+   <children>
+      <AnchorPane layoutX="17.0" layoutY="44.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.12" prefHeight="48.0" prefWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <HBox alignment="TOP_RIGHT" prefHeight="54.0" prefWidth="429.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#notificationsButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@ButtonStyles.css">
+               <graphic>
+                  <FontAwesomeIconView glyphName="BELL" size="21">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9725490212440491" green="0.34117648005485535" blue="0.09019608050584793" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.43654822335025356">
+                                 <color>
+                                    <Color red="0.8705882430076599" green="0.1921568661928177" blue="0.3294117748737335" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.40392157435417175" blue="0.5529412031173706" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIconView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#userButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@ButtonStyles.css">
+               <graphic>
+                  <FontAwesomeIconView glyphName="USER" size="21">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9725490212440491" green="0.34117648005485535" blue="0.09019608050584793" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.43654822335025356">
+                                 <color>
+                                    <Color red="0.8705882430076599" green="0.1921568661928177" blue="0.3294117748737335" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.40392157435417175" blue="0.5529412031173706" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIconView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>
