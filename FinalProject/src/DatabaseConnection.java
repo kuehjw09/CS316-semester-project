@@ -1,5 +1,6 @@
 /**
- * DatabaseConnection class represents the database connection for an application session
+ * DatabaseConnection class represents the database connection for an application session.
+ *  - Connects to the database and provides methods for interacting with the database within the application
  * 
  * @author owner
  *
@@ -24,10 +25,15 @@ public class DatabaseConnection {
 	final static String DATABASE_URL = "jdbc:mysql://project-database.cfkat6ss9oqw.us-east-2.rds.amazonaws.com/Project_Database?";
 
 	// keep track of database connection status
-	private boolean connectedToDatabase = false;
+	private boolean connectedToDatabase = false; // use this as a flag when executing database methods to ensure connection
+	
+	// example 
+//	if (!connectedToDatabase) {
+//		System.out.print("not connected to database");
+//	}
 
 	
-	// connect to database and provide methods for interacting with the database
+
 	
 	public DatabaseConnection() throws SQLException {
 		try {
@@ -41,6 +47,15 @@ public class DatabaseConnection {
 		}
 	}
 	
+	
+	/**
+	 * This method executes a query to select the row in the Users table of DB2 database with a username attribute matching the string passed to this method.
+	 * If a row matching the criteria is returned, this method will instatiate a User object with the data returned and then return the object.
+	 * 
+	 * @param username
+	 * @return
+	 * @throws SQLException
+	 */
 	private User getUser(String username) throws SQLException {
 		String queryString = "SELECT * FROM DB2.Users WHERE username = ? ";
 		try (PreparedStatement queryStatement = connection.prepareStatement(queryString)) {
@@ -61,6 +76,16 @@ public class DatabaseConnection {
 		return null; // if no matching username was found, return null
 	}
 	
+	/**
+	 * This method calls the stored procedure that checks whether the password entered matches the password column
+	 *  of a row in the Users table with user_id equal to the user_id passed into this method.  Returns true if the
+	 *  passwords match; returns false if otherwise.
+	 *  
+	 * @param user_id
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
 	private boolean verifyPassword(int user_id, String password) throws SQLException {
 		String callString = "CALL DB2.CHECK_PASS(?, MD5(?), ?)";
 		try (CallableStatement cs = connection.prepareCall(callString)) {
@@ -83,7 +108,9 @@ public class DatabaseConnection {
  		return false;
 	}
 	
-	
+	/*
+	 * Searches the database for an occurance of the account number passed into this method. Returns true if an account was found matching the parameter.
+	 */
 	public boolean search(int accountNumber) throws SQLException {
 		try {
 			statement = connection.createStatement();
@@ -100,6 +127,14 @@ public class DatabaseConnection {
 		return false; // if no matching account was found
 	}
 	
+	/**
+	 * Called from LoginController when a user attempts to sign into the application.
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean authenticateUser(String username, String password) throws SQLException {
 		// attempt to retrieve the account with provided username
 		currentUser = getUser(username);
@@ -112,11 +147,23 @@ public class DatabaseConnection {
 		return false;
 	}
 	
+	/**
+	 * This method will instantiate and return a UserSession object with the validated user information obtained during successful login procedure.
+	 * @return
+	 * @throws SQLException
+	 */
 	public UserSession getUserSession() throws SQLException {
 		UserSession currentUserSession = new UserSession(currentUser, getAccounts(currentUser));
 		return currentUserSession;
 	}
 	
+	/**
+	 * Populate an ArrayList with Account objects associated with a given user.
+	 * 
+	 * @param user
+	 * @return
+	 * @throws SQLException
+	 */
 	public ArrayList<Account> getAccounts(User user) throws SQLException {
 		ArrayList<Account> accounts = new ArrayList<Account>();
 		try {
@@ -135,8 +182,11 @@ public class DatabaseConnection {
 		return accounts;
 	}
 
-	// provide static method to obtain a Connection object reference to a database
-	// connection
+	/**
+	 * Static method to obtain a Connection object reference to the application's database connection.
+	 * 
+	 * @return
+	 */
 	public static Connection getConnection() {
 		Connection connection;
 		try {

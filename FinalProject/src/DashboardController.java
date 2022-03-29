@@ -11,8 +11,8 @@ import javafx.scene.control.ListView;
 import javafx.util.Callback;
 
 public class DashboardController {
-	private UserSession currentUserSession;
-	private int selectedAccountNumber;
+	private UserSession currentUserSession; // hold current user session as context
+	private Account selectedAccount; // keep track of selected account
 
 	@FXML
 	private ListView<Account> accountsListView;
@@ -25,13 +25,13 @@ public class DashboardController {
 		//  route a user to account creation form
 	}
 
-	public void setSelectedAccountNumber(int accountNumber) {
-		this.selectedAccountNumber = accountNumber;
-		System.out.printf("selectedAccountNumber = %d%n", accountNumber);
+	public void setSelectedAccount(Account account) {
+		this.selectedAccount = account;
+		System.out.printf("selectedAccountNumber = %s%n", getSelectedAccount());
 	}
 
-	public int getSelectedAccountNumber() {
-		return selectedAccountNumber;
+	public Account getSelectedAccount() {
+		return selectedAccount;
 	}
 
 	public void setCurrentUserSession(UserSession currentUserSession) {
@@ -57,14 +57,15 @@ public class DashboardController {
 		for (Account account : getCurrentUserSession().getAccounts()) {
 			accounts.add(account);
 		}
-
-		accountsListView.setItems(accounts); // set ObservableList items
+		
+		// set ObservableList items
+		accountsListView.setItems(accounts);
 
 		// when selection changes
 		accountsListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Account>() {
 			@Override
 			public void changed(ObservableValue<? extends Account> ov, Account oldAccount, Account newAccount) {
-				setSelectedAccountNumber(newAccount.getAccountNumber());
+				setSelectedAccount(newAccount);
 			}
 		});
 
