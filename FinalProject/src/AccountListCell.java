@@ -31,7 +31,8 @@ public class AccountListCell extends ListCell<Account> {
 		nameLabel.setFont(Font.font("arial", 15 ));
 		numberLabel.setFont(Font.font("arial", 15 ));
 		balanceLabel.setFont(Font.font("helvatica", 24));
-		vbox.setStyle("-fx-border-width: 2px 4px 4px 2px");
+
+
 
 		
 		setPrefWidth(USE_PREF_SIZE);
