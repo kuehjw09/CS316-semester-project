@@ -8,6 +8,7 @@ CREATE TABLE Users (
     first_name VARCHAR(20) NOT NULL,
     last_name VARCHAR(20) NOT NULL,
     ssn VARCHAR(11) DEFAULT "000-00-0000",
+    birth_date DATE,
     username VARCHAR(20) UNIQUE NOT NULL,
     pass VARCHAR(100) NOT NULL
 );
@@ -105,24 +106,26 @@ DELIMITER ;
 DELIMITER $$
 SET SQL_SAFE_UPDATES = 0;
 
-CREATE PROCEDURE NEW_USER(IN firstname VARCHAR(20), IN lastname VARCHAR(20), IN ssn VARCHAR(11), 
-	IN user VARCHAR(20), IN pass VARCHAR(30))
+CREATE PROCEDURE NEW_USER(IN firstname VARCHAR(20), IN lastname VARCHAR(20), IN birthdate DATE, 
+	IN ssn VARCHAR(11), IN user VARCHAR(20), IN pass VARCHAR(30))
     
 BEGIN
 	DECLARE name1 VARCHAR(20);
     DECLARE name2 VARCHAR(20);
+    DECLARE bday DATE;
     DECLARE ssNumber VARCHAR(11);
     DECLARE name3 VARCHAR(20);
     DECLARE passkey VARCHAR(100);
     
     SET name1 = firstname;
     SET name2 = lastname;
+    SET bday = birthdate;
     SET ssNumber = ssn;
     SET name3 = user;
     SET passkey = MD5(pass);
     
-    INSERT INTO Users (first_name, last_name, ssn, username, pass) VALUES (
-		name1, name2, ssNumber, name3, passkey
+    INSERT INTO Users (first_name, last_name, birth_date, ssn, username, pass) VALUES (
+		name1, name2, bday, ssNumber, name3, passkey
     );
 END$$
 SET SQL_SAFE_UPDATES = 1;

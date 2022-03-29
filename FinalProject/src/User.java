@@ -4,6 +4,7 @@
  * @author owner
  *
  */
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -11,11 +12,13 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String username;
+	private Date birthDate;
 	private int user_id;
 	
-	public User(String firstName, String lastName, String username, int user_id) {
+	public User(String firstName, String lastName, Date birthDate, String username, int user_id) {
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.birthDate = birthDate;
 		this.username = username;
 		this.user_id = user_id;
 	}
@@ -23,7 +26,8 @@ public class User {
 	public User(ResultSet resultSet) throws SQLException {
 		this.firstName = resultSet.getString(2);
 		this.lastName = resultSet.getString(3);
-		this.username = resultSet.getString(5);
+		this.birthDate = resultSet.getDate(5);
+		this.username = resultSet.getString(6);
 		this.user_id = resultSet.getInt(1);
 	}
 
@@ -46,6 +50,13 @@ public class User {
 		this.lastName = lastName;
 	}
 
+	public Date getBirthDate() {
+		return birthDate;
+	}
+	
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
 
 	public String getUsername() {
 		return username;
@@ -68,8 +79,8 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return String.format("First: %s%nLast:%s%nUsername: %s%nuser_id: %05d%n", getFirstName(),
-				getLastName(), getUsername(), getUser_id());
+		return String.format("First: %s%nLast: %s%nBirth Date: %s%nUsername: %s%nuser_id: %05d%n", getFirstName(),
+				getLastName(), getBirthDate(), getUsername(), getUser_id());
 	}
 
 }

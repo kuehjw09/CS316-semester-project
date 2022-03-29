@@ -11,7 +11,7 @@
 }
 .list-cell:filled:hover {
   -fx-border-color: linear-gradient(#f85717, #de3154, #67008d);
-  -fx-border-radius: 10;
+  -fx-border-radius: 3;
   -fx-text-fill: black;
 }
 .list-cell:empty {

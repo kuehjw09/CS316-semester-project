@@ -30,8 +30,10 @@ public class AccountListCell extends ListCell<Account> {
 		
 		nameLabel.setFont(Font.font("arial", 15 ));
 		numberLabel.setFont(Font.font("arial", 15 ));
-
 		balanceLabel.setFont(Font.font("helvatica", 24));
+
+
+
 		
 		setPrefWidth(USE_PREF_SIZE);
 	}
