@@ -7,9 +7,12 @@
   -fx-font-size: 12;
   -fx-padding: 9;
   -fx-border-insets: 6px;
+  -fx-border-width: 0 0 0 2px;
+  
   -fx-background-insets: 6px;
 }
 .list-cell:filled:hover {
+-fx-border-width: 0 0 0 2px;
   -fx-border-color: linear-gradient(#f85717, #de3154, #67008d);
   -fx-border-radius: 3;
   -fx-text-fill: black;

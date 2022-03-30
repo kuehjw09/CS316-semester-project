@@ -27,7 +27,8 @@ public class DashboardController {
 
 	public void setSelectedAccount(Account account) {
 		this.selectedAccount = account;
-		System.out.printf("selectedAccountNumber = %s%n", getSelectedAccount());
+		System.out.printf("selectedAccount = %n%s%n", getSelectedAccount());
+
 	}
 
 	public Account getSelectedAccount() {

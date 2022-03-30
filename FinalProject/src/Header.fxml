@@ -13,9 +13,9 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: TRANSPARENT;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HeaderController">
    <children>
       <AnchorPane layoutX="17.0" layoutY="44.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.12" prefHeight="48.0" prefWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <HBox alignment="TOP_RIGHT" prefHeight="54.0" prefWidth="429.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="TOP_RIGHT" layoutX="454.0" prefHeight="48.0" prefWidth="146.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#notificationsButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@ButtonStyles.css">
+            <Button mnemonicParsing="false" onAction="#notificationsButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;">
                <graphic>
                   <FontAwesomeIconView glyphName="BELL" size="21">
                      <fill>
@@ -45,7 +45,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#userButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@ButtonStyles.css">
+            <Button mnemonicParsing="false" onAction="#userButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;">
                <graphic>
                   <FontAwesomeIconView glyphName="USER" size="21">
                      <fill>

@@ -1,24 +1,29 @@
 
 /**
  * UserSession class represents all data required to accommodate a user session
+ * 	- holds all objects associated with a given user session
  * 
- * @author owner
+ * @author kuehjw09
  *
  */
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class UserSession { // holds all objects associated with a given user session
+public class UserSession { 
 
-	private User user;
-	private ArrayList<Account> accounts;
+	private User user; // validated user
+	private ArrayList<Account> accounts; // accounts associated with validated user
 
+	// constructor
 	public UserSession(User user, ArrayList<Account> accounts) throws SQLException {
 		this.user = user;
 		this.accounts = accounts;
 	}
 	
+	/*
+	 * return a count of Accounts associated with a validated User
+	 */
 	public int getCountOfAccounts() {
 		return accounts.size();
 	}
@@ -27,6 +32,9 @@ public class UserSession { // holds all objects associated with a given user ses
 		return accounts;
 	}
  	
+	/**
+	 * return a String representation of a UserSession object
+	 */
 	@Override
 	public String toString() {
 		String accountString = "Summary of accounts:\n";

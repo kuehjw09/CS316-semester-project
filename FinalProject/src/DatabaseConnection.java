@@ -2,7 +2,7 @@
  * DatabaseConnection class represents the database connection for an application session.
  *  - Connects to the database and provides methods for interacting with the database within the application
  * 
- * @author owner
+ * @author kuehjw09
  *
  */
 import java.sql.CallableStatement;
