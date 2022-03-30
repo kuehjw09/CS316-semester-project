@@ -78,5 +78,9 @@ public class DashboardController {
 			}
 		});
 	}
+	
+	public void initialize() {
+		// no implementation
+	}
 
 }
