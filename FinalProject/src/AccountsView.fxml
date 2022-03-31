@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AccountsViewController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AccountsViewController">
 	<children>
       <AnchorPane layoutX="191.0" prefHeight="475.0" prefWidth="418.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="191.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="TOP_CENTER" prefHeight="475.0" prefWidth="444.0" spacing="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox alignment="CENTER" prefHeight="475.0" prefWidth="444.0" spacing="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label fx:id="welcomeLabel1" alignment="BOTTOM_LEFT" prefHeight="28.0" prefWidth="332.0" text="Select an account to view" textFill="#000000d6">
                      <font>
@@ -39,7 +39,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <Label fx:id="welcomeLabel" alignment="TOP_LEFT" layoutX="231.0" prefHeight="28.0" prefWidth="384.0">
+      <Label fx:id="welcomeLabel" alignment="TOP_LEFT" layoutX="227.0" layoutY="61.0" prefHeight="39.0" prefWidth="514.0">
          <font>
             <Font name="Hiragino Sans W5" size="21.0" />
          </font>

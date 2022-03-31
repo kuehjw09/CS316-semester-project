@@ -5,6 +5,7 @@
  *
  */
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
 public class TransactionViewController {
 	private UserSession currentUserSession;
 	
@@ -16,6 +17,9 @@ public class TransactionViewController {
 	public void setCurrentUserSession(UserSession userSession) {
 		this.currentUserSession = userSession;
 	}
+	
+	@FXML 
+	private AnchorPane anchorPane;
 	
 	@FXML
 	void withdrawalButtonPressed() {

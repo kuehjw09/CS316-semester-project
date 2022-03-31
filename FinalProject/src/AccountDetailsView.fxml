@@ -12,9 +12,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AccountDetailsViewController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AccountDetailsViewController">
 	<children>
-	<VBox alignment="TOP_CENTER" layoutX="178.0" prefHeight="475.0" prefWidth="444.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="178.0" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="0.0">
+	<VBox alignment="CENTER" layoutX="178.0" layoutY="-21.0" prefHeight="475.0" prefWidth="444.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="178.0" AnchorPane.rightAnchor="178.0" AnchorPane.topAnchor="-21.0">
 		<children>
 			<VBox spacing="1.0" style="-fx-background-color: linear-gradient(#e9e9e9, white); -fx-background-radius: 12 12 0 0;" VBox.vgrow="NEVER">
 				<children>
@@ -66,7 +66,7 @@
             <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
          </padding>
 	</VBox>
-      <Button layoutX="102.0" layoutY="8.0" mnemonicParsing="false" onAction="#returnButtonPressed" prefHeight="52.0" prefWidth="52.0" text="&lt;">
+      <Button layoutX="102.0" layoutY="8.0" mnemonicParsing="false" onAction="#returnButtonPressed" prefHeight="52.0" prefWidth="52.0" stylesheets="@ButtonStyles.css" text="&lt;">
          <font>
             <Font name="Apple Symbols" size="18.0" />
          </font></Button>

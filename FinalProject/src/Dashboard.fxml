@@ -101,7 +101,7 @@
       <AnchorPane layoutX="17.0" layoutY="44.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.09" prefHeight="57.0" prefWidth="280.0" style="-fx-background-color: #212121;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <HBox alignment="CENTER" prefHeight="54.0" prefWidth="429.0" spacing="48.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#homeButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@ButtonStyles.css">
+            <Button mnemonicParsing="false" onAction="#homeButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" styleClass="navButton" stylesheets="@ButtonStyles.css">
                <graphic>
                   <FontAwesomeIconView glyphName="HOME" size="27">
                      <fill>
@@ -131,7 +131,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#depositButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@ButtonStyles.css">
+            <Button mnemonicParsing="false" onAction="#depositButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" styleClass="navButton" stylesheets="@ButtonStyles.css">
                <graphic>
                   <FontAwesomeIconView glyphName="MONEY" size="27">
                      <fill>
@@ -161,7 +161,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#transferButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@ButtonStyles.css">
+            <Button mnemonicParsing="false" onAction="#transferButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" styleClass="navButton" stylesheets="@ButtonStyles.css">
                <graphic>
                   <FontAwesomeIconView glyphName="SEND" size="27">
                      <fill>
@@ -191,7 +191,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" onAction="#menuButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@ButtonStyles.css">
+            <Button mnemonicParsing="false" onAction="#menuButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" styleClass="navButton" stylesheets="@ButtonStyles.css">
                <graphic>
                   <FontAwesomeIconView glyphName="BARS" size="27">
                      <fill>
