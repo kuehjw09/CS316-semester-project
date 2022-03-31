@@ -21,6 +21,14 @@ public class UserSession {
 		this.accounts = accounts;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	/*
 	 * return a count of Accounts associated with a validated User
 	 */

@@ -78,11 +78,11 @@ public class LoginController
 		loader.setLocation(getClass().getResource("Dashboard.fxml"));
 		Parent root = loader.load();
 		
-		scene = new Scene(root);
-		
 		// access the controller and call a method
 		DashboardController controller = loader.getController();
 		controller.initializeData(userSession); // passing current account number and database
+		
+		scene = new Scene(root);
 
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		stage.setScene(scene);

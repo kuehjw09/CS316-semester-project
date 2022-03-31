@@ -1,32 +1,233 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DashboardController">
    <top>
-   <fx:include source="Header.fxml" BorderPane.alignment="CENTER" />
-   </top>
-   <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="600.0" style="-fx-background-color: TRANSPARENT;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="17.0" layoutY="44.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.12" prefHeight="48.0" prefWidth="280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <HBox alignment="TOP_RIGHT" layoutX="454.0" prefHeight="48.0" prefWidth="146.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane layoutX="166.0" prefHeight="238.0" prefWidth="266.0">
-               <children>
-                  <ListView fx:id="accountsListView" layoutX="-59.0" layoutY="-35.0" maxHeight="1.7976931348623157E308" prefHeight="200.0" prefWidth="259.0" style="-fx-background-color: transparent;" stylesheets="@ListStyles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <padding>
-                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-                     </padding>
-                  </ListView>
-               </children>
-            </AnchorPane>
-            <Button layoutX="234.0" layoutY="247.0" mnemonicParsing="false" onAction="#newAccountButtonPressed" stylesheets="@ListStyles.css" text="Open a new account" />
+            <Button mnemonicParsing="false" onAction="#notificationsButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;">
+               <graphic>
+                  <FontAwesomeIconView glyphName="BELL" size="21">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9725490212440491" green="0.34117648005485535" blue="0.09019608050584793" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.43654822335025356">
+                                 <color>
+                                    <Color red="0.8705882430076599" green="0.1921568661928177" blue="0.3294117748737335" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.40392157435417175" blue="0.5529412031173706" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIconView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#userButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;">
+               <graphic>
+                  <FontAwesomeIconView glyphName="USER" size="21">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9725490212440491" green="0.34117648005485535" blue="0.09019608050584793" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.43654822335025356">
+                                 <color>
+                                    <Color red="0.8705882430076599" green="0.1921568661928177" blue="0.3294117748737335" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.40392157435417175" blue="0.5529412031173706" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIconView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
+         <padding>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>
+   </top>
+   
+   <!-- Center AnchorPane will change based on user navigation -->
+   <center>
+      <AnchorPane fx:id="anchorPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+
       </AnchorPane>
    </center>
+   
+   
    <bottom>
-   <fx:include source="Footer.fxml" BorderPane.alignment="CENTER" />
+   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0" prefWidth="600.0" style="-fx-background-color: TRANSPARENT;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="17.0" layoutY="44.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.09" prefHeight="57.0" prefWidth="280.0" style="-fx-background-color: #212121;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <HBox alignment="CENTER" prefHeight="54.0" prefWidth="429.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#homeButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@ButtonStyles.css">
+               <graphic>
+                  <FontAwesomeIconView glyphName="HOME" size="27">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9725490212440491" green="0.34117648005485535" blue="0.09019608050584793" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.43654822335025356">
+                                 <color>
+                                    <Color red="0.8705882430076599" green="0.1921568661928177" blue="0.3294117748737335" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.40392157435417175" blue="0.5529412031173706" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIconView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#depositButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@ButtonStyles.css">
+               <graphic>
+                  <FontAwesomeIconView glyphName="MONEY" size="27">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9725490212440491" green="0.34117648005485535" blue="0.09019608050584793" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.43654822335025356">
+                                 <color>
+                                    <Color red="0.8705882430076599" green="0.1921568661928177" blue="0.3294117748737335" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.40392157435417175" blue="0.5529412031173706" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIconView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#transferButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@ButtonStyles.css">
+               <graphic>
+                  <FontAwesomeIconView glyphName="SEND" size="27">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9725490212440491" green="0.34117648005485535" blue="0.09019608050584793" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.43654822335025356">
+                                 <color>
+                                    <Color red="0.8705882430076599" green="0.1921568661928177" blue="0.3294117748737335" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.40392157435417175" blue="0.5529412031173706" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIconView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#menuButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" stylesheets="@ButtonStyles.css">
+               <graphic>
+                  <FontAwesomeIconView glyphName="BARS" size="27">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.9725490212440491" green="0.34117648005485535" blue="0.09019608050584793" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.43654822335025356">
+                                 <color>
+                                    <Color red="0.8705882430076599" green="0.1921568661928177" blue="0.3294117748737335" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.40392157435417175" blue="0.5529412031173706" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </FontAwesomeIconView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>
    </bottom>
 </BorderPane>

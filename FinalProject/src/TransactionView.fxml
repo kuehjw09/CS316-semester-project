@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TransactionViewController">
+   <children>
+      <Label layoutX="244.0" layoutY="120.0" text="New Transaction" />
+      <HBox layoutX="200.0" layoutY="187.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#depositButtonPressed" text="Deposit" />
+            <Button mnemonicParsing="false" onAction="#withdrawalButtonPressed" text="Withdrawal" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
