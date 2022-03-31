@@ -9,36 +9,53 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AccountsViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AccountsViewController">
 	<children>
-      <VBox alignment="CENTER" layoutX="182.0" layoutY="53.0" prefHeight="395.0" prefWidth="337.0" spacing="3.0">
+      <HBox layoutX="77.0" layoutY="51.0" prefHeight="534.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox alignment="BOTTOM_LEFT" prefHeight="56.0" prefWidth="329.0">
+            <VBox alignment="CENTER" prefHeight="408.0" prefWidth="398.0" spacing="3.0">
                <children>
-                  <Label text="Select an account to view">
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                  </Label>
+                  <AnchorPane prefHeight="11.0" prefWidth="333.0">
+                     <children>
+                        <Label prefHeight="21.0" prefWidth="243.0" text="Select an account to view">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="12.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+            		<ListView fx:id="accountsListView" maxHeight="1.7976931348623157E308" prefHeight="255.0" prefWidth="362.0" style="-fx-background-color: transparent;" stylesheets="@ListStyles.css">
+            			<padding>
+            				<Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+            			</padding>
+            		</ListView>
+            		<Button mnemonicParsing="false" onAction="#newAccountButtonPressed" stylesheets="@ListStyles.css" text="Open a new account">
+                     <VBox.margin>
+                        <Insets top="6.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
                <padding>
-                  <Insets bottom="15.0" left="12.0" />
+                  <Insets left="18.0" right="18.0" />
                </padding>
-            </HBox>
-      		<ListView fx:id="accountsListView" maxHeight="1.7976931348623157E308" prefHeight="251.0" prefWidth="283.0" style="-fx-background-color: transparent;" stylesheets="@ListStyles.css">
-      			<padding>
-      				<Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-      			</padding>
-      		</ListView>
-      		<Button mnemonicParsing="false" onAction="#newAccountButtonPressed" stylesheets="@ListStyles.css" text="Open a new account">
-               <VBox.margin>
-                  <Insets top="6.0" />
-               </VBox.margin>
-            </Button>
+            </VBox>
+            <AnchorPane fx:id="anchorPane" prefHeight="534.0" prefWidth="403.0" HBox.hgrow="NEVER">
+               <children>
+            
+               </children>
+               <padding>
+                  <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+               </padding>
+            </AnchorPane>
          </children>
-         <padding>
-            <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
-         </padding>
-      </VBox>
+      </HBox>
+      <Label fx:id="welcomeLabel" layoutX="25.0" layoutY="14.0" prefHeight="37.0" prefWidth="375.0" text="Welcome Label" textFill="#b02834d7">
+         <font>
+            <Font name="Microsoft Sans Serif" size="27.0" />
+         </font>
+      </Label>
 	</children>
 </AnchorPane>

@@ -33,7 +33,6 @@ public class AccountListCell extends ListCell<Account> {
 		balanceLabel.setFont(Font.font("helvatica", 24));
 
 
-
 		
 		setPrefWidth(USE_PREF_SIZE);
 	}
