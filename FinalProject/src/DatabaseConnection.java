@@ -1,3 +1,4 @@
+
 /**
  * DatabaseConnection class represents the database connection for an application session.
  *  - Connects to the database and provides methods for interacting with the database within the application
@@ -18,23 +19,17 @@ public class DatabaseConnection {
 	private Connection connection;
 	private Statement statement;
 	private ResultSet resultSet;
-	
+
 	private User currentUser;
-	
+
 	// final static hostname for use in AccountDatabase methods
 	final static String DATABASE_URL = "jdbc:mysql://project-database.cfkat6ss9oqw.us-east-2.rds.amazonaws.com/Project_Database?";
 
 	// keep track of database connection status
-	private boolean connectedToDatabase = false; // use this as a flag when executing database methods to ensure connection
+	private boolean connectedToDatabase = false; // use this as a flag when executing database methods to ensure
+													// connection
 	
-	// example 
-//	if (!connectedToDatabase) {
-//		System.out.print("not connected to database");
-//	}
-
-	
-
-	
+	// no-argument constructor initializes database connection
 	public DatabaseConnection() throws SQLException {
 		try {
 			connection = DriverManager.getConnection(DATABASE_URL, "admin", "adminpassword");
@@ -46,11 +41,12 @@ public class DatabaseConnection {
 			exception.printStackTrace();
 		}
 	}
-	
-	
+
 	/**
-	 * This method executes a query to select the row in the Users table of DB2 database with a username attribute matching the string passed to this method.
-	 * If a row matching the criteria is returned, this method will instatiate a User object with the data returned and then return the object.
+	 * This method executes a query to select the row in the Users table of DB2
+	 * database with a username attribute matching the string passed to this method.
+	 * If a row matching the criteria is returned, this method will instatiate a
+	 * User object with the data returned and then return the object.
 	 * 
 	 * @param username
 	 * @return
@@ -60,14 +56,15 @@ public class DatabaseConnection {
 		String queryString = "SELECT * FROM DB2.Users WHERE username = ? ";
 		try (PreparedStatement queryStatement = connection.prepareStatement(queryString)) {
 			queryStatement.setString(1, username);
-			
+
 			resultSet = queryStatement.executeQuery();
-		
+
 			if (resultSet.next()) { // if the query returned a value
 				User user = new User(resultSet); // create a User object
 				return user; // return User object to caller
-				
+
 			}
+
 			queryStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -75,12 +72,13 @@ public class DatabaseConnection {
 
 		return null; // if no matching username was found, return null
 	}
-	
+
 	/**
-	 * This method calls the stored procedure that checks whether the password entered matches the password column
-	 *  of a row in the Users table with user_id equal to the user_id passed into this method.  Returns true if the
-	 *  passwords match; returns false if otherwise.
-	 *  
+	 * This method calls the stored procedure that checks whether the password
+	 * entered matches the password column of a row in the Users table with user_id
+	 * equal to the user_id passed into this method. Returns true if the passwords
+	 * match; returns false if otherwise.
+	 * 
 	 * @param user_id
 	 * @param password
 	 * @return
@@ -93,23 +91,24 @@ public class DatabaseConnection {
 			cs.setString(2, password);
 			cs.registerOutParameter(3, java.sql.Types.BOOLEAN);
 			cs.execute();
-			
+
 			boolean verified = cs.getBoolean(3);
 
-				if (verified) {
-					return true;
-				}
-				
+			if (verified) {
+				return true;
+			}
+
 			cs.close();
 		} catch (SQLException exception) {
 			exception.printStackTrace();
 		}
-		
- 		return false;
+
+		return false;
 	}
-	
+
 	/*
-	 * Searches the database for an occurance of the account number passed into this method. Returns true if an account was found matching the parameter.
+	 * Searches the database for an occurance of the account number passed into this
+	 * method. Returns true if an account was found matching the parameter.
 	 */
 	public boolean search(int accountNumber) throws SQLException {
 		try {
@@ -126,9 +125,10 @@ public class DatabaseConnection {
 
 		return false; // if no matching account was found
 	}
-	
+
 	/**
-	 * Called from LoginController when a user attempts to sign into the application.
+	 * Called from LoginController when a user attempts to sign into the
+	 * application.
 	 * 
 	 * @param username
 	 * @param password
@@ -146,9 +146,11 @@ public class DatabaseConnection {
 
 		return false;
 	}
-	
+
 	/**
-	 * This method will instantiate and return a UserSession object with the validated user information obtained during successful login procedure.
+	 * This method will instantiate and return a UserSession object with the
+	 * validated user information obtained during successful login procedure.
+	 * 
 	 * @return
 	 * @throws SQLException
 	 */
@@ -156,7 +158,7 @@ public class DatabaseConnection {
 		UserSession currentUserSession = new UserSession(currentUser, getAccounts(currentUser));
 		return currentUserSession;
 	}
-	
+
 	/**
 	 * Populate an ArrayList with Account objects associated with a given user.
 	 * 
@@ -168,24 +170,25 @@ public class DatabaseConnection {
 		ArrayList<Account> accounts = new ArrayList<Account>();
 		try {
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM DB2.Accounts WHERE user_id = " + user.getUser_id()
-					+" ORDER BY date_created DESC");
-			while (resultSet.next()) { 
-				if (resultSet!= null) { // must include to avoid null pointer exception
+			resultSet = statement.executeQuery(
+					"SELECT * FROM DB2.Accounts WHERE user_id = " + user.getUser_id() + " ORDER BY date_created DESC");
+			while (resultSet.next()) {
+				if (resultSet != null) { // must include to avoid null pointer exception
 					accounts.add(new Account(resultSet));
 				}
 			}
 		} catch (SQLException exception) {
 			exception.printStackTrace();
 		}
-		
+
 		return accounts;
 	}
 
 	/**
-	 * Static method to obtain a Connection object reference to the application's database connection.
+	 * Static method to obtain a Connection object reference to the application's
+	 * database connection.
 	 * 
-	 * @return
+	 * @return a Connection object
 	 */
 	public static Connection getConnection() {
 		Connection connection;
@@ -199,8 +202,4 @@ public class DatabaseConnection {
 		}
 		return null;
 	}
-}	
-
-	
-
-
+}

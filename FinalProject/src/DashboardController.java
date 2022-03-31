@@ -29,7 +29,6 @@ public class DashboardController {
 		return this.currentUserSession;
 	}
 
-	// this will change when calling method newAnchorPane
 	@FXML
 	private AnchorPane anchorPane;
 
@@ -57,7 +56,6 @@ public class DashboardController {
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-
 	}
 
 	@FXML
@@ -72,7 +70,6 @@ public class DashboardController {
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-
 	}
 
 	@FXML
@@ -121,7 +118,5 @@ public class DashboardController {
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-
 	}
-
 }

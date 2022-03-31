@@ -1,11 +1,10 @@
-import javafx.fxml.FXML;
-
 /**
  * Displays the TransactionView when a user selects the deposit/withdrawal option in the application footer.
  * 
- * @author owner
+ * @author jkuehl
  *
  */
+import javafx.fxml.FXML;
 public class TransactionViewController {
 	private UserSession currentUserSession;
 	

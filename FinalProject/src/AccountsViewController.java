@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
@@ -47,7 +48,6 @@ public class AccountsViewController {
 	
 	
 	public void initialize() {
-		
 		for (Account account : currentUserSession.getAccounts()) {
 			accounts.add(account);
 		}
