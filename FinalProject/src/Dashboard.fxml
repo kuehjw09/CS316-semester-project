@@ -89,7 +89,7 @@
    
    <!-- Center AnchorPane will change based on user navigation -->
    <center>
-      <AnchorPane fx:id="anchorPane" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="anchorPane" prefHeight="476.0" prefWidth="800.0" BorderPane.alignment="CENTER">
 
       </AnchorPane>
    </center>

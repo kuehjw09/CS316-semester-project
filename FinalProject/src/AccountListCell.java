@@ -1,5 +1,6 @@
 import java.text.NumberFormat;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -31,6 +32,9 @@ public class AccountListCell extends ListCell<Account> {
 		nameLabel.setFont(Font.font("arial", 15 ));
 		numberLabel.setFont(Font.font("arial", 15 ));
 		balanceLabel.setFont(Font.font("helvatica", 24));
+		
+		vbox.setPadding(new Insets(1, 1, 1, 12));
+		vbox.setStyle("-fx-background-radius: 12");
 
 
 		

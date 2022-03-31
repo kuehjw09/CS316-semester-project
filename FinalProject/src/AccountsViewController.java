@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 /**
@@ -25,6 +26,7 @@ import javafx.util.Callback;
 public class AccountsViewController {
 	private static UserSession currentUserSession; // static variable to set the current user session
 	private Account selectedAccount; // keep track of selected account
+	private static int count;
 
 	public static void setCurrentUserSession(UserSession userSession) {
 		currentUserSession = userSession;
@@ -43,6 +45,9 @@ public class AccountsViewController {
 
 	@FXML
 	private AnchorPane anchorPane;
+	
+//	@FXML 
+//	private VBox vbox;
 
 	@FXML
 	private ListView<Account> accountsListView;
@@ -60,16 +65,17 @@ public class AccountsViewController {
 		Calendar calendar = Calendar.getInstance();
 		int hours = calendar.get(Calendar.HOUR_OF_DAY);
 		if (hours>=0 && hours<12) {
-			return ("Good Morning, ");
+			return ("Good Morning");
 		} else if(hours >= 12 && hours < 18) {
-			return ("Good Afternoon, ");
+			return ("Good Afternoon");
 		} else {
-			return ("Good Evening, ");
+			return ("Good Evening");
 		}
 	}
 	
 	
 	void showAccountDetailsView() throws IOException {
+		welcomeLabel.setText(null);
 		// show the AccountDetailsView
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("AccountDetailsView.fxml"));
 		AnchorPane accountPane = (AnchorPane) loader.load();
@@ -82,7 +88,14 @@ public class AccountsViewController {
 	}
 
 	public void initialize() {
-		welcomeLabel.setText(String.format("%s%s!", getWelcomeMessageText(), currentUserSession.getUser().getFirstName()));
+		count++;
+		
+		if (count == 1) {
+			welcomeLabel.setText(String.format("%s, %s", getWelcomeMessageText(), currentUserSession.getUser().getFirstName()));
+		} else {
+			welcomeLabel.setText(null);
+		}
+		
 		for (Account account : currentUserSession.getAccounts()) {
 			accounts.add(account);
 		}
