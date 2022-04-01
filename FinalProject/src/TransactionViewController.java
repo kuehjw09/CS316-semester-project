@@ -28,7 +28,7 @@ public class TransactionViewController {
 	void withdrawalButtonPressed() throws IOException {
 		System.out.println("withdrawal button pressed");
 		// take the user to the WithdrawalView
-		WithdrawalController.setCurrentUserSession(currentUserSession);
+		WithdrawalViewController.setCurrentUserSession(currentUserSession);
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("WithdrawalView.fxml"));
 		AnchorPane accountPane = (AnchorPane) loader.load();
@@ -44,7 +44,8 @@ public class TransactionViewController {
 	void depositButtonPressed() throws IOException {
 		System.out.println("depositButtonPressed");
 		// take user to deposit view
-
+		DepositViewController.setCurrentUserSession(currentUserSession);
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("DepositView.fxml"));
 		AnchorPane accountPane = (AnchorPane) loader.load();
 		try {

@@ -26,7 +26,7 @@ import javafx.util.Callback;
 public class AccountsViewController {
 	private static UserSession currentUserSession; // static variable to set the current user session
 	private Account selectedAccount; // keep track of selected account
-	private static int count;
+//	private static int count;
 
 	public static void setCurrentUserSession(UserSession userSession) {
 		currentUserSession = userSession;
@@ -88,13 +88,8 @@ public class AccountsViewController {
 	}
 
 	public void initialize() {
-		count++;
-		
-		if (count < 3) {
+
 			welcomeLabel.setText(String.format("%s, %s", getWelcomeMessageText(), currentUserSession.getUser().getFirstName()));
-		} else {
-			welcomeLabel.setText(null);
-		}
 		
 		for (Account account : currentUserSession.getAccounts()) {
 			accounts.add(account);
