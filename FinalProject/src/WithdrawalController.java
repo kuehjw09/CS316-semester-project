@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.EventObject;
+import java.util.Optional;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -20,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -45,6 +47,8 @@ public class WithdrawalController {
 
 	public void setCurrentAccount(Account currentAccout) {
 		this.currentAccount = currentAccout;
+		errorMessageLabel.setText(null);
+
 	}
 
 	public Double getWithdrawalAmount() {
@@ -75,25 +79,34 @@ public class WithdrawalController {
 
 	@FXML
 	void confirmAmountButtonPressed(ActionEvent event) {
-		setWithdrawalAmount(Double.valueOf(amountTextField.getText()));
+		try {
+			setWithdrawalAmount(Double.valueOf(amountTextField.getText()));
+			errorMessageLabel.setText(null);
 
-		amountTextField.setText(currency.format(getWithdrawalAmount()));
-		submitButton.setDisable(false);
+			amountTextField.setText(currency.format(getWithdrawalAmount()));
+			submitButton.setDisable(false);
+		} catch (NumberFormatException exception ) {
+			errorMessageLabel.setText("Please enter a valid amount");
+		}
 	}
 
 	@FXML
 	void cancelButtonPressed(ActionEvent event) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Cancel");
+		alert.setTitle("Confirmation");
 		alert.setHeaderText("Cancel Withdrawal");
-		alert.setContentText("Are you sure you want to cancel?");
+		alert.setContentText("Are you sure you wish to cancel?");
 
-		alert.showAndWait();
+		Optional<ButtonType> option = alert.showAndWait();
 
-		try {
-			switchToAccountView(event);
-		} catch (IOException exception) {
-			exception.printStackTrace();
+		if (option.get() == ButtonType.OK) {
+			try {
+				switchToAccountView(event);
+			} catch (IOException exception) {
+				exception.printStackTrace();
+			}
+		} else {
+			alert.close();
 		}
 	}
 
@@ -109,7 +122,7 @@ public class WithdrawalController {
 				exception.printStackTrace();
 			}
 		} catch (NullPointerException exception) {
-			errorMessageLabel.setText("Please select an account for withdrawal");
+			errorMessageLabel.setText("Please select an account for withdrawal.");
 		}
 	}
 
@@ -125,7 +138,7 @@ public class WithdrawalController {
 		
 		// access the controller and call a method
 		DashboardController controller = loader.getController();
-		controller.initializeData(currentUserSession); // passing current account number and database
+		controller.initializeData(currentUserSession);
 
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		stage.setScene(scene);

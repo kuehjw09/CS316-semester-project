@@ -29,8 +29,6 @@ public class DashboardController {
 		return this.currentUserSession;
 	}
 	
-
-	
 	@FXML
 	private AnchorPane anchorPane;
 

@@ -90,7 +90,7 @@ public class AccountsViewController {
 	public void initialize() {
 		count++;
 		
-		if (count == 1) {
+		if (count < 3) {
 			welcomeLabel.setText(String.format("%s, %s", getWelcomeMessageText(), currentUserSession.getUser().getFirstName()));
 		} else {
 			welcomeLabel.setText(null);

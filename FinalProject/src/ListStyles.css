@@ -1,7 +1,7 @@
 .list-cell {
   -fx-background-color: white;
   -fx-border-color: transparent;
-  -fx-background-radius: 3;
+  -fx-background-radius: 6 20 6 6;
   -fx-border-radius: 3;
   -fx-font-family: 'Arial';
   -fx-font-size: 12;
