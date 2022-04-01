@@ -28,7 +28,9 @@ public class DashboardController {
 	public UserSession getCurrentUserSession() {
 		return this.currentUserSession;
 	}
+	
 
+	
 	@FXML
 	private AnchorPane anchorPane;
 
@@ -48,6 +50,7 @@ public class DashboardController {
 	@FXML
 	void depositButtonPressed(ActionEvent event) throws IOException {
 		// route the user to the transactions view
+		TransactionViewController.setCurrentUserSession(currentUserSession);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("TransactionView.fxml"));
 		AnchorPane centerPane = (AnchorPane) loader.load();
 		try {
