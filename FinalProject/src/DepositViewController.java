@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 public class DepositViewController {
 	private static UserSession currentUserSession;
 	private Account currentAccount;
-	private Double withdrawalAmount;
+	private Double depositAmount;
 
 	private static final NumberFormat currency = NumberFormat.getCurrencyInstance();
 
@@ -43,15 +43,14 @@ public class DepositViewController {
 	public void setCurrentAccount(Account currentAccout) {
 		this.currentAccount = currentAccout;
 		errorMessageLabel.setText(null);
-
 	}
 
-	public Double getWithdrawalAmount() {
-		return withdrawalAmount;
+	public Double getDepositAmount() {
+		return depositAmount;
 	}
 
-	public void setWithdrawalAmount(Double withdrawalAmount) {
-		this.withdrawalAmount = withdrawalAmount;
+	public void setDepositAmount(Double depositAmount) {
+		this.depositAmount = depositAmount;
 	}
 	
 
@@ -69,6 +68,24 @@ public class DepositViewController {
     
     @FXML 
     private Label errorMessageLabel;
+    
+    @FXML
+    void confirmAmountButtonPressed() {
+		try {
+			Double input = Double.valueOf(amountTextField.getText());
+			if (!(input > 0)) {
+				errorMessageLabel.setText("Please enter a valid amount");
+			} else {
+				setDepositAmount(input);
+				errorMessageLabel.setText(null);
+
+				amountTextField.setText(currency.format(getDepositAmount()));
+				submitButton.setDisable(false);
+			}
+		} catch (NumberFormatException exception ) {
+			errorMessageLabel.setText("Please enter a valid amount");
+		}
+    }
 
     @FXML
     void cancelButtonPressed(ActionEvent event) {
@@ -93,9 +110,10 @@ public class DepositViewController {
     @FXML
     void submitButtonPressed(ActionEvent event) {
 		try {
-			System.out.println("submitting deposit for " + currency.format(withdrawalAmount) + "from account "
+			System.out.println("submitting deposit for " + currency.format(getDepositAmount()) + " from account "
 					+ getCurrentAccount().getAccountNumber());
 
+			submitButton.setDisable(true);
 			try {
 				switchToAccountView(event);
 			} catch (IOException exception) {
@@ -139,6 +157,7 @@ public class DepositViewController {
 				setCurrentAccount(newAccount);
 			}
 		});
+		
     }
 
 }

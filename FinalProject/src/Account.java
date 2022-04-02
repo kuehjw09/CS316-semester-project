@@ -102,10 +102,9 @@ public class Account {
 	
 	@Override
 	public String toString() {
-		return String.format("Account Name: %s%nAccount Number: %s%n"
-				+ "Available Balance: %.2f%nTotalBalance: %s%nNumber of Transactions: %d%n%n",
-				getName(), getAccountNumber(), getAvailableBalance(), getTotalBalance(),
-				getTransactionsCount());
+		return String.format("%s...%s%n"
+				+ "Available Balance: $%.2f%n",
+				getName(), getAccountNumber() % 110000, getAvailableBalance());
 	}
 	
 }

@@ -19,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
 public class DashboardController {
-	private UserSession currentUserSession; // hold current user session for context
+	private UserSession currentUserSession; // contains a UserSession object 
 
 	public void setCurrentUserSession(UserSession currentUserSession) {
 		this.currentUserSession = currentUserSession;
@@ -32,7 +32,6 @@ public class DashboardController {
 	@FXML
 	private AnchorPane anchorPane;
 
-	// Footer Buttons
 	@FXML
 	void notificationsButtonPressed(ActionEvent event) {
 		System.out.println("Notifications button pressed");
@@ -44,7 +43,6 @@ public class DashboardController {
 
 	}
 
-	// Header Buttons
 	@FXML
 	void depositButtonPressed(ActionEvent event) throws IOException {
 		// route the user to the transactions view
@@ -98,8 +96,8 @@ public class DashboardController {
 	}
 
 	/**
-	 * Dashboard is initialized with a UserSession object obtained when a validated
-	 * user signs in
+	 * Dashboard is initialized with a UserSession object when a validated
+	 * user succesfully signs in
 	 * 
 	 * @param currentUserSession
 	 * @throws IOException
@@ -111,7 +109,6 @@ public class DashboardController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("AccountsView.fxml"));
 		AccountsViewController.setCurrentUserSession(getCurrentUserSession()); // set the current user session in the
 																				// accountsViewController
-
 		AnchorPane centerPane = (AnchorPane) loader.load();
 		try {
 			anchorPane.getChildren().clear();

@@ -80,11 +80,16 @@ public class WithdrawalViewController {
 	@FXML
 	void confirmAmountButtonPressed(ActionEvent event) {
 		try {
-			setWithdrawalAmount(Double.valueOf(amountTextField.getText()));
-			errorMessageLabel.setText(null);
+			Double input = Double.valueOf(amountTextField.getText());
+			if (!(input > 0)) {
+				errorMessageLabel.setText("Please enter a valid amount");
+			} else {
+				setWithdrawalAmount(input);
+				errorMessageLabel.setText(null);
 
-			amountTextField.setText(currency.format(getWithdrawalAmount()));
-			submitButton.setDisable(false);
+				amountTextField.setText(currency.format(getWithdrawalAmount()));
+				submitButton.setDisable(false);
+			}
 		} catch (NumberFormatException exception ) {
 			errorMessageLabel.setText("Please enter a valid amount");
 		}
@@ -113,8 +118,10 @@ public class WithdrawalViewController {
 	@FXML
 	void submitButtonPressed(ActionEvent event) {
 		try {
-			System.out.println("submitting withdrawal for " + currency.format(withdrawalAmount) + "from account "
+			System.out.println("submitting withdrawal for " + currency.format(withdrawalAmount) + " from account "
 					+ getCurrentAccount().getAccountNumber());
+			
+			submitButton.setDisable(true);
 
 			try {
 				switchToAccountView(event);

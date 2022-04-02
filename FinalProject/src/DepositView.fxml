@@ -19,7 +19,7 @@
                </font>
             </Label>
             <AnchorPane layoutY="56.0" prefHeight="2.0" prefWidth="298.0" style="-fx-background-color: #212121;" />
-            <VBox layoutY="64.0" prefHeight="345.0" prefWidth="298.0" spacing="8.0">
+            <VBox layoutY="64.0" prefHeight="345.0" prefWidth="298.0" spacing="12.0">
                <children>
                   <Label text="To" />
                   <ChoiceBox fx:id="accountChoiceBox" prefHeight="46.0" prefWidth="298.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0px 0px 2px 0px;" />
@@ -29,6 +29,7 @@
                         <Font name="Helvetica" size="36.0" />
                      </font>
                   </TextField>
+                  <Button alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#confirmAmountButtonPressed" prefWidth="63.0" stylesheets="@ListStyles.css" text="Confirm" />
                   <Label fx:id="errorMessageLabel" text="Error message label" />
                   <HBox alignment="CENTER" prefHeight="41.0" prefWidth="98.0" spacing="3.0">
                      <children>
