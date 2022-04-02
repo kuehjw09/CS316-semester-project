@@ -44,6 +44,7 @@ CREATE TABLE Transactions (
     amount DECIMAL(13 , 2 ) NOT NULL,
     transaction_type ENUM('credit', 'debit') NOT NULL,
     description VARCHAR(90),
+    status ENUM('pending', 'processed'),
     processed TIMESTAMP NOT NULL ON UPDATE LOCALTIMESTAMP DEFAULT LOCALTIMESTAMP
 );
 
@@ -144,37 +145,42 @@ BEGIN
 END $$
 DELIMITER ;
 
--- UPDATE_TOTALS procedure simulates the bank processing deposits and updating the available_balance of an account
+-- UPDATE_TOTALS procedure simulates the bank processing deposits and updating the balances of an account
 DELIMITER $$
 SET SQL_SAFE_UPDATES = 0;
 
 CREATE PROCEDURE UPDATE_TOTALS()
 BEGIN
-	DECLARE available DECIMAL(13, 2) DEFAULT 0.0;
     DECLARE total DECIMAL(13, 2) DEFAULT 0.0;
     DECLARE account INT;
-    DECLARE finishedReading BOOL DEFAULT FALSE;
-    
-	DECLARE accountCursor CURSOR FOR
-		SELECT account_id, available_balance, total_balance FROM Accounts;
-        
+    DECLARE operation ENUM("credit", "debit");
+    DECLARE transactionID INT;
+	DECLARE finishedReading BOOL DEFAULT FALSE;
+
+	DECLARE transactionCursor CURSOR FOR
+		SELECT account_number, amount, transaction_type, transaction_id FROM Transactions
+			WHERE status = "pending";
+            
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET finishedReading = TRUE;
-        
-	OPEN accountCursor;
-    FETCH FROM accountCursor INTO account, available, total;
+            
+	OPEN transactionCursor;
+    FETCH FROM transactionCursor INTO account, total, operation, transactionID;
     
     WHILE NOT finishedReading DO
-		IF available < total THEN
-			UPDATE Accounts
-            SET available_balance = total
-            WHERE account_id = account;
-		END IF;
-        
-	    FETCH FROM accountCursor INTO account, available, total;
+    
+		IF operation = "debit" THEN
+			UPDATE Accounts SET total_balance = (total_balance - total) WHERE account_number = account;
+            
+		ELSEIF operation = "credit" THEN
+			UPDATE Accounts SET available_balance = (available_balance + total) WHERE account_number = account;
+            
+		UPDATE Transactions SET status = "processed" WHERE transaction_id = transactionID;
+        END IF;
+	     FETCH FROM transactionCursor INTO account, total, operation, transactionID;
 
 	END WHILE;
     
-    CLOSE accountCursor;
+    CLOSE transactionCursor;
     
 END$$
 SET SQL_SAFE_UPDATES = 1;

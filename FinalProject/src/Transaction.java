@@ -16,6 +16,7 @@ public class Transaction {
 	private Timestamp timestamp;
 	private int account_number;
 	private String description;
+	private String status;
 	private String type;
 	private double amount;
 
@@ -25,10 +26,13 @@ public class Transaction {
 		this.description = description;
 		this.type = type;
 		this.amount = amount;
+		this.status = "pending"; // always pending until database is updated
 	}
 	
 	public Transaction(ResultSet resultSet) throws SQLException {
-		this.timestamp = resultSet.getTimestamp(6);
+		this.status = resultSet.getString(6);
+		this.timestamp = resultSet.getTimestamp(7);
+
 		this.account_number = resultSet.getInt(2);
 		this.description = resultSet.getString(5);
 		this.type = resultSet.getString(4);
@@ -43,6 +47,14 @@ public class Transaction {
 
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public int getAccount_number() {
@@ -88,12 +100,13 @@ public class Transaction {
 		Connection connection = DatabaseConnection.getConnection(); // call static method getConnection()
 		
 		String createString = "INSERT INTO DB2.Transactions "
-					+ "(account_number, amount, transaction_type)"
-					+ "VALUES (?, ?, ?);";
+					+ "(account_number, amount, transaction_type, status)"
+					+ "VALUES (?, ?, ?, ?);";
 		try (PreparedStatement createStatement = connection.prepareStatement(createString)) {
 			createStatement.setInt(1, getAccount_number());
 			createStatement.setDouble(2, getAmount());
 			createStatement.setString(3, getType());
+			createStatement.setString(4, getStatus());
 			
 			createStatement.executeUpdate();
 			System.out.printf("Transaction receipt created.%n%n");
@@ -110,6 +123,6 @@ public class Transaction {
 	
 	@Override
 	public String toString() {
-		return String.format("%s\t%s\t%s\t$%.2f%n", getTimestamp(), getDescription(), getType(), getAmount());
+		return String.format("%-12s%9s%9s     $%.2f%n", getStatus(), getTimestamp(), getType(), getAmount());
 	}
 }

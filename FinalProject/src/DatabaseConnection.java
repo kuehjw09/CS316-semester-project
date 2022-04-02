@@ -35,7 +35,7 @@ public class DatabaseConnection {
 			connection = DriverManager.getConnection(DATABASE_URL, "admin", "adminpassword");
 
 			connectedToDatabase = true;
-			System.out.printf("Connected to database%n%n%n");
+			System.out.printf("Connected to database%n%n");
 			callUpdateTotalsProcedure();
 
 		} catch (SQLException exception) {

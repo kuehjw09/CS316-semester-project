@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.NumberFormat;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,6 +38,15 @@ public class AccountDetailsViewController {
 	private Label balanceLabel;
 	
 	@FXML
+	private Label totalBalanceLabel;
+	
+	@FXML
+	private Label pendingDebitsLabel;
+	
+	@FXML 
+	private Label pendingCreditsLabel;
+	
+	@FXML
 	private ListView<Transaction> transactionsListView;
 
 	@FXML
@@ -42,7 +54,7 @@ public class AccountDetailsViewController {
 	
 	@FXML
 	void viewAllTransactionsClicked() {
-		// view all transactions clicked
+		
 	}
 	
 	@FXML 
@@ -62,11 +74,17 @@ public class AccountDetailsViewController {
 	}
 	
 	public void initialize() throws SQLException {
+		// set balance info labels
+		totalBalanceLabel.setText(currency.format(currentAccount.getTotalBalance()));
+		pendingDebitsLabel.setText(currency.format(currentAccount.getPendingWithdrawalsAmount().negate()));
+		pendingCreditsLabel.setText("+" + currency.format(currentAccount.getPendingDepositsAmount()));
 
-		// populate transactionsListView with ArrayList of currentAccount transactions
+		// populate transactionsListView with ArrayList of currentAccount transactions (limit 12)
 		for (Transaction transaction : getCurrentAccount().getTransactions()) {
 			transactions.add(transaction);
 		}
+		
+		Collections.reverse(transactions); // descending order
 		
 		transactionsListView.setItems(transactions);
 		
