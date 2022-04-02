@@ -37,7 +37,6 @@ CREATE TABLE Accounts (
     last_updated TIMESTAMP NOT NULL ON UPDATE LOCALTIMESTAMP DEFAULT LOCALTIMESTAMP
 );
 
-
 -- heap table to store all transactions
 CREATE TABLE Transactions (
     transaction_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -145,8 +144,6 @@ BEGIN
 END $$
 DELIMITER ;
 
-
-
 -- UPDATE_TOTALS procedure simulates the bank processing deposits and updating the available_balance of an account
 DELIMITER $$
 SET SQL_SAFE_UPDATES = 0;
@@ -159,7 +156,7 @@ BEGIN
     DECLARE finishedReading BOOL DEFAULT FALSE;
     
 	DECLARE accountCursor CURSOR FOR
-		SELECT accountID, availableBalance, totalBalance FROM Accounts;
+		SELECT account_id, available_balance, total_balance FROM Accounts;
         
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET finishedReading = TRUE;
         
@@ -169,8 +166,8 @@ BEGIN
     WHILE NOT finishedReading DO
 		IF available < total THEN
 			UPDATE Accounts
-            SET availableBalance = total
-            WHERE accountID = account;
+            SET available_balance = total
+            WHERE account_id = account;
 		END IF;
         
 	    FETCH FROM accountCursor INTO account, available, total;

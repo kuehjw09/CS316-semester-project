@@ -1,0 +1,14 @@
+.list-cell {
+  -fx-background-color: transparent;
+  -fx-text-fill: black;
+  -fx-font-family: 'Monospaced';
+  -fx-font-size: 12;
+}
+.list-cell:filled:hover {
+    -fx-background-color: linear-gradient(#f85717, #de3154);
+   -fx-background-radius: 10;
+  -fx-text-fill: white;
+}
+.list-view {
+	-fx-background-color:transparent;
+}

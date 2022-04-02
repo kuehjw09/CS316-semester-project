@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.EventObject;
@@ -81,17 +83,26 @@ public class WithdrawalViewController {
 	void confirmAmountButtonPressed(ActionEvent event) {
 		try {
 			Double input = Double.valueOf(amountTextField.getText());
+
 			if (!(input > 0)) {
 				errorMessageLabel.setText("Please enter a valid amount");
-			} else {
-				setWithdrawalAmount(input);
-				errorMessageLabel.setText(null);
-
-				amountTextField.setText(currency.format(getWithdrawalAmount()));
-				submitButton.setDisable(false);
+			} else if ((getCurrentAccount().getAvailableBalance().subtract(new BigDecimal(input)).
+					compareTo(BigDecimal.ZERO) < 0.0)) {
+				errorMessageLabel.setText("Withdrawal amount exceeds available balance.");
 			}
-		} catch (NumberFormatException exception ) {
+			else {
+				setWithdrawalAmount(input);
+
+				amountTextField.setText(currency.format(input));
+				
+				errorMessageLabel.setText(null);
+				submitButton.setDisable(false);
+				amountTextField.setDisable(true);
+			}
+		} catch (NumberFormatException exception) {
 			errorMessageLabel.setText("Please enter a valid amount");
+		} catch (NullPointerException exception) {
+			errorMessageLabel.setText("Please select an account for withdrawal.");
 		}
 	}
 
@@ -120,6 +131,16 @@ public class WithdrawalViewController {
 		try {
 			System.out.println("submitting withdrawal for " + currency.format(withdrawalAmount) + " from account "
 					+ getCurrentAccount().getAccountNumber());
+			
+			// perform withdraw transaction with validated amount
+			try {
+				getCurrentUserSession().debit(getCurrentAccount(), getWithdrawalAmount()); 
+				Transaction transaction = new Transaction(getCurrentAccount().getAccountNumber(), "Withdrawal Transaction", "debit", getWithdrawalAmount());
+				transaction.addTransaction();
+			} catch (SQLException exception) {
+				System.out.printf("Transaction failed.%n");
+				exception.printStackTrace();
+			}
 			
 			submitButton.setDisable(true);
 

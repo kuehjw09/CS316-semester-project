@@ -36,8 +36,32 @@ public class DatabaseConnection {
 
 			connectedToDatabase = true;
 			System.out.printf("Connected to database%n%n%n");
+			callUpdateTotalsProcedure();
 
 		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+	}
+	
+	/**
+	 * When called, this method will call the UPDATE_TOTALS() stored procedure
+	 * defined in the schema for `Project_Database`. The stored procedure simulates
+	 * the update of pending funds to available funds in a bank database. The
+	 * totalBalance of an Account object will match its availableBalance after this
+	 * method is executed succesfully.
+	 */
+	public void callUpdateTotalsProcedure() {
+		try {
+			connection = DriverManager.getConnection(DATABASE_URL, "admin", "adminpassword");
+			// call the stored procedure UPDATE_TOTALS to update availableBalance to match
+			// totalBalance on each account
+			CallableStatement cs = connection.prepareCall("CALL DB2.UPDATE_TOTALS;");
+																					
+			cs.executeUpdate();
+			System.out.printf("Successfully executed stored procedure call%n%n");
+
+		} catch (SQLException exception) {
+			System.out.printf("Stored procedure call failed.");
 			exception.printStackTrace();
 		}
 	}
@@ -72,7 +96,7 @@ public class DatabaseConnection {
 
 		return null; // if no matching username was found, return null
 	}
-
+	
 	/**
 	 * This method calls the stored procedure that checks whether the password
 	 * entered matches the password column of a row in the Users table with user_id
@@ -113,7 +137,7 @@ public class DatabaseConnection {
 	public boolean search(int accountNumber) throws SQLException {
 		try {
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM DB2.Accounts WHERE accountID = " + accountNumber);
+			resultSet = statement.executeQuery("SELECT * FROM DB2.Accounts WHERE account_number = " + accountNumber);
 
 			if (resultSet.next()) {
 				return true;
@@ -202,4 +226,5 @@ public class DatabaseConnection {
 		}
 		return null;
 	}
+
 }

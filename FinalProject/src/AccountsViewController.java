@@ -83,6 +83,7 @@ public class AccountsViewController {
 	}
 
 	public void initialize() {
+		currentUserSession.updateUserSession(); // make sure to update the ArrayList to match database
 
 		welcomeLabel
 				.setText(String.format("%s, %s", getWelcomeMessageText(), currentUserSession.getUser().getFirstName()));

@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.Optional;
 
@@ -73,14 +74,18 @@ public class DepositViewController {
     void confirmAmountButtonPressed() {
 		try {
 			Double input = Double.valueOf(amountTextField.getText());
+
 			if (!(input > 0)) {
 				errorMessageLabel.setText("Please enter a valid amount");
 			} else {
 				setDepositAmount(input);
-				errorMessageLabel.setText(null);
 
 				amountTextField.setText(currency.format(getDepositAmount()));
+
+				errorMessageLabel.setText(null);
 				submitButton.setDisable(false);
+				amountTextField.setDisable(true);
+
 			}
 		} catch (NumberFormatException exception ) {
 			errorMessageLabel.setText("Please enter a valid amount");
@@ -112,7 +117,17 @@ public class DepositViewController {
 		try {
 			System.out.println("submitting deposit for " + currency.format(getDepositAmount()) + " from account "
 					+ getCurrentAccount().getAccountNumber());
-
+			
+			// perform deposit transaction with validated amount
+			try {
+				getCurrentUserSession().credit(getCurrentAccount(), getDepositAmount()); 
+				Transaction transaction = new Transaction(getCurrentAccount().getAccountNumber(), "Deposit Transaction", "credit", getDepositAmount());
+				transaction.addTransaction();
+			} catch (SQLException exception) {
+				System.out.printf("Transaction failed.%n");
+				exception.printStackTrace();
+			}
+			
 			submitButton.setDisable(true);
 			try {
 				switchToAccountView(event);
@@ -120,6 +135,7 @@ public class DepositViewController {
 				exception.printStackTrace();
 			}
 		} catch (NullPointerException exception) {
+			exception.printStackTrace();
 			errorMessageLabel.setText("Please select an account for deposit.");
 		}
     }

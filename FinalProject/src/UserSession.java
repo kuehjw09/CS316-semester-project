@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserSession { 
-
+	private DatabaseConnection databaseConnection = new DatabaseConnection();
 	private User user; // validated user
 	private ArrayList<Account> accounts; // accounts associated with validated user
 
@@ -36,10 +36,32 @@ public class UserSession {
 		return accounts.size();
 	}
 	
+	public void setAccounts(ArrayList<Account> accounts) {
+		this.accounts = accounts;
+	}
+	
 	public ArrayList<Account> getAccounts() {
 		return accounts;
 	}
- 	
+	
+	public void credit(Account account, double creditAmount) throws SQLException {
+		account.credit(creditAmount);
+
+	}
+	
+	public void debit(Account account, double debitAmount) throws SQLException {
+		account.debit(debitAmount);
+	}
+	
+	public void updateUserSession() {
+		try {
+			setAccounts(databaseConnection.getAccounts(getUser()));
+			System.out.println("UserSession Accounts updated");
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+	}
+	
 	/**
 	 * return a String representation of a UserSession object
 	 */
