@@ -14,6 +14,7 @@ public class UserSession {
 	private DatabaseConnection databaseConnection = new DatabaseConnection();
 	private User user; // validated user
 	private ArrayList<Account> accounts; // accounts associated with validated user
+	private ArrayList<Notification> notifications = new ArrayList<>();
 
 	// constructor
 	public UserSession(User user, ArrayList<Account> accounts) throws SQLException {
@@ -29,12 +30,6 @@ public class UserSession {
 		this.user = user;
 	}
 	
-	/*
-	 * return a count of Accounts associated with a validated User
-	 */
-	public int getCountOfAccounts() {
-		return accounts.size();
-	}
 	
 	public void setAccounts(ArrayList<Account> accounts) {
 		this.accounts = accounts;
@@ -42,6 +37,19 @@ public class UserSession {
 	
 	public ArrayList<Account> getAccounts() {
 		return accounts;
+	}
+	
+	public void addNotification(Notification notification) {
+		System.out.println("adding 1 new notification");
+		notifications.add(notification);
+	}
+	
+	public ArrayList<Notification> getNotifications() {
+		return notifications;
+	}
+	
+	public void clearNotifications() {
+		notifications.clear();
 	}
 	
 	public void credit(Account account, double creditAmount) throws SQLException {
@@ -56,7 +64,7 @@ public class UserSession {
 	public void updateUserSession() {
 		try {
 			setAccounts(databaseConnection.getAccounts(getUser()));
-			System.out.println("UserSession Accounts updated");
+			System.out.println("UserSession updated");
 		} catch (SQLException exception) {
 			exception.printStackTrace();
 		}
@@ -71,7 +79,7 @@ public class UserSession {
 		for (Account account : accounts) {
 			accountString += account;
 		}
-		return String.format("UserSession for user %s:%n%snumber of accounts: %d%n%n%s", user.getUsername(), 
-				user.toString(), getCountOfAccounts(), accountString);
+		return String.format("UserSession for user %s:%n%snumber of accounts: %d%nnumber of notifications: %d%n%n%s", user.getUsername(), 
+				user.toString(), accounts.size(), notifications.size(), accountString);
 	}
 }

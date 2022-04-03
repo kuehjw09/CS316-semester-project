@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -40,9 +41,14 @@ public class AccountsViewController {
 
 	@FXML
 	private Label welcomeLabel;
+	
+	@FXML
+	private Label activityLabel;
 
 	@FXML
 	private AnchorPane anchorPane;
+	
+	@FXML private AnchorPane sidebarPane;
 
 	@FXML
 	private ListView<Account> accountsListView;
@@ -54,6 +60,40 @@ public class AccountsViewController {
 	void newAccountButtonPressed(ActionEvent event) {
 		// route a user to account creation form
 	}
+	
+    @FXML
+    private ListView<Notification> notificationsListView;
+    
+    @FXML 
+    private final ObservableList<Notification> notifications = FXCollections.observableArrayList();
+
+    @FXML
+    private AnchorPane notificationsPane;
+    
+    @FXML
+    private Button showHideButton;
+
+    @FXML
+    void clearNotificationsButtonPressed(ActionEvent event) {
+    	// clear notifications
+    	currentUserSession.clearNotifications();
+    	notifications.clear();
+		notificationsPane.setVisible(false);
+		showHideButton.setText("Show");
+    	activityLabel.setText(String.format("Session Activity (%d)", notifications.size()));
+    }
+
+    @FXML
+    void notificationsPaneButtonPressed(ActionEvent event) {
+    	if (notificationsPane.isVisible()) {
+    		notificationsPane.setVisible(false);
+    		showHideButton.setText("Show");
+    		
+    	} else {
+         	notificationsPane.setVisible(true);
+    		showHideButton.setText("Hide");
+    	}
+    }
 
 	public String getWelcomeMessageText() {
 
@@ -84,14 +124,32 @@ public class AccountsViewController {
 
 	public void initialize() {
 		currentUserSession.updateUserSession(); // make sure to update the ArrayList to match database
-
+		
 		welcomeLabel
 				.setText(String.format("%s, %s", getWelcomeMessageText(), currentUserSession.getUser().getFirstName()));
-
+		
+    	for (Notification notification : currentUserSession.getNotifications()) {
+    		notifications.add(notification);
+    	}
+    	
+    	activityLabel.setText(String.format("Session Activity (%d)", notifications.size()));
+		notificationsPane.setVisible(false);
+		showHideButton.setText("Show");
+		
+    	notificationsListView.setItems(notifications);
+    	
+    	
+    	notificationsListView.setCellFactory(new Callback<ListView<Notification>, ListCell<Notification>>() {
+    		@Override
+    		public ListCell<Notification> call(ListView<Notification> listView) {
+    			return new NotificationsListCell();
+    		}
+    	});
+		
 		for (Account account : currentUserSession.getAccounts()) {
 			accounts.add(account);
 		}
-
+		
 		// set ObservableList items
 		accountsListView.setItems(accounts);
 

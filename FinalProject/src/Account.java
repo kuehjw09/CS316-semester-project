@@ -71,6 +71,10 @@ public class Account {
 		this.totalBalance = totalBalance;
 	}
 
+	/**
+	 * 
+	 * @return size of the ArrayList transactions
+	 */
 	public int getTransactionsCount() {
 		return transactions.size();
 	}
@@ -101,7 +105,7 @@ public class Account {
 	}
 
 	public BigDecimal getPendingWithdrawalsAmount() {
-		// count and return the total amount of withdrawals with pending status
+		// count and return the total amount of pending withdrawals with debit status
 		Double amount = transactions.stream().filter((transaction) -> {
 			return transaction.getStatus().equalsIgnoreCase("pending");}).filter((transaction) -> {
 			return transaction.getType().equalsIgnoreCase("debit");
@@ -112,8 +116,7 @@ public class Account {
 	}
 
 	public BigDecimal getPendingDepositsAmount() {
-		// filter out transactions having status = pending
-		// count and return the total amount of deposits with pending status
+		// count and return the total amount of pending deposits with credit status
 		Double amount = transactions.stream().filter((transaction) -> {
 				return transaction.getStatus().equalsIgnoreCase("pending");}).filter((transaction) -> {
 				return transaction.getType().equalsIgnoreCase("credit");

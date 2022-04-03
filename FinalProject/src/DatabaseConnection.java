@@ -58,7 +58,7 @@ public class DatabaseConnection {
 			CallableStatement cs = connection.prepareCall("CALL DB2.UPDATE_TOTALS;");
 																					
 			cs.executeUpdate();
-			System.out.printf("Successfully executed stored procedure call%n%n");
+			System.out.printf("executed update totals procedure%n%n");
 
 		} catch (SQLException exception) {
 			System.out.printf("Stored procedure call failed.");

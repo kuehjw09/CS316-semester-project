@@ -143,7 +143,9 @@ public class WithdrawalViewController {
 			}
 			
 			submitButton.setDisable(true);
-
+			Notification notification = new Notification(NotificationType.DEBIT, String.format("Withdrawal submitted for account %s", getCurrentAccount().getName()));
+			currentUserSession.addNotification(notification);
+			
 			try {
 				switchToAccountView(event);
 			} catch (IOException exception) {

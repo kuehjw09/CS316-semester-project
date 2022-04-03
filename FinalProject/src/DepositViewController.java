@@ -129,13 +129,14 @@ public class DepositViewController {
 			}
 			
 			submitButton.setDisable(true);
+			Notification notification = new Notification(NotificationType.CREDIT, String.format("Deposit submitted for account %s", getCurrentAccount().getName()));
+			currentUserSession.addNotification(notification);
 			try {
 				switchToAccountView(event);
 			} catch (IOException exception) {
 				exception.printStackTrace();
 			}
 		} catch (NullPointerException exception) {
-			exception.printStackTrace();
 			errorMessageLabel.setText("Please select an account for deposit.");
 		}
     }

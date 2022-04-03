@@ -79,7 +79,7 @@ public class AccountDetailsViewController {
 		pendingDebitsLabel.setText(currency.format(currentAccount.getPendingWithdrawalsAmount().negate()));
 		pendingCreditsLabel.setText("+" + currency.format(currentAccount.getPendingDepositsAmount()));
 
-		// populate transactionsListView with ArrayList of currentAccount transactions (limit 12)
+		// populate transactionsListView with ArrayList of currentAccount transactions (limit 9)
 		for (Transaction transaction : getCurrentAccount().getTransactions()) {
 			transactions.add(transaction);
 		}
