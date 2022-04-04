@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="LoginController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginController">
    <children>
       <AnchorPane prefHeight="579.0" prefWidth="822.0">
          <children>
@@ -21,7 +20,7 @@
                         <Font name="Tahoma" size="29.0" />
                      </font>
                   </Label>
-                  <Label fx:id="errorLabel" layoutX="271.0" layoutY="247.0" textFill="RED" />
+                  <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="208.0" layoutY="247.0" textFill="RED" />
                   <Button layoutX="233.0" layoutY="386.0" mnemonicParsing="false" onAction="#onLoginPress" prefHeight="25.0" prefWidth="106.0" text="Login" />
                   <Label layoutX="132.0" layoutY="162.0" prefHeight="20.0" prefWidth="308.0" text="Please enter your username and password!">
                      <font>

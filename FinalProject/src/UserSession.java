@@ -10,6 +10,8 @@
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.management.Notification;
+
 public class UserSession { 
 	private DatabaseConnection databaseConnection = new DatabaseConnection();
 	private User user; // validated user

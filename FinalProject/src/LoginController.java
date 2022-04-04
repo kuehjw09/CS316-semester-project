@@ -105,6 +105,11 @@ public class LoginController
 		stage.show();
 	}
 	
+	public void creationSuccess()
+	{
+		errorLabel.setText("Account creation successful!");
+	}
+	
 	public void initialize()
 	{
 		try {
