@@ -5,9 +5,6 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.Optional;
-
-import javax.management.Notification;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;

@@ -3,6 +3,7 @@ public class Notification {
 	private NotificationType notificationType;
 	private String description;
 	
+	// constructor
 	public Notification(NotificationType notificationType, String description) {
 		this.notificationType = notificationType;
 		this.description = description;

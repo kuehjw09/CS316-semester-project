@@ -12,9 +12,9 @@
    <!-- Center AnchorPane will change based on user navigation -->
    <center>
       <AnchorPane fx:id="anchorPane" prefHeight="476.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets top="27.0" />
-         </padding></AnchorPane>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin></AnchorPane>
    </center>
    
    
@@ -52,7 +52,7 @@
    </children>
 </AnchorPane>
    </bottom>
-   <top>
-      <AnchorPane prefHeight="48.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
-   </top>
+   <padding>
+      <Insets top="18.0" />
+   </padding>
 </BorderPane>

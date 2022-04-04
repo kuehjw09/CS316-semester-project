@@ -3,8 +3,6 @@ import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.Optional;
 
-import javax.management.Notification;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
