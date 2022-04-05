@@ -53,6 +53,6 @@
 </AnchorPane>
    </bottom>
    <padding>
-      <Insets top="18.0" />
+      <Insets top="27.0" />
    </padding>
 </BorderPane>

@@ -52,6 +52,19 @@ public class UserSession {
 		notifications.clear();
 	}
 	
+	// called to insert a new account
+	public void addNewAccount(Account account) throws SQLException {
+		// call the method to add a user
+		databaseConnection.addNewAccount(account, user);
+		
+		// create a new notififcation
+		Notification notification = new Notification(NotificationType.CREATE,
+				String.format("New account created for %s", user.getUsername()));
+		
+		// add the notification to the ArrayList
+		addNotification(notification);
+	}
+	
 	public void credit(Account account, double creditAmount) throws SQLException {
 		account.credit(creditAmount);
 

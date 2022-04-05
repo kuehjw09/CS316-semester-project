@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public class Account {
 	private String name;
 	private int accountNumber;
-	// private enum Type {CHECKING, SAVINGS}; // may become subclasses of Account
+	private String type; // may become subclasses of Account
 	private BigDecimal availableBalance;
 	private BigDecimal totalBalance;
 	private ArrayList<Transaction> transactions;
@@ -53,6 +53,14 @@ public class Account {
 
 	public void setAccountNumber(int accountNumber) {
 		this.accountNumber = accountNumber;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public BigDecimal getAvailableBalance() {

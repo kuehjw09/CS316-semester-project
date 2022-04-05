@@ -45,16 +45,16 @@ public class DatabaseConnection {
 	
 	/**
 	 * When called, this method will call the UPDATE_TOTALS() stored procedure
-	 * defined in the schema for `Project_Database`. The stored procedure simulates
-	 * the update of pending funds to available funds in a bank database. The
-	 * totalBalance of an Account object will match its availableBalance after this
-	 * method is executed succesfully.
+	 * defined in the schema for DB2. The stored procedure simulates
+	 * the update of pending funds to available funds in a bank database. 
+	 * 
 	 */
 	public void callUpdateTotalsProcedure() {
 		try {
+			// establish the database connection with credentials 
 			connection = DriverManager.getConnection(DATABASE_URL, "admin", "adminpassword");
-			// call the stored procedure UPDATE_TOTALS to update availableBalance to match
-			// totalBalance on each account
+			
+			// call a stored procedure to update the totals in the database
 			CallableStatement cs = connection.prepareCall("CALL DB2.UPDATE_TOTALS;");
 																					
 			cs.executeUpdate();
@@ -206,6 +206,26 @@ public class DatabaseConnection {
 		}
 
 		return accounts;
+	}
+	
+	/**
+	 * 
+	 */
+	public void addNewAccount(Account account, User user) {
+		String createString = "CALL NEW_ACCOUNT( ? , ? , "
+				+ "( SELECT user_id FROM Users WHERE username LIKE ? );";
+		try(CallableStatement createStatement = connection.prepareCall(createString)) {
+			createStatement.setString(1, account.getName());
+			createStatement.setString(2, account.getType());
+			createStatement.setString(3, user.getUsername());
+			
+			createStatement.executeUpdate();
+			System.out.println("New Account added for user " + user.getUsername());
+			createStatement.close();
+
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		} 
 	}
 
 	/**
