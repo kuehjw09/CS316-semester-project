@@ -10,7 +10,7 @@ public class addAccountPageController {
 	private static UserSession currentUserSession;
 	
 	public static void setCurrentUserSession(UserSession userSession) {
-		return currentUserSession;
+		 currentUserSession = userSession;
 	}
 	//observable list to add options to the select account choice box
 	ObservableList <String> accountTypeList = FXCollections.observableArrayList("Checking","Savings");

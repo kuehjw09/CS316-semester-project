@@ -57,8 +57,19 @@ public class AccountsViewController {
 	private final ObservableList<Account> accounts = FXCollections.observableArrayList();
 
 	@FXML
-	void newAccountButtonPressed(ActionEvent event) {
+	void newAccountButtonPressed(ActionEvent event) throws IOException {
 		// route a user to account creation form
+		addAccountPageController.setCurrentUserSession(currentUserSession);
+		
+		TransactionViewController.setCurrentUserSession(currentUserSession);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("addAccountPage.fxml"));
+		AnchorPane centerPane = (AnchorPane) loader.load();
+		try {
+			anchorPane.getChildren().clear();
+			anchorPane.getChildren().add(centerPane);
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
 	}
 	
     @FXML
