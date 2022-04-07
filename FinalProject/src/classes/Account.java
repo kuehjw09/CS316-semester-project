@@ -34,7 +34,7 @@ public class Account {
 		this.transactions = getTransactions();
 	}
 
-	// Overloaded constructor takes a ResultSet
+	// alternate constructor accepts a ResultSet object
 	public Account(ResultSet resultSet) throws SQLException {
 		this.name = resultSet.getString(2);
 		this.accountNumber = resultSet.getInt(5);

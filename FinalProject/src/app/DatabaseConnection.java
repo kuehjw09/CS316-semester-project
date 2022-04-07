@@ -51,7 +51,7 @@ public class DatabaseConnection {
 	}
 	
 	/**
-	 * When called, this method will call the UPDATE_TOTALS() stored procedure
+	 * this method calls the UPDATE_TOTALS() stored procedure
 	 * defined in the schema for DB2. The stored procedure simulates
 	 * the update of pending funds to available funds in a bank database. 
 	 * 
@@ -76,7 +76,7 @@ public class DatabaseConnection {
 	/**
 	 * This method executes a query to select the row in the Users table of DB2
 	 * database with a username attribute matching the string passed to this method.
-	 * If a row matching the criteria is returned, this method will instatiate a
+	 * If a row matching the criteria is returned, this method will instantiate a
 	 * User object with the data returned and then return the object.
 	 * 
 	 * @param username
@@ -135,26 +135,6 @@ public class DatabaseConnection {
 		}
 
 		return false;
-	}
-
-	/*
-	 * Searches the database for an occurance of the account number passed into this
-	 * method. Returns true if an account was found matching the parameter.
-	 */
-	public boolean search(int accountNumber) throws SQLException {
-		try {
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM DB2.Accounts WHERE account_number = " + accountNumber);
-
-			if (resultSet.next()) {
-				return true;
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return false; // if no matching account was found
 	}
 
 	/**

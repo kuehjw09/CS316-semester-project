@@ -1,7 +1,7 @@
 package classes;
 /**
  * Class User represents an application user
- * 
+ * 	- Represent relevant user information for an application session
  * @author owner
  *
  */
