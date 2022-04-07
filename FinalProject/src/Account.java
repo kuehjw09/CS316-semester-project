@@ -31,6 +31,7 @@ public class Account {
 		this.transactions = getTransactions();
 	}
 
+	// Overloaded constructor takes a ResultSet
 	public Account(ResultSet resultSet) throws SQLException {
 		this.name = resultSet.getString(2);
 		this.accountNumber = resultSet.getInt(5);
@@ -54,11 +55,11 @@ public class Account {
 	public void setAccountNumber(int accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	
+
 	public String getType() {
 		return type;
 	}
-	
+
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -77,14 +78,6 @@ public class Account {
 
 	public void setTotalBalance(BigDecimal totalBalance) {
 		this.totalBalance = totalBalance;
-	}
-
-	/**
-	 * 
-	 * @return size of the ArrayList transactions
-	 */
-	public int getTransactionsCount() {
-		return transactions.size();
 	}
 
 	public ArrayList<Transaction> getTransactions() throws SQLException {
@@ -115,7 +108,8 @@ public class Account {
 	public BigDecimal getPendingWithdrawalsAmount() {
 		// count and return the total amount of pending withdrawals with debit status
 		Double amount = transactions.stream().filter((transaction) -> {
-			return transaction.getStatus().equalsIgnoreCase("pending");}).filter((transaction) -> {
+			return transaction.getStatus().equalsIgnoreCase("pending");
+		}).filter((transaction) -> {
 			return transaction.getType().equalsIgnoreCase("debit");
 		}).map(Transaction::getAmount).reduce(0.0, (a, b) -> a + b);
 
@@ -126,10 +120,10 @@ public class Account {
 	public BigDecimal getPendingDepositsAmount() {
 		// count and return the total amount of pending deposits with credit status
 		Double amount = transactions.stream().filter((transaction) -> {
-				return transaction.getStatus().equalsIgnoreCase("pending");}).filter((transaction) -> {
-				return transaction.getType().equalsIgnoreCase("credit");
-			}).map(Transaction::getAmount).reduce(0.0, (a, b) -> a + b);
-	
+			return transaction.getStatus().equalsIgnoreCase("pending");
+		}).filter((transaction) -> {
+			return transaction.getType().equalsIgnoreCase("credit");
+		}).map(Transaction::getAmount).reduce(0.0, (a, b) -> a + b);
 
 		return new BigDecimal(amount);
 	}
@@ -149,9 +143,8 @@ public class Account {
 	 * This method calls AccountDatabase static method getConnection() to obtain a
 	 * connection to the project database. When called, the method will select the
 	 * row in the Accounts table of the project database and update the appropriate
-	 * columns representing the available balance and total balance of the row
-	 * matching the corresponding accountNumber of the Account object that was
-	 * called.
+	 * columns representing the available balance and total balance to match the
+	 * corresponding Account object.
 	 * 
 	 * @throws SQLException
 	 */

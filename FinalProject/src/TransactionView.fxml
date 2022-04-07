@@ -1,22 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TransactionViewController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="TransactionViewController">
    <children>
-      <Label layoutX="316.0" layoutY="76.0" text="New Transaction">
-         <font>
-            <Font name="Helvetica" size="24.0" />
-         </font></Label>
-      <VBox alignment="CENTER" layoutX="201.0" layoutY="76.0" prefHeight="248.0" prefWidth="410.0" spacing="12.0">
+      <AnchorPane layoutX="371.0" layoutY="48.0" prefHeight="425.0" prefWidth="298.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#depositButtonPressed" prefHeight="68.0" prefWidth="250.0" stylesheets="@ButtonStyles.css" text="Deposit" />
-            <Button mnemonicParsing="false" onAction="#withdrawalButtonPressed" prefHeight="68.0" prefWidth="250.0" stylesheets="@ButtonStyles.css" text="Withdrawal" />
+            <Label fx:id="typeLabel" alignment="CENTER" text="New Transaction">
+               <font>
+                  <Font name="Helvetica Neue" size="24.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="2.0" layoutY="30.0" prefHeight="2.0" prefWidth="294.0" style="-fx-background-color: #212121;" />
+            <VBox alignment="CENTER_LEFT" layoutY="32.0" prefHeight="394.0" prefWidth="298.0" spacing="21.0">
+               <children>
+                  <Label text="Select an account" />
+                  <ChoiceBox fx:id="accountChoiceBox" prefHeight="46.0" prefWidth="328.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Label text="Amount" />
+                  <TextField fx:id="amountTextField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="70.0" prefWidth="310.0" promptText="\$0.00" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-radius: 3; -fx-border-color: #212121;">
+                     <font>
+                        <Font name="Helvetica" size="36.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Button mnemonicParsing="false" onAction="#confirmAmountButtonPressed" stylesheets="@ListStyles.css" text="Confirm" />
+                  <Label fx:id="errorMessageLabel" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="394.0" text="Error message label" />
+                  <HBox prefHeight="42.0" prefWidth="200.0" spacing="3.0">
+                     <children>
+                        <Button cancelButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="29.0" prefWidth="394.0" style="-fx-background-radius: 15;" text="Cancel" />
+                        <Button fx:id="submitButton" defaultButton="true" disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#submitButtonPressed" prefHeight="29.0" prefWidth="394.0" style="-fx-background-radius: 15;" text="Submit" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </AnchorPane>
    </children>
 </AnchorPane>

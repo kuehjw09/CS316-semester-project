@@ -20,6 +20,8 @@ public class DatabaseConnection {
 	private Statement statement;
 	private ResultSet resultSet;
 
+	// declare private static UserSession
+	private static UserSession currentUserSession; 
 	private User currentUser;
 
 	// final static hostname for use in AccountDatabase methods
@@ -172,14 +174,15 @@ public class DatabaseConnection {
 	}
 
 	/**
-	 * This method will instantiate and return a UserSession object with the
+	 * This method will return a UserSession object with the
 	 * validated user information obtained during successful login procedure.
 	 * 
 	 * @return
 	 * @throws SQLException
 	 */
 	public UserSession getUserSession() throws SQLException {
-		UserSession currentUserSession = new UserSession(currentUser, getAccounts(currentUser));
+		currentUserSession = new UserSession(currentUser, getAccounts(currentUser));
+		
 		return currentUserSession;
 	}
 

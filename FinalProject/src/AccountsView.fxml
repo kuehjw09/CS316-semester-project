@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AccountsViewController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AccountsViewController">
 	<children>
-      <AnchorPane layoutX="23.0" prefHeight="550.0" prefWidth="407.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="370.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="95.0" prefHeight="550.0" prefWidth="423.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="522.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="438.0" spacing="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -48,7 +48,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="sidebarPane" layoutX="430.0" prefHeight="550.0" prefWidth="354.0">
+      <AnchorPane fx:id="sidebarPane" layoutX="651.0" prefHeight="550.0" prefWidth="354.0">
    <children>
       <HBox alignment="CENTER" layoutX="30.0" layoutY="43.0" prefHeight="55.0" prefWidth="315.0" spacing="18.0" styleClass="sidebar" stylesheets="@stylesheet.css">
          <children>

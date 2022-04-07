@@ -1,25 +1,14 @@
 import java.io.IOException;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.Callback;
 
 public class DashboardController {
-	private UserSession currentUserSession; // contains a UserSession object 
+	private UserSession currentUserSession; // contains a UserSession object
 
 	public void setCurrentUserSession(UserSession currentUserSession) {
 		this.currentUserSession = currentUserSession;
@@ -28,7 +17,7 @@ public class DashboardController {
 	public UserSession getCurrentUserSession() {
 		return this.currentUserSession;
 	}
-	
+
 	@FXML
 	private AnchorPane anchorPane;
 
@@ -48,6 +37,21 @@ public class DashboardController {
 		// route the user to the transactions view
 		TransactionViewController.setCurrentUserSession(currentUserSession);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("TransactionView.fxml"));
+		TransactionViewController.setTransactionType("DEPOSIT");
+		AnchorPane centerPane = (AnchorPane) loader.load();
+		try {
+			anchorPane.getChildren().clear();
+			anchorPane.getChildren().add(centerPane);
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
+	}
+
+	@FXML
+	void withdrawalButtonPressed(ActionEvent event) throws IOException {
+		TransactionViewController.setCurrentUserSession(currentUserSession);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("TransactionView.fxml"));
+		TransactionViewController.setTransactionType("WITHDRAWAL");
 		AnchorPane centerPane = (AnchorPane) loader.load();
 		try {
 			anchorPane.getChildren().clear();
@@ -83,21 +87,9 @@ public class DashboardController {
 		alert.showAndWait();
 	}
 
-	@FXML
-	void transferButtonPressed(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("PayAndTransferView.fxml"));
-		AnchorPane centerPane = (AnchorPane) loader.load();
-		try {
-			anchorPane.getChildren().clear();
-			anchorPane.getChildren().add(centerPane);
-		} catch (Exception exception) {
-			exception.printStackTrace();
-		}
-	}
-
 	/**
-	 * Dashboard is initialized with a UserSession object when a validated
-	 * user succesfully signs in
+	 * Dashboard is initialized with a UserSession object when a validated user
+	 * succesfully signs in
 	 * 
 	 * @param currentUserSession
 	 * @throws IOException
