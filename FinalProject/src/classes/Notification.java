@@ -1,3 +1,4 @@
+package classes;
 
 public class Notification {
 	private NotificationType notificationType;

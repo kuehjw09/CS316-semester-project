@@ -1,3 +1,4 @@
+package app;
 
 /**
  * DatabaseConnection class represents the database connection for an application session.
@@ -14,6 +15,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import classes.Account;
+import classes.User;
+import classes.UserSession;
 
 public class DatabaseConnection {
 	private Connection connection;

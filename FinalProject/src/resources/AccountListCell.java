@@ -1,5 +1,7 @@
+package resources;
 import java.text.NumberFormat;
 
+import classes.Account;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

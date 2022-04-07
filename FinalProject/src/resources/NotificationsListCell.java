@@ -1,3 +1,5 @@
+package resources;
+import classes.Notification;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

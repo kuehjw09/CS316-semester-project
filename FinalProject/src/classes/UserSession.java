@@ -1,3 +1,4 @@
+package classes;
 
 /**
  * UserSession class represents all data required to accommodate a user session
@@ -9,6 +10,8 @@
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import app.DatabaseConnection;
 
 public class UserSession { 
 	private DatabaseConnection databaseConnection = new DatabaseConnection();

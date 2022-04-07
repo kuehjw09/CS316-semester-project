@@ -1,7 +1,11 @@
+package views;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.Calendar;
 
+import classes.Account;
+import classes.Notification;
+import classes.UserSession;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,6 +20,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import resources.AccountListCell;
+import resources.NotificationsListCell;
 
 /**
  * AccountViewController has a UserSession and shows detailed account information and options.

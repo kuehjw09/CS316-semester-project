@@ -1,3 +1,4 @@
+package classes;
 
 /**
  * Account class represents a bank account
@@ -12,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.stream.Stream;
+
+import app.DatabaseConnection;
 
 public class Account {
 	private String name;

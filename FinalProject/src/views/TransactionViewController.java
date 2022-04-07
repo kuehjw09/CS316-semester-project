@@ -1,3 +1,4 @@
+package views;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -5,6 +6,12 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.Optional;
+
+import classes.Account;
+import classes.Notification;
+import classes.NotificationType;
+import classes.Transaction;
+import classes.UserSession;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;

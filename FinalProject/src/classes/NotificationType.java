@@ -1,3 +1,4 @@
+package classes;
 
 public enum NotificationType {
 	// declare constants of enum type

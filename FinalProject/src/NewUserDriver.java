@@ -3,6 +3,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
+
+import app.DatabaseConnection;
+
 import java.sql.Date;
 
 public class NewUserDriver 

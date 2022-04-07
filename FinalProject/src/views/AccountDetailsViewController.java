@@ -1,3 +1,4 @@
+package views;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.NumberFormat;
@@ -5,6 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
+import classes.Account;
+import classes.Transaction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

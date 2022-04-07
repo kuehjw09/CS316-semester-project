@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+import app.DatabaseConnection;
+import classes.UserSession;
+
 public class DriverClass {
 
 	public static void main(String[] args) {

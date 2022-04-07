@@ -1,4 +1,6 @@
+package app;
 
+import classes.UserSession;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
@@ -7,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import views.DashboardController;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -24,7 +27,7 @@ public class App extends Application {
 				UserSession currentUserSession = connection.getUserSession();
 				System.out.printf("%s", currentUserSession);
 				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(getClass().getResource("Dashboard.fxml"));
+				loader.setLocation(getClass().getResource("../views/Dashboard.fxml"));
 				Parent root = loader.load();
 				
 				scene = new Scene(root);

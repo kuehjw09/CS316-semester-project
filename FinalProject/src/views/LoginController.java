@@ -1,6 +1,9 @@
+package views;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import app.DatabaseConnection;
+import classes.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

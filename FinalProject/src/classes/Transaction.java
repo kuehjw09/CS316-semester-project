@@ -1,3 +1,4 @@
+package classes;
 
 /**
  * Transaction class represents an account transaction
@@ -11,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+
+import app.DatabaseConnection;
 
 public class Transaction {
 	private Timestamp timestamp;

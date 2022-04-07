@@ -1,3 +1,5 @@
+package views;
+import classes.UserSession;
 import javafx.fxml.FXML;
 
 /**

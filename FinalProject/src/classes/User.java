@@ -1,3 +1,4 @@
+package classes;
 /**
  * Class User represents an application user
  * 
