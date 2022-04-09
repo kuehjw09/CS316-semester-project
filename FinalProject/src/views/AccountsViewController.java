@@ -91,16 +91,6 @@ public class AccountsViewController {
     private Button showHideButton;
 
     @FXML
-    void clearNotificationsButtonPressed(ActionEvent event) {
-    	// clear notifications
-    	currentUserSession.clearNotifications();
-    	notifications.clear();
-		notificationsPane.setVisible(false);
-		showHideButton.setText("Show");
-    	activityLabel.setText(String.format("Session Activity (%d)", notifications.size()));
-    }
-
-    @FXML
     void notificationsPaneButtonPressed(ActionEvent event) {
     	if (notificationsPane.isVisible()) {
     		notificationsPane.setVisible(false);
