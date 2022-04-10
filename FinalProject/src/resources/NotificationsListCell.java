@@ -24,7 +24,7 @@ public class NotificationsListCell extends ListCell<Notification> {
 		
 
 
-		
+		descriptionLabel.setWrapText(true);
 		setPrefWidth(USE_PREF_SIZE);
 	}
 	

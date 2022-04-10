@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.AccountsViewController">
 	<children>
-      <AnchorPane layoutX="95.0" prefHeight="550.0" prefWidth="423.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="522.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="56.0" prefHeight="550.0" prefWidth="423.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="56.0" AnchorPane.rightAnchor="561.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="438.0" spacing="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -50,7 +50,7 @@
       </AnchorPane>
       <AnchorPane fx:id="sidebarPane" layoutX="548.0" prefHeight="550.0" prefWidth="492.0" style="-fx-background-radius: 30 0 0 30;">
    <children>
-      <HBox alignment="CENTER" layoutX="78.0" layoutY="14.0" opacity="0.93" prefHeight="39.0" prefWidth="337.0" spacing="9.0" styleClass="sidebar" stylesheets="@../resources/stylesheet.css">
+      <HBox alignment="CENTER" layoutX="78.0" layoutY="22.0" opacity="0.93" prefHeight="39.0" prefWidth="337.0" spacing="9.0" styleClass="sidebar" stylesheets="@../resources/stylesheet.css">
          <children>
             <Label fx:id="activityLabel" prefHeight="28.0" prefWidth="149.0" text="Session Activity">
                <font>
@@ -64,7 +64,7 @@
             </Button>
          </children>
       </HBox>
-      <AnchorPane fx:id="notificationsPane" layoutX="78.0" layoutY="61.0" prefHeight="435.0" prefWidth="337.0" style="-fx-background-radius: 30;">
+      <AnchorPane fx:id="notificationsPane" layoutX="78.0" layoutY="70.0" prefHeight="435.0" prefWidth="337.0" style="-fx-background-radius: 30;">
          <children>
             <VBox layoutX="11.0" layoutY="-49.0" prefHeight="471.0" prefWidth="337.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>

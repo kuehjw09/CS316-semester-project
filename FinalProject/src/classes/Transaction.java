@@ -49,6 +49,10 @@ public class Transaction {
 
 		return formatted;
 	}
+	
+	public Timestamp getTrueTimestamp() {
+		return timestamp;
+	}
 
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;

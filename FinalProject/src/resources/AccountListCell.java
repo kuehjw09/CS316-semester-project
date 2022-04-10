@@ -52,7 +52,7 @@ public class AccountListCell extends ListCell<Account> {
 			setGraphic(null); // don't display anything
 		} else {
 			nameLabel.setText(account.getName());
-			numberLabel.setText("..." + String.valueOf(account.getAccountNumber() % 110000));
+			numberLabel.setText("..." + String.format("%04d", account.getAccountNumber() % 110000));
 			balanceLabel.setText(currency.format(account.getAvailableBalance()));
 			label.setText("Available balance");
 			setGraphic(vbox);

@@ -1,9 +1,13 @@
 package views;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -34,6 +38,10 @@ public class AccountDetailsViewController {
 	public Account getCurrentAccount() {
 		return currentAccount;
 	}
+	
+	public BigDecimal accountBalance = BigDecimal.ZERO;
+	
+	ArrayList<Transaction> historicalTransactions = new ArrayList<>();
 
 	@FXML
 	private Label nameLabel;
@@ -58,7 +66,10 @@ public class AccountDetailsViewController {
 
 	@FXML
 	private final ObservableList<Transaction> transactions = FXCollections.observableArrayList();
-
+	
+	@FXML
+	private LineChart<String, BigDecimal> accountLineChart;
+	
 	@FXML
 	void viewAllTransactionsClicked() {
 
@@ -90,7 +101,7 @@ public class AccountDetailsViewController {
 		// (limit 9)
 		for (Transaction transaction : getCurrentAccount().getTransactions()) {
 			transactions.add(transaction);
-
+			historicalTransactions.add(transaction);
 		}
 
 		Collections.reverse(transactions); // descending order
@@ -100,6 +111,38 @@ public class AccountDetailsViewController {
 		nameLabel.setText(getCurrentAccount().getName());
 		numberLabel.setText("..." + (currentAccount.getAccountNumber() % 11000));
 		balanceLabel.setText(currency.format(currentAccount.getAvailableBalance()));
+		
 
+		XYChart.Series<String, BigDecimal> series = new XYChart.Series<String, BigDecimal>();
+		series.setName("historical account balance");
+		
+		
+		// sort the historicalTransactions for sequential processing
+		Collections.sort(historicalTransactions, new TimeStampComparator());
+		series.getData().add(new XYChart.Data<String, BigDecimal>(String.valueOf(BigDecimal.ZERO), BigDecimal.ZERO));
+		int count = 1;
+		for (Transaction transaction : historicalTransactions) {
+			if (transaction.getType().equalsIgnoreCase("credit")) {
+				accountBalance = accountBalance.add(transaction.getAmount());
+			} else {
+				accountBalance = accountBalance.subtract(transaction.getAmount());
+			}
+			series.getData().add(new XYChart.Data<String, BigDecimal>(String.valueOf(count), accountBalance));
+			count++;
+		}
+		
+		accountLineChart.getData().add(series);
+	}
+	
+	
+	public class TimeStampComparator implements Comparator<Transaction> {
+		@Override
+		public int compare(Transaction a, Transaction b) {
+			// TODO Auto-generated method stub
+			Timestamp t1 = a.getTrueTimestamp();
+			Timestamp t2 = b.getTrueTimestamp();
+			
+			return (t1.compareTo(t2) > 0) ? 1 : (t2.compareTo(t1) > 0) ? -1 : 0;
+		}
 	}
 }

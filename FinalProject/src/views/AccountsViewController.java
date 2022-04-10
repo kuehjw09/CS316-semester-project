@@ -140,8 +140,15 @@ public class AccountsViewController {
     	}
     	
     	activityLabel.setText(String.format("Session Activity (%d)", notifications.size()));
-		notificationsPane.setVisible(false);
-		showHideButton.setText("Show");
+    	
+    	if (notifications.size() > 0) {
+    		notificationsPane.setVisible(true);
+    		showHideButton.setText("Hide");
+    	} else {
+    		notificationsPane.setVisible(false);
+    		showHideButton.setText("Show");
+    	}
+	
 		
     	notificationsListView.setItems(notifications);
     	

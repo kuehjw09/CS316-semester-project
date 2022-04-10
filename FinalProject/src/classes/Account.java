@@ -177,7 +177,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return String.format("%s...%s%n" + "Available Balance: $%.2f%n", getName(), getAccountNumber() % 110000,
+		return String.format("%s...%04d%n" + "Available Balance: $%.2f%n", getName(), getAccountNumber() % 110000,
 				getAvailableBalance());
 	}
 
