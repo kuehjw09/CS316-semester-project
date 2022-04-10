@@ -49,7 +49,7 @@
             <MenuButton layoutX="3.0" layoutY="398.0" mnemonicParsing="false" popupSide="TOP" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: white;" stylesheets="@ButtonStyles.css">
                <items>
                   <MenuItem mnemonicParsing="false" text="Send Money" />
-                  <MenuItem mnemonicParsing="false" text="Transfer Funds" />
+                  <MenuItem mnemonicParsing="false" onAction="#transferButtonPressed" text="Transfer Funds" />
                </items>
                <graphic>
                   <ImageView fitHeight="60.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">

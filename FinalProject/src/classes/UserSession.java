@@ -1,5 +1,7 @@
 package classes;
 
+import java.math.BigDecimal;
+
 /**
  * UserSession class represents all data required to accommodate a user session
  * 	- holds all objects associated with a given user session
@@ -68,12 +70,12 @@ public class UserSession {
 		addNotification(notification);
 	}
 	
-	public void credit(Account account, double creditAmount) throws SQLException {
+	public void credit(Account account, BigDecimal creditAmount) throws SQLException {
 		account.credit(creditAmount);
 
 	}
 	
-	public void debit(Account account, double debitAmount) throws SQLException {
+	public void debit(Account account, BigDecimal debitAmount) throws SQLException {
 		account.debit(debitAmount);
 	}
 	

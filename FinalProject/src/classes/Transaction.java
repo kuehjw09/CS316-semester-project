@@ -1,5 +1,7 @@
 package classes;
 
+import java.math.BigDecimal;
+
 /**
  * Transaction class represents an account transaction
  * @author owner
@@ -21,10 +23,10 @@ public class Transaction {
 	private String description;
 	private String status;
 	private String type;
-	private double amount;
+	private BigDecimal amount;
 
 	// constructor
-	public Transaction(int account_number, String description, String type, double amount) {
+	public Transaction(int account_number, String description, String type, BigDecimal amount) {
 		this.account_number = account_number;
 		this.description = description;
 		this.type = type;
@@ -39,7 +41,7 @@ public class Transaction {
 		this.account_number = resultSet.getInt(2);
 		this.description = resultSet.getString(5);
 		this.type = resultSet.getString(4);
-		this.amount = resultSet.getDouble(3);
+		this.amount = resultSet.getBigDecimal(3);
 	}
 
 	public String getTimestamp() {
@@ -84,11 +86,11 @@ public class Transaction {
 		this.type = type;
 	}
 
-	public double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 	
@@ -107,7 +109,7 @@ public class Transaction {
 					+ "VALUES (?, ?, ?, ?);";
 		try (PreparedStatement createStatement = connection.prepareStatement(createString)) {
 			createStatement.setInt(1, getAccount_number());
-			createStatement.setDouble(2, getAmount());
+			createStatement.setBigDecimal(2, getAmount());
 			createStatement.setString(3, getType());
 			createStatement.setString(4, getStatus());
 			

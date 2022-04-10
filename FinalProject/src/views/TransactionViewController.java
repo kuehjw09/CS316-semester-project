@@ -37,7 +37,7 @@ import javafx.stage.Stage;
 public class TransactionViewController {
 	private static UserSession currentUserSession;
 	private Account currentAccount;
-	private Double amount;
+	private BigDecimal amount;
 	private static TransactionType transactionType;
 
 	public static enum TransactionType {
@@ -67,11 +67,11 @@ public class TransactionViewController {
 		errorMessageLabel.setText(null);
 	}
 
-	public Double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Double amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 
@@ -99,16 +99,16 @@ public class TransactionViewController {
 	@FXML
 	void confirmAmountButtonPressed(ActionEvent event) {
 		try {
-			Double input = Double.valueOf(amountTextField.getText());
+			BigDecimal input = new BigDecimal(amountTextField.getText());
 
-			if (!(input > 0)) {
+			if (!(input.compareTo(BigDecimal.ZERO) > 0.0)) {
 				errorMessageLabel.setText("Please enter a valid amount");
 			}
 
 			else {
 				// if transaction type is a withdrawal
 				if (transactionType == TransactionType.WITHDRAWAL && (getCurrentAccount().getAvailableBalance()
-						.subtract(new BigDecimal(input)).compareTo(BigDecimal.ZERO) < 0.0)) {
+						.subtract(input).compareTo(BigDecimal.ZERO) < 0.0)) {
 					errorMessageLabel.setText("Withdrawal amount exceeds available balance.");
 				} else {
 					setAmount(input);
@@ -221,11 +221,13 @@ public class TransactionViewController {
 		typeLabel.setText((transactionType == TransactionType.DEPOSIT) ? "Deposit" : "Withdrawal");
 
 		errorMessageLabel.setText(null);
-		accountChoiceBox.setItems(accounts);
+
 
 		for (Account account : currentUserSession.getAccounts()) {
 			accounts.add(account);
 		}
+		
+		accountChoiceBox.setItems(accounts);
 
 		accountChoiceBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Account>() {
 			@Override

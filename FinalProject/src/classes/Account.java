@@ -110,35 +110,35 @@ public class Account {
 
 	public BigDecimal getPendingWithdrawalsAmount() {
 		// count and return the total amount of pending withdrawals with debit status
-		Double amount = transactions.stream().filter((transaction) -> {
+		BigDecimal amount = transactions.stream().filter((transaction) -> {
 			return transaction.getStatus().equalsIgnoreCase("pending");
 		}).filter((transaction) -> {
 			return transaction.getType().equalsIgnoreCase("debit");
-		}).map(Transaction::getAmount).reduce(0.0, (a, b) -> a + b);
+		}).map(Transaction::getAmount).reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
 
-		return new BigDecimal(amount);
+		return amount;
 
 	}
 
 	public BigDecimal getPendingDepositsAmount() {
 		// count and return the total amount of pending deposits with credit status
-		Double amount = transactions.stream().filter((transaction) -> {
+		BigDecimal amount = transactions.stream().filter((transaction) -> {
 			return transaction.getStatus().equalsIgnoreCase("pending");
 		}).filter((transaction) -> {
 			return transaction.getType().equalsIgnoreCase("credit");
-		}).map(Transaction::getAmount).reduce(0.0, (a, b) -> a + b);
+		}).map(Transaction::getAmount).reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
 
-		return new BigDecimal(amount);
+		return amount;
 	}
 
-	public void credit(double amount) throws SQLException {
-		setTotalBalance(totalBalance.add(new BigDecimal(amount))); // add amount to totalBalance
+	public void credit(BigDecimal amount) throws SQLException {
+		setTotalBalance(totalBalance.add(amount)); // add amount to totalBalance
 		updateTotals(); // update Accounts table to reflect changes
 
 	}
 
-	public void debit(double amount) throws SQLException {
-		setAvailableBalance(availableBalance.subtract(new BigDecimal(amount))); // subtract amount from availableBalance
+	public void debit(BigDecimal amount) throws SQLException {
+		setAvailableBalance(availableBalance.subtract(amount)); // subtract amount from availableBalance
 		updateTotals(); // update Accounts table to reflect changes
 	}
 

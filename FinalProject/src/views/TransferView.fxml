@@ -10,19 +10,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.TransactionViewController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.TransferViewController">
    <children>
-      <AnchorPane layoutX="371.0" layoutY="32.0" prefHeight="463.0" prefWidth="346.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+      <AnchorPane layoutX="347.0" layoutY="19.0" prefHeight="463.0" prefWidth="346.0" style="-fx-background-color: white; -fx-background-radius: 30;">
          <children>
-            <Label fx:id="typeLabel" alignment="CENTER" layoutX="21.0" layoutY="12.0" text="New Transaction">
+            <Label fx:id="typeLabel" alignment="CENTER" layoutX="21.0" layoutY="12.0" text="New Transfer">
                <font>
                   <Font name="Helvetica Neue" size="24.0" />
                </font>
             </Label>
             <VBox alignment="CENTER_LEFT" layoutX="24.0" layoutY="55.0" prefHeight="394.0" prefWidth="298.0" spacing="21.0">
                <children>
-                  <Label text="Select an account" />
-                  <ChoiceBox fx:id="accountChoiceBox" prefHeight="46.0" prefWidth="328.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Label text="From" />
+                  <ChoiceBox fx:id="fromAccountChoiceBox" prefHeight="39.0" prefWidth="298.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Label text="To" />
+                  <ChoiceBox fx:id="toAccountChoiceBox" prefHeight="42.0" prefWidth="298.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0px 0px 2px 0px;" />
                   <Label text="Amount" />
                   <TextField fx:id="amountTextField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="70.0" prefWidth="310.0" promptText="\$0.00" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-radius: 3; -fx-border-color: #212121;">
                      <font>
