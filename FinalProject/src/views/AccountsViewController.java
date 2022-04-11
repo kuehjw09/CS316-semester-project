@@ -2,6 +2,7 @@ package views;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Collections;
 
 import classes.Account;
 import classes.Notification;
@@ -150,6 +151,7 @@ public class AccountsViewController {
     	}
 	
 		
+    	Collections.reverse(notifications);
     	notificationsListView.setItems(notifications);
     	
     	
@@ -163,6 +165,9 @@ public class AccountsViewController {
 		for (Account account : currentUserSession.getAccounts()) {
 			accounts.add(account);
 		}
+		
+		// reverse the list/ show oldest account first
+		Collections.reverse(accounts);
 		
 		// set ObservableList items
 		accountsListView.setItems(accounts);

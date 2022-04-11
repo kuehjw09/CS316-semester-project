@@ -20,7 +20,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.AccountDetailsViewController">
 	<children>
-      <AnchorPane layoutX="29.0" layoutY="73.0" prefHeight="556.0" prefWidth="980.0" style="-fx-background-color: linear-gradient(white, #e9e9e9); -fx-background-radius: 30;">
+      <AnchorPane layoutX="29.0" layoutY="73.0" prefHeight="556.0" prefWidth="1001.0" style="-fx-background-color: linear-gradient(white, #e9e9e9); -fx-background-radius: 30;">
          <children>
       	<VBox alignment="TOP_CENTER" layoutY="14.0" prefHeight="161.0" prefWidth="446.0" AnchorPane.bottomAnchor="326.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="534.0" AnchorPane.topAnchor="14.0">
       		<children>
@@ -151,7 +151,7 @@
             </LineChart>
          </children>
       </AnchorPane>
-      <HBox layoutX="29.0" prefHeight="61.0" prefWidth="980.0" spacing="9.0" style="-fx-background-color: white; -fx-background-radius: 0 0 30 30;">
+      <HBox layoutX="29.0" prefHeight="61.0" prefWidth="1001.0" spacing="9.0" style="-fx-background-color: white; -fx-background-radius: 0 0 30 30;">
          <children>
             <Label text="Account Details" textFill="#197af7">
                <font>

@@ -109,12 +109,12 @@ public class AccountDetailsViewController {
 		transactionsListView.setItems(transactions);
 
 		nameLabel.setText(getCurrentAccount().getName());
-		numberLabel.setText("..." + (currentAccount.getAccountNumber() % 11000));
+		numberLabel.setText("..." + String.format("%04d", currentAccount.getAccountNumber() % 11000));
 		balanceLabel.setText(currency.format(currentAccount.getAvailableBalance()));
 		
 
 		XYChart.Series<String, BigDecimal> series = new XYChart.Series<String, BigDecimal>();
-		series.setName("historical account balance");
+		series.setName("transaction");
 		
 		
 		// sort the historicalTransactions for sequential processing
