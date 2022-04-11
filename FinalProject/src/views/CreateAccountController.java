@@ -1,4 +1,5 @@
 package views;
+
 import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -9,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
 import app.DatabaseConnection;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,20 +26,18 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.control.Tooltip;
 import javafx.util.StringConverter;
 
-public class CreateAccountController
-{
+public class CreateAccountController {
 
 	private DatabaseConnection databaseConnection;
 
-	public void initializeData(DatabaseConnection databaseConnection)
-	{
+	public void initializeData(DatabaseConnection databaseConnection) {
 		this.databaseConnection = databaseConnection; // obtaining reference to database connection
 	}
 
-	Alert alert = new Alert(AlertType.NONE);
 	private Stage stage;
 	private Scene scene;
 
@@ -74,23 +75,17 @@ public class CreateAccountController
 	private CheckBox ssnToggleCheckBox;
 
 	@FXML
-	void onCreateAccount(ActionEvent event) throws IOException, SQLException
-	{
+	void onCreateAccount(ActionEvent event) throws IOException, SQLException {
 
 		String formattedSSN = ssnValue().replaceFirst("(\\d{3})(\\d{2})(\\d+)", "$1-$2-$3");
 
 		set_ssnValue(formattedSSN);
 
-		if (!isEmpty())
-		{
-			if (isValidName(firstnameTextField.getText()) && isValidName(lastnameTextField.getText()))
-			{
-				if (isValidSSN(ssnValue()))
-				{
-					if (isValidUsername(usernameTextField.getText()))
-					{
-						if (isValidPassword(passwordValue()))
-						{
+		if (!isEmpty()) {
+			if (isValidName(firstnameTextField.getText()) && isValidName(lastnameTextField.getText())) {
+				if (isValidSSN(ssnValue())) {
+					if (isValidUsername(usernameTextField.getText())) {
+						if (isValidPassword(passwordValue())) {
 							String firstName = firstnameTextField.getText();
 							String lastName = lastnameTextField.getText();
 							LocalDate birthDay = birthdayDatePicker.getValue();
@@ -104,48 +99,39 @@ public class CreateAccountController
 
 							switchToLoginSuccess(event);
 
-						} else
-						{
+						} else {
 							errorLabel.setText("Please enter a valid password!");
 						}
-					} else
-					{
+					} else {
 						errorLabel.setText("Please enter a valid username!");
 					}
-				} else
-				{
+				} else {
 					errorLabel.setText("Please enter a valid 9 digit SSN!");
 				}
-			} else
-			{
+			} else {
 				errorLabel.setText("Please enter a valid first and last name!");
 			}
-		} else
-		{
+		} else {
 			errorLabel.setText("Please complete all fields!");
 		}
 
 	}
 
 	@FXML
-	void onReset(ActionEvent event)
-	{
+	void onReset(ActionEvent event) {
 		clearValues();
 
 	}
 
 	@FXML
-	void onReturn(ActionEvent event) throws IOException, SQLException
-	{
+	void onReturn(ActionEvent event) throws IOException, SQLException {
 		switchToLoginCancel(event);
 
 	}
 
 	@FXML
-	void toggleVisiblePassword(ActionEvent event)
-	{
-		if (passwordToggleCheckBox.isSelected())
-		{
+	void toggleVisiblePassword(ActionEvent event) {
+		if (passwordToggleCheckBox.isSelected()) {
 			visible_passwordTextField.setText(hiddenPasswordField.getText());
 			visible_passwordTextField.setVisible(true);
 			hiddenPasswordField.setVisible(false);
@@ -157,10 +143,8 @@ public class CreateAccountController
 	}
 
 	@FXML
-	void toggleVisibleSSN(ActionEvent event)
-	{
-		if (ssnToggleCheckBox.isSelected())
-		{
+	void toggleVisibleSSN(ActionEvent event) {
+		if (ssnToggleCheckBox.isSelected()) {
 			visible_ssnTextField.setText(hiddenSSNPasswordField.getText());
 			visible_ssnTextField.setVisible(true);
 			hiddenSSNPasswordField.setVisible(false);
@@ -172,25 +156,21 @@ public class CreateAccountController
 
 	}
 
-	private String passwordValue()
-	{
+	private String passwordValue() {
 		return passwordToggleCheckBox.isSelected() ? visible_passwordTextField.getText()
 				: hiddenPasswordField.getText();
 	}
 
-	private String ssnValue()
-	{
+	private String ssnValue() {
 		return ssnToggleCheckBox.isSelected() ? visible_ssnTextField.getText() : hiddenSSNPasswordField.getText();
 	}
 
-	private void set_ssnValue(String formattedSSN)
-	{
+	private void set_ssnValue(String formattedSSN) {
 		visible_ssnTextField.setText(formattedSSN);
 		hiddenSSNPasswordField.setText(formattedSSN);
 	}
 
-	private void clearValues()
-	{
+	private void clearValues() {
 		firstnameTextField.clear();
 		lastnameTextField.clear();
 		visible_passwordTextField.clear();
@@ -202,21 +182,17 @@ public class CreateAccountController
 
 	}
 
-	private boolean isEmpty()
-	{
+	private boolean isEmpty() {
 		if (usernameTextField.getText() == null || birthdayDatePicker.getValue() == null
 				|| firstnameTextField.getText() == null || lastnameTextField.getText() == null || ssnValue() == null
-				|| passwordValue() == null)
-		{
+				|| passwordValue() == null) {
 			return true;
-		} else
-		{
+		} else {
 			return false;
 		}
 	}
 
-	public void initialize()
-	{
+	public void initialize() {
 		final Tooltip passwordTip = new Tooltip();
 		final Tooltip usernameTip = new Tooltip();
 		final Tooltip ssnTip = new Tooltip();
@@ -239,23 +215,19 @@ public class CreateAccountController
 		this.toggleVisiblePassword(null);
 		this.toggleVisibleSSN(null);
 
-		birthdayDatePicker.setConverter(new StringConverter<LocalDate>()
-		{
+		birthdayDatePicker.setConverter(new StringConverter<LocalDate>() {
 			private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 			@Override
-			public String toString(LocalDate localDate)
-			{
+			public String toString(LocalDate localDate) {
 				if (localDate == null)
 					return "";
 				return dateTimeFormatter.format(localDate);
 			}
 
 			@Override
-			public LocalDate fromString(String dateString)
-			{
-				if (dateString == null || dateString.trim().isEmpty())
-				{
+			public LocalDate fromString(String dateString) {
+				if (dateString == null || dateString.trim().isEmpty()) {
 					return null;
 				}
 				return LocalDate.parse(dateString, dateTimeFormatter);
@@ -263,45 +235,47 @@ public class CreateAccountController
 
 		});
 
+		visible_ssnTextField.focusedProperty()
+				.addListener(new FieldListener(visible_ssnTextField, hiddenSSNPasswordField));
+		hiddenSSNPasswordField.focusedProperty()
+				.addListener(new FieldListener(visible_ssnTextField, hiddenSSNPasswordField));
+
 	}
 
-	private static Pattern SSN_NUM_PATTERN = Pattern.compile("^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$");
+	private static Pattern SSN_NUM_PATTERN = Pattern
+			.compile("^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$");
 
-	private static Pattern USERNAME_PATTERN = Pattern.compile("^(?=.{3,10}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$");
+	private static Pattern USERNAME_PATTERN = Pattern
+			.compile("^(?=.{3,10}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$");
 
-	private static Pattern PASSWORD_PATTERN = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=?!()])(?=\\S+$).{8,20}$");
+	private static Pattern PASSWORD_PATTERN = Pattern
+			.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=?!()])(?=\\S+$).{8,20}$");
 
 	private static Pattern NAME_PATTERN = Pattern.compile("^\\p{L}+[\\p{L}\\p{Z}\\p{P}]{0,}");
 
-	private static boolean isValidSSN(String ssn)
-	{
+	private static boolean isValidSSN(String ssn) {
 		return SSN_NUM_PATTERN.matcher(ssn).matches();
 	}
 
-	private static boolean isValidPassword(String password)
-	{
+	private static boolean isValidPassword(String password) {
 		return PASSWORD_PATTERN.matcher(password).matches();
 	}
 
-	private static boolean isValidUsername(String username)
-	{
+	private static boolean isValidUsername(String username) {
 		return USERNAME_PATTERN.matcher(username).matches();
 	}
 
-	private static boolean isValidName(String name)
-	{
+	private static boolean isValidName(String name) {
 		return NAME_PATTERN.matcher(name).matches();
 	}
 
 	public static void addUser(String firstName, String lastName, Date birthDate, String SSN, String username,
-			String password)
-	{
+			String password) {
 		Connection connection = DatabaseConnection.getConnection();
 
 		String callProcedure = "CALL DB2.NEW_USER(?, ?, ?, ?, ?, ?)";
 
-		try (CallableStatement cs = connection.prepareCall(callProcedure))
-		{
+		try (CallableStatement cs = connection.prepareCall(callProcedure)) {
 			cs.setString(1, firstName);
 			cs.setString(2, lastName);
 			cs.setDate(3, birthDate);
@@ -312,8 +286,7 @@ public class CreateAccountController
 			cs.execute();
 			System.out.println("User successfully added!");
 
-		} catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("User creation unsuccessful");
@@ -321,8 +294,7 @@ public class CreateAccountController
 
 	}
 
-	public void switchToLoginCancel(ActionEvent event) throws IOException, SQLException
-	{
+	public void switchToLoginCancel(ActionEvent event) throws IOException, SQLException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("Login.fxml"));
 		Parent root = loader.load();
@@ -334,8 +306,7 @@ public class CreateAccountController
 		stage.show();
 	}
 
-	public void switchToLoginSuccess(ActionEvent event) throws IOException, SQLException
-	{
+	public void switchToLoginSuccess(ActionEvent event) throws IOException, SQLException {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("Login.fxml"));
 		Parent root = loader.load();
@@ -350,6 +321,35 @@ public class CreateAccountController
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
 		stage.show();
+	}
+
+	class FieldListener implements ChangeListener<Boolean> {
+		private final TextField textField;
+		private final PasswordField passwordField;
+
+		FieldListener(TextField textField, PasswordField passwordField) {
+			this.textField = textField;
+			this.passwordField = passwordField;
+		}
+
+		@Override
+		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+			if (!newValue) // check if focus gained or lost
+			{
+				if (isValidSSN(getFormattedText(ssnValue()))) {
+					errorLabel.setText(" ");
+					set_ssnValue((getFormattedText(ssnValue())));
+				} else {
+					errorLabel.setText("Invalid SSN");
+				}
+
+			}
+		}
+
+		public String getFormattedText(String str) {
+			String formattedSSN = ssnValue().replaceFirst("(\\d{3})(\\d{2})(\\d+)", "$1-$2-$3");
+			return formattedSSN;
+		}
 	}
 
 }
