@@ -344,7 +344,8 @@ public class CreateAccountController
 
 		// access the controller and call a method
 		LoginController controller = loader.getController();
-		controller.creationSuccess();// notifies user that account creation was successful
+		controller.creationSuccess();
+		;// notifies user that account creation was successful
 
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
