@@ -40,7 +40,7 @@ public class LoginController
 	{
 		if (usernameTextField.getText().isEmpty() || passwordField.getText().isEmpty()) 
 		{
-			errorLabel.setText("Please enter a valid username or password!");
+			errorLabel.setText("Please enter a valid username and password!");
 		}
 		else {
 		try {
@@ -53,7 +53,7 @@ public class LoginController
 				System.out.printf("%s", currentUserSession);
 				switchToDashboard(event);
 			} else {
-				errorLabel.setText("Failure");
+				errorLabel.setText("Unable to authenticate username or password! Please try again.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

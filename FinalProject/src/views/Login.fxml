@@ -4,33 +4,42 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.LoginController">
+<AnchorPane prefHeight="583.0" prefWidth="842.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.LoginController">
    <children>
-      <AnchorPane prefHeight="579.0" prefWidth="822.0">
-         <children>
-            <AnchorPane layoutX="127.0" layoutY="43.0" prefHeight="493.0" prefWidth="569.0">
+      <BorderPane layoutX="104.0" layoutY="180.0" prefHeight="583.0" prefWidth="842.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="usernameTextField" layoutX="182.0" layoutY="281.0" prefHeight="25.0" prefWidth="205.0" promptText="Username" />
-                  <PasswordField fx:id="passwordField" layoutX="182.0" layoutY="341.0" prefHeight="25.0" prefWidth="205.0" promptText="Password" />
-                  <Label alignment="CENTER" contentDisplay="TOP" layoutX="148.0" layoutY="97.0" text="Welcome to JavaATM">
+                  <ImageView fitHeight="583.0" fitWidth="414.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
+         </left>
+         <right>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="usernameTextField" layoutX="108.0" layoutY="267.0" prefHeight="25.0" prefWidth="205.0" promptText="Username" />
+                  <PasswordField fx:id="passwordField" layoutX="108.0" layoutY="308.0" prefHeight="25.0" prefWidth="205.0" promptText="Password" />
+                  <Label alignment="CENTER" contentDisplay="TOP" layoutX="73.0" layoutY="147.0" text="Welcome to JavaATM">
                      <font>
                         <Font name="Tahoma" size="29.0" />
                      </font>
                   </Label>
-                  <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="208.0" layoutY="247.0" textFill="RED" />
-                  <Button layoutX="233.0" layoutY="386.0" mnemonicParsing="false" onAction="#onLoginPress" prefHeight="25.0" prefWidth="106.0" text="Login" />
-                  <Label layoutX="132.0" layoutY="162.0" prefHeight="20.0" prefWidth="308.0" text="Please enter your username and password!">
+                  <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="1.0" layoutY="247.0" prefHeight="17.0" prefWidth="419.0" textAlignment="CENTER" textFill="RED" />
+                  <Button layoutX="157.0" layoutY="356.0" mnemonicParsing="false" onAction="#onLoginPress" prefHeight="25.0" prefWidth="106.0" text="Login" />
+                  <Label layoutX="56.0" layoutY="205.0" prefHeight="20.0" prefWidth="308.0" text="Please enter your username and password!">
                      <font>
                         <Font name="Tahoma" size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="234.0" layoutY="428.0" mnemonicParsing="false" onAction="#onCreateAccountPress" prefHeight="25.0" prefWidth="106.0" text="Create Account" />
+                  <Button layoutX="157.0" layoutY="395.0" mnemonicParsing="false" onAction="#onCreateAccountPress" prefHeight="25.0" prefWidth="106.0" text="Create Account" />
                </children>
             </AnchorPane>
-         </children>
-      </AnchorPane>
+         </right>
+      </BorderPane>
    </children>
 </AnchorPane>
