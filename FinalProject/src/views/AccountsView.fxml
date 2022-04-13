@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.AccountsViewController">
 	<children>
-      <AnchorPane layoutX="56.0" prefHeight="550.0" prefWidth="423.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="56.0" AnchorPane.rightAnchor="561.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="97.0" prefHeight="550.0" prefWidth="423.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="97.0" AnchorPane.rightAnchor="520.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="TOP_CENTER" prefHeight="550.0" prefWidth="438.0" spacing="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -31,7 +31,7 @@
                         <Insets top="24.0" />
                      </padding>
                   </Label>
-            		<ListView fx:id="accountsListView" maxHeight="476.0" prefHeight="285.0" prefWidth="382.0" style="-fx-background-color: transparent;" stylesheets="@../resources/ListStyles.css">
+            		<ListView fx:id="accountsListView" maxHeight="476.0" prefHeight="362.0" prefWidth="387.0" style="-fx-background-color: transparent;" stylesheets="@../resources/ListStyles.css">
             			<padding>
             				<Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
             			</padding>
@@ -48,27 +48,31 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="sidebarPane" layoutX="548.0" prefHeight="550.0" prefWidth="492.0" style="-fx-background-radius: 30 0 0 30;">
+      <AnchorPane layoutX="625.0" layoutY="-8.0" opacity="0.32" prefHeight="688.0" prefWidth="416.0" style="-fx-background-color: linear-gradient(white, #212121); -fx-border-width: 0 0 0 3px; -fx-border-color: linear-gradient(#f85717, #de3154, #67008d);" />
+      <AnchorPane fx:id="sidebarPane" layoutX="624.0" layoutY="-8.0" prefHeight="566.0" prefWidth="416.0" style="-fx-background-radius: 30 0 0 30;">
    <children>
-      <HBox alignment="CENTER" layoutX="78.0" layoutY="22.0" opacity="0.93" prefHeight="39.0" prefWidth="337.0" spacing="9.0" styleClass="sidebar" stylesheets="@../resources/stylesheet.css">
+      <AnchorPane fx:id="notificationsPane" layoutX="40.0" layoutY="27.0" prefHeight="512.0" prefWidth="337.0" style="-fx-background-radius: 30;">
          <children>
-            <Label fx:id="activityLabel" prefHeight="28.0" prefWidth="149.0" text="Session Activity">
-               <font>
-                  <Font name="Arial Bold" size="15.0" />
-               </font>
-            </Label>
-            <Button fx:id="showHideButton" mnemonicParsing="false" onAction="#notificationsPaneButtonPressed" prefHeight="30.0" prefWidth="69.0" stylesheets="@../resources/stylesheet.css" text="Show">
-               <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-      <AnchorPane fx:id="notificationsPane" layoutX="78.0" layoutY="70.0" prefHeight="435.0" prefWidth="337.0" style="-fx-background-radius: 30;">
-         <children>
-            <VBox layoutX="11.0" layoutY="-49.0" prefHeight="471.0" prefWidth="337.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox layoutX="11.0" layoutY="-19.0" prefHeight="471.0" prefWidth="337.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ListView fx:id="notificationsListView" prefHeight="349.0" prefWidth="317.0" stylesheets="@../resources/stylesheet.css" />
+                  <HBox alignment="CENTER" opacity="0.93" prefHeight="39.0" prefWidth="337.0" spacing="9.0" styleClass="sidebar">
+                     <children>
+                        <Label fx:id="activityLabel" prefHeight="28.0" prefWidth="140.0" text="Session Activity" textFill="BLUE">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="showHideButton" mnemonicParsing="false" onAction="#notificationsPaneButtonPressed" prefHeight="30.0" prefWidth="69.0" stylesheets="@../resources/stylesheet.css" text="Show">
+                           <HBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <ListView fx:id="notificationsListView" prefHeight="408.0" prefWidth="317.0" stylesheets="@../resources/stylesheet.css">
+                           <padding>
+                              <Insets top="9.0" />
+                           </padding></ListView>
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -77,9 +81,6 @@
          </children>
       </AnchorPane>
    </children>
-   <padding>
-      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-   </padding>
       </AnchorPane>
 	</children>
 </AnchorPane>

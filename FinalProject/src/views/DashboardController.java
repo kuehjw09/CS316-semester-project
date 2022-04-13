@@ -5,9 +5,13 @@ import classes.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class DashboardController {
 	private UserSession currentUserSession; // contains a UserSession object
@@ -22,16 +26,26 @@ public class DashboardController {
 
 	@FXML
 	private AnchorPane anchorPane;
+	
+	@FXML 
+	void logOutButtonPressed(ActionEvent event) throws IOException {
+		Stage stage;
+		Scene scene;
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("Login.fxml"));
+		Parent root = loader.load();
 
-	@FXML
-	void notificationsButtonPressed(ActionEvent event) {
-		System.out.println("Notifications button pressed");
+		scene = new Scene(root);
+		
+
+		stage = (Stage) anchorPane.getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
 	}
-
+	
 	@FXML
-	void userButtonPressed(ActionEvent event) {
-		System.out.println("User button pressed");
-
+	void manageAccountsButtonPressed(ActionEvent event) {
+		// route user to accounts management
 	}
 
 	@FXML
@@ -101,7 +115,7 @@ public class DashboardController {
 
 		alert.showAndWait();
 	}
-
+	
 	/**
 	 * Dashboard is initialized with a UserSession object when a validated user
 	 * succesfully signs in

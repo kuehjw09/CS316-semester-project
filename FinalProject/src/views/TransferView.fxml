@@ -10,23 +10,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.TransferViewController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.TransferViewController">
    <children>
-      <AnchorPane layoutX="347.0" layoutY="19.0" prefHeight="463.0" prefWidth="346.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+      <AnchorPane layoutX="324.0" layoutY="57.0" prefHeight="536.0" prefWidth="392.0" style="-fx-background-color: white; -fx-background-radius: 30;">
          <children>
-            <Label fx:id="typeLabel" alignment="CENTER" layoutX="21.0" layoutY="12.0" text="New Transfer">
+            <Label fx:id="typeLabel" alignment="CENTER" layoutX="29.0" layoutY="14.0" text="New Transfer">
                <font>
                   <Font name="Helvetica Neue" size="24.0" />
                </font>
             </Label>
-            <VBox alignment="CENTER_LEFT" layoutX="24.0" layoutY="55.0" prefHeight="394.0" prefWidth="298.0" spacing="21.0">
+            <VBox alignment="CENTER_LEFT" layoutX="24.0" layoutY="48.0" prefHeight="536.0" prefWidth="386.0" spacing="21.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="48.0">
                <children>
                   <Label text="From" />
-                  <ChoiceBox fx:id="fromAccountChoiceBox" prefHeight="39.0" prefWidth="298.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0px 0px 2px 0px;" />
+                  <ChoiceBox fx:id="fromAccountChoiceBox" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="362.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0px 0px 2px 0px;" />
                   <Label text="To" />
-                  <ChoiceBox fx:id="toAccountChoiceBox" prefHeight="42.0" prefWidth="298.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0px 0px 2px 0px;" />
+                  <ChoiceBox fx:id="toAccountChoiceBox" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="362.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0px 0px 2px 0px;" />
                   <Label text="Amount" />
-                  <TextField fx:id="amountTextField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="70.0" prefWidth="310.0" promptText="\$0.00" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-radius: 3; -fx-border-color: #212121;">
+                  <TextField fx:id="amountTextField" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="310.0" promptText="\$0.00" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-radius: 3; -fx-border-color: #212121;">
                      <font>
                         <Font name="Helvetica" size="36.0" />
                      </font>

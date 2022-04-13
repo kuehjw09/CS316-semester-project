@@ -93,12 +93,12 @@ public class AccountsViewController {
 
     @FXML
     void notificationsPaneButtonPressed(ActionEvent event) {
-    	if (notificationsPane.isVisible()) {
-    		notificationsPane.setVisible(false);
+    	if (notificationsListView.isVisible()) {
+    		notificationsListView.setVisible(false);
     		showHideButton.setText("Show");
     		
     	} else {
-         	notificationsPane.setVisible(true);
+         	notificationsListView.setVisible(true);
     		showHideButton.setText("Hide");
     	}
     }
@@ -144,10 +144,10 @@ public class AccountsViewController {
     	
     	if (notifications.size() > 0) {
     		notificationsPane.setVisible(true);
+    		notificationsListView.setVisible(true);
     		showHideButton.setText("Hide");
     	} else {
     		notificationsPane.setVisible(false);
-    		showHideButton.setText("Show");
     	}
 	
 		

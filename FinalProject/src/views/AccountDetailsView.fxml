@@ -20,9 +20,9 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.AccountDetailsViewController">
 	<children>
-      <AnchorPane layoutX="29.0" layoutY="73.0" prefHeight="556.0" prefWidth="1001.0" style="-fx-background-color: linear-gradient(white, #e9e9e9); -fx-background-radius: 30;">
+      <AnchorPane layoutX="29.0" layoutY="73.0" prefHeight="543.0" prefWidth="975.0" style="-fx-background-color: linear-gradient(white, #e9e9e9); -fx-background-radius: 30;">
          <children>
-      	<VBox alignment="TOP_CENTER" layoutY="14.0" prefHeight="161.0" prefWidth="446.0" AnchorPane.bottomAnchor="326.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="534.0" AnchorPane.topAnchor="14.0">
+      	<VBox alignment="TOP_CENTER" layoutY="12.0" prefHeight="206.0" prefWidth="411.0" spacing="9.0" AnchorPane.bottomAnchor="326.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="564.0" AnchorPane.topAnchor="12.0">
       		<children>
       			<VBox prefHeight="90.0" prefWidth="414.0" spacing="3.0" style="-fx-border-width: 0 0 0 2px; -fx-border-radius: 3; -fx-background-radius: 18;" VBox.vgrow="NEVER">
       				<children>
@@ -48,15 +48,15 @@
                         <Label text="Available balance" textFill="#282828" />
       				</children>
                      <padding>
-                        <Insets bottom="6.0" left="36.0" right="6.0" top="15.0" />
+                        <Insets bottom="6.0" left="39.0" right="6.0" top="15.0" />
                      </padding>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
       			</VBox>
-                  <AnchorPane prefHeight="69.0" prefWidth="395.0" style="-fx-background-color: transparent;">
+                  <AnchorPane prefHeight="69.0" prefWidth="436.0" style="-fx-background-color: transparent;">
                      <children>
-                        <GridPane layoutX="34.0" layoutY="2.0" prefHeight="69.0" prefWidth="323.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="2.0">
+                        <GridPane layoutX="40.0" layoutY="2.0" prefHeight="63.0" prefWidth="344.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="37.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="2.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="236.0" minWidth="10.0" prefWidth="180.0" />
                             <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" prefWidth="120.0" />
@@ -103,14 +103,17 @@
                      <padding>
                         <Insets bottom="3.0" left="3.0" right="3.0" />
                      </padding>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                   </AnchorPane>
       		</children>
       	</VBox>
-            <VBox layoutX="29.0" layoutY="186.0" prefHeight="358.0" prefWidth="460.0">
+            <VBox layoutX="29.0" layoutY="199.0" prefHeight="335.0" prefWidth="353.0">
                <children>
             			<TabPane prefHeight="511.0" prefWidth="291.0" tabClosingPolicy="UNAVAILABLE">
             				<tabs>
-            					<Tab text="Overview">
+            					<Tab style="-fx-background-radius: 10 10 0 0;" text="Overview">
             						<content>
             							<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="241.0" prefWidth="360.0">
                                  <children>
@@ -131,7 +134,7 @@
             							</AnchorPane>
             						</content>
             					</Tab>
-            					<Tab text="Account Info">
+            					<Tab style="-fx-background-radius: 10 10 0 0;" text="Account Info">
             						<content>
             							<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             						</content>
@@ -141,17 +144,17 @@
             			<Hyperlink onMouseClicked="#viewAllTransactionsClicked" text="View all transactions" />
                </children>
             </VBox>
-            <LineChart fx:id="accountLineChart" layoutX="489.0" layoutY="14.0" prefHeight="298.0" prefWidth="491.0" title="Account History">
+            <LineChart fx:id="accountLineChart" layoutX="423.0" layoutY="75.0" prefHeight="359.0" prefWidth="508.0" title="Balance History" verticalGridLinesVisible="false">
               <xAxis>
                 <CategoryAxis gapStartAndEnd="false" prefHeight="15.0" prefWidth="442.0" side="BOTTOM" />
               </xAxis>
               <yAxis>
-                <NumberAxis side="LEFT" />
+                <NumberAxis minorTickCount="2" minorTickVisible="false" side="LEFT" tickLabelGap="1.0" tickLength="6.0" upperBound="500.0" />
               </yAxis>
             </LineChart>
          </children>
       </AnchorPane>
-      <HBox layoutX="29.0" prefHeight="61.0" prefWidth="1001.0" spacing="9.0" style="-fx-background-color: white; -fx-background-radius: 0 0 30 30;">
+      <HBox layoutX="29.0" prefHeight="61.0" prefWidth="975.0" spacing="9.0" style="-fx-background-color: white; -fx-background-radius: 0 0 30 30;">
          <children>
             <Label text="Account Details" textFill="#197af7">
                <font>
