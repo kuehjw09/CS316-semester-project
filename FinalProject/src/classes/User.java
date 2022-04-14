@@ -15,6 +15,7 @@ public class User {
 	private String username;
 	private Date birthDate;
 	private int user_id;
+	private int default_account;
 	
 	public User(String firstName, String lastName, Date birthDate, String username, int user_id) {
 		this.firstName = firstName;
@@ -25,11 +26,12 @@ public class User {
 	}
 	
 	public User(ResultSet resultSet) throws SQLException {
+		this.user_id = resultSet.getInt(1);
 		this.firstName = resultSet.getString(2);
 		this.lastName = resultSet.getString(3);
 		this.birthDate = resultSet.getDate(5);
 		this.username = resultSet.getString(6);
-		this.user_id = resultSet.getInt(1);
+		this.default_account = resultSet.getInt(8);
 	}
 
 	public String getFirstName() {
@@ -78,10 +80,18 @@ public class User {
 		this.user_id = user_id;
 	}
 	
+	public int getDefault_Account() {
+		return default_account;
+	}
+	
+	public void setDefault_Account(int default_account) {
+		this.default_account = default_account;
+	}
+	
 	@Override
 	public String toString() {
-		return String.format("First: %s%nLast: %s%nBirth Date: %s%nUsername: %s%nuser_id: %05d%n", getFirstName(),
-				getLastName(), getBirthDate(), getUsername(), getUser_id());
+		return String.format("First: %s%nLast: %s%nBirth Date: %s%nUsername: %s%nuser_id: %05d%ndefault_account: %08d%n", getFirstName(),
+				getLastName(), getBirthDate(), getUsername(), getUser_id(), getDefault_Account());
 	}
 
 }

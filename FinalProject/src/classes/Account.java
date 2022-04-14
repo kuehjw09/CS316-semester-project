@@ -17,12 +17,13 @@ import java.util.stream.Stream;
 import app.DatabaseConnection;
 
 public class Account {
-	private String name;
-	private int accountNumber;
-	private String type; // may become subclasses of Account
+	private String name; // account name
+	private int accountNumber; // account number
+	private String type; // checking or savings
 	private BigDecimal availableBalance;
 	private BigDecimal totalBalance;
-	private ArrayList<Transaction> transactions;
+	private ArrayList<Transaction> transactions; // transactions associated with account
+	private boolean isDefault; // whether this is a default account or not
 
 	// constructor
 	public Account(String name, int accountNumber, BigDecimal availableBalance, BigDecimal totalBalance)
@@ -32,6 +33,8 @@ public class Account {
 		this.availableBalance = availableBalance;
 		this.totalBalance = totalBalance;
 		this.transactions = getTransactions();
+		
+		isDefault();
 	}
 
 	// alternate constructor accepts a ResultSet object
@@ -41,6 +44,8 @@ public class Account {
 		this.availableBalance = resultSet.getBigDecimal(6);
 		this.totalBalance = resultSet.getBigDecimal(7);
 		this.transactions = getTransactions();
+		
+		isDefault();
 	}
 
 	public String getName() {
@@ -106,6 +111,33 @@ public class Account {
 
 	public void setTransactions(ArrayList<Transaction> transactions) throws SQLException {
 		this.transactions = transactions;
+	}
+
+	// return whether this is a default account or not
+	public void isDefault() throws SQLException {
+		Connection connection = DatabaseConnection.getConnection();
+
+		String selectString = "SELECT default_account FROM DB2.Users where default_account = ? ";
+
+		try (PreparedStatement selectStatement = connection.prepareStatement(selectString)) {
+			selectStatement.setInt(1, accountNumber);
+			ResultSet resultSet = selectStatement.executeQuery();
+			if (resultSet.next()) {
+				setIsDefault(true);
+			} else {
+				setIsDefault(false);
+			}
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+	}
+	
+	public boolean getIsDefault() {
+		return isDefault;
+	}
+	
+	public void setIsDefault(boolean isDefault) {
+		this.isDefault = isDefault;
 	}
 
 	public BigDecimal getPendingWithdrawalsAmount() {
@@ -177,8 +209,8 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return String.format("%s...%04d%n" + "Available Balance: $%.2f%n", getName(), getAccountNumber() % 110000,
-				getAvailableBalance());
+		return String.format("%s...%04d%n" + "Available Balance: $%.2f%nisDefault: %b%n", getName(), getAccountNumber() % 110000,
+				getAvailableBalance(), getIsDefault());
 	}
 
 }

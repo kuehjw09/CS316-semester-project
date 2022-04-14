@@ -15,6 +15,7 @@ public class AccountListCell extends ListCell<Account> {
 	private HBox hbox = new HBox(3.0);
 	private Label nameLabel = new Label();
 	private Label numberLabel = new Label();
+	private Label defaultLabel = new Label();
 	private Label balanceLabel = new Label();
 	private Label label = new Label();
 	
@@ -27,14 +28,17 @@ public class AccountListCell extends ListCell<Account> {
 		hbox.setSpacing(3.0);
 		hbox.getChildren().add(nameLabel); // attach to hbox
 		hbox.getChildren().add(numberLabel); // attach to hbox
+		hbox.getChildren().add(defaultLabel);
 		vbox.getChildren().add(hbox);
 		vbox.getChildren().add(balanceLabel);
 		vbox.getChildren().add(label);
 		
 		nameLabel.setFont(Font.font("arial", 15 ));
 		numberLabel.setFont(Font.font("arial", 15 ));
+		defaultLabel.setFont(Font.font("arial", 12));
 		balanceLabel.setFont(Font.font("helvatica", 24));
 		
+		defaultLabel.setPadding(new Insets(1, 1, 1, 12));
 		vbox.setPadding(new Insets(1, 1, 1, 12));
 		vbox.setStyle("-fx-background-radius: 12");
 
@@ -53,6 +57,9 @@ public class AccountListCell extends ListCell<Account> {
 		} else {
 			nameLabel.setText(account.getName());
 			numberLabel.setText("..." + String.format("%04d", account.getAccountNumber() % 110000));
+			if (account.getIsDefault()) {
+				defaultLabel.setText("(Default)");
+			}
 			balanceLabel.setText(currency.format(account.getAvailableBalance()));
 			label.setText("Available balance");
 			setGraphic(vbox);

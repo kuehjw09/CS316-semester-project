@@ -10,25 +10,17 @@ CREATE TABLE Users (
     ssn VARCHAR(11) DEFAULT "000-00-0000",
     birth_date DATE,
     username VARCHAR(20) UNIQUE NOT NULL,
-    pass VARCHAR(100) NOT NULL
+    pass VARCHAR(100) NOT NULL,
+    default_account MEDIUMINT REFERENCES Accounts(account_number)
 );
-
--- *Optional* Addresses table represents a user's address
-CREATE TABLE Addresses (
-	address_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    city VARCHAR(20) DEFAULT "Citytown",
-    state VARCHAR(20) DEFAULT "AL",
-    zipcode VARCHAR(10) DEFAULT "54321",
-    street_address VARCHAR(30) DEFAULT "1424 Alpine Drive",
-    user_id INT NOT NULL REFERENCES Users(user_id)
-);
-
 
 -- Accounts table represents a bank account
 CREATE TABLE Accounts (
 	account_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    account_name VARCHAR(15) DEFAULT "New Account",
-    user_id INT NOT NULL REFERENCES Users(user_id),
+    account_name VARCHAR(25) DEFAULT "New Account",
+    user_id INT NOT NULL REFERENCES Users(user_id)
+		ON UPDATE CASCADE
+        ON DELETE CASCADE,
     account_type ENUM('Checking', 'Savings') NOT NULL,
 	account_number MEDIUMINT UNIQUE NOT NULL,
 	available_balance DECIMAL(13, 2) NOT NULL DEFAULT 0.00,
@@ -40,11 +32,13 @@ CREATE TABLE Accounts (
 -- heap table to store all transactions
 CREATE TABLE Transactions (
     transaction_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    account_number MEDIUMINT NOT NULL NOT NULL REFERENCES Accounts (account_number),
+    account_number MEDIUMINT NOT NULL NOT NULL REFERENCES Accounts (account_number)
+		ON UPDATE CASCADE
+        ON DELETE CASCADE,
     amount DECIMAL(13 , 2 ) NOT NULL,
     transaction_type ENUM('credit', 'debit') NOT NULL,
     description VARCHAR(90),
-    status ENUM('pending', 'processed'),
+    status ENUM('pending', 'processed') NOT NULL,
     processed TIMESTAMP NOT NULL ON UPDATE LOCALTIMESTAMP DEFAULT LOCALTIMESTAMP
 );
 
@@ -83,9 +77,9 @@ DELIMITER ;
 DELIMITER $$
 SET SQL_SAFE_UPDATES = 0;
 
-CREATE PROCEDURE NEW_ACCOUNT(IN name VARCHAR(15), IN type VARCHAR(15), IN user INT)
+CREATE PROCEDURE NEW_ACCOUNT(IN name VARCHAR(25), IN type VARCHAR(15), IN user INT)
 BEGIN
-    DECLARE acct_name VARCHAR(15);
+    DECLARE acct_name VARCHAR(25);
     DECLARE acct_type ENUM('Checking', 'Savings');
     DECLARE acct_number MEDIUMINT;
     DECLARE id INT;
@@ -127,9 +121,30 @@ BEGIN
     INSERT INTO Users (first_name, last_name, birth_date, ssn, username, pass) VALUES (
 		name1, name2, bday, ssNumber, name3, passkey
     );
+    
+    CALL NEW_ACCOUNT("Default Checking", "checking", (SELECT user_id FROM Users WHERE username = user));
+    CALL SET_DEFAULT_ACCOUNT((SELECT user_id FROM Users WHERE username = name3), (SELECT account_number FROM Accounts WHERE user_id = 
+    (SELECT user_id FROM Users WHERE username = name3)));
 END$$
 SET SQL_SAFE_UPDATES = 1;
 DELIMITER ;
+
+-- SET_DEFAULT_ACCOUNT procedure to set the default account for a user
+DELIMITER $$
+SET SQL_SAFE_UPDATES = 0;
+CREATE PROCEDURE SET_DEFAULT_ACCOUNT(IN userID INT, IN accountNum MEDIUMINT)
+BEGIN
+	DECLARE id INT;
+    DECLARE acctid MEDIUMINT;
+    
+    SET id = userID;
+    SET acctid = accountNum;
+    
+	UPDATE Users SET default_account = acctid WHERE user_id = id; 
+END$$
+SET SQL_SAFE_UPDATES = 1;
+DELIMITER ;
+
 
 -- CHECK_PASS procedure to verify a password for a given user
 DELIMITER $$
@@ -170,13 +185,14 @@ BEGIN
     
 		IF operation = "debit" THEN
 			UPDATE Accounts SET total_balance = (total_balance - total) WHERE account_number = account;
-            
-		ELSEIF operation = "credit" THEN
+		END IF;
+		IF operation = "credit" THEN
 			UPDATE Accounts SET available_balance = (available_balance + total) WHERE account_number = account;
-            
+		END IF;
+        
 		UPDATE Transactions SET status = "processed" WHERE transaction_id = transactionID;
-        END IF;
-	     FETCH FROM transactionCursor INTO account, total, operation, transactionID;
+     
+		FETCH FROM transactionCursor INTO account, total, operation, transactionID;
 
 	END WHILE;
     
