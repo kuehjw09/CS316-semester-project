@@ -4,23 +4,32 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="583.0" prefWidth="842.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.LoginController">
+<AnchorPane prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.LoginController">
    <children>
       <BorderPane layoutX="104.0" layoutY="180.0" prefHeight="583.0" prefWidth="842.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="650.0" prefWidth="432.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="583.0" fitWidth="414.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="537.0" fitWidth="480.0" layoutX="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/images/Transparent_Java_Logo.png" />
+                     </image></ImageView>
+                  <Label layoutX="176.0" layoutY="567.0" text="ATM">
+                     <font>
+                        <Font size="47.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </left>
          <right>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="650.0" prefWidth="630.0" BorderPane.alignment="CENTER">
                <children>
                   <TextField fx:id="usernameTextField" layoutX="108.0" layoutY="267.0" prefHeight="25.0" prefWidth="205.0" promptText="Username" />
                   <PasswordField fx:id="passwordField" layoutX="108.0" layoutY="308.0" prefHeight="25.0" prefWidth="205.0" promptText="Password" />
