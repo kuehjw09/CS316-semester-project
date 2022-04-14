@@ -1,4 +1,5 @@
 package views;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -24,7 +25,6 @@ public class LoginController
 	private Scene scene;
 	private UserSession userSession;
 	private DatabaseConnection databaseConnection;
-	
 
 	@FXML
 	private TextField usernameTextField;
@@ -34,102 +34,118 @@ public class LoginController
 
 	@FXML
 	private Label errorLabel;
-	
+
 	@FXML
-	void onLoginPress(ActionEvent event) 
-	{
+	void onLoginPress(ActionEvent event) {
 		if (usernameTextField.getText().isEmpty() || passwordField.getText().isEmpty()) 
 		{
 			errorLabel.setText("Please enter a valid username and password!");
-		}
-		else {
-		try {
-			DatabaseConnection connection = databaseConnection;
-			boolean authenticated = connection.authenticateUser(usernameTextField.getText(), passwordField.getText());
-			if (authenticated == true) {
-				errorLabel.setText("Login Success!");
-				UserSession currentUserSession = connection.getUserSession();
-				userSession = currentUserSession;
-				System.out.printf("%s", currentUserSession);
-				switchToDashboard(event);
-			} else {
-				errorLabel.setText("Unable to authenticate username or password! Please try again.");
+		} 
+		else 
+		{
+			try 
+			{
+				DatabaseConnection connection = databaseConnection;
+				boolean authenticated = connection.authenticateUser(usernameTextField.getText(),
+						passwordField.getText());
+				if (authenticated == true) 
+				{
+					errorLabel.setText("Login Success!");
+					UserSession currentUserSession = connection.getUserSession();
+					userSession = currentUserSession;
+					System.out.printf("%s", currentUserSession);
+					switchToDashboard(event);
+				} 
+				else 
+				{
+					errorLabel.setText("Unable to authenticate username or password! Please try again.");
+				}
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-		}
-	
+
 	}
 
 	@FXML
 	void onCreateAccountPress(ActionEvent event) 
 	{
-		try {
+		try 
+		{
 			switchToCreateAccount(event);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (IOException e) 
+		{
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} 
+		catch (SQLException e) 
+		{
 			e.printStackTrace();
 		}
-		
 
 	}
-	
 
-	
-	public void switchToDashboard(ActionEvent event) throws IOException, SQLException{
+	public void switchToDashboard(ActionEvent event) throws IOException, SQLException 
+	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("Dashboard.fxml"));
 		Parent root = loader.load();
-		
+
 		// access the controller and call a method
 		DashboardController controller = loader.getController();
 		controller.initializeData(userSession); // passing current account number and database
-		
+
 		scene = new Scene(root);
 
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-	public void switchToCreateAccount(ActionEvent event) throws IOException, SQLException{
+
+	public void switchToCreateAccount(ActionEvent event) throws IOException, SQLException 
+	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("CreateAccount.fxml"));
 		Parent root = loader.load();
-		
+
 		scene = new Scene(root);
-		
+
 		// access the controller and call a method
 		CreateAccountController controller = loader.getController();
 		controller.initializeData(databaseConnection); // passing current account number and database
 
-		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
 		stage.show();
 	}
-	
-	public void creationSuccess()
+
+	public void creationSuccess() 
 	{
-		
-		Alert alert = new Alert (AlertType.NONE, "Account Created!", ButtonType.OK);
-		
+
+		Alert alert = new Alert(AlertType.NONE, "Account Created!", ButtonType.OK);
+
 		alert.show();
 	}
-	
-	public void initialize()
+
+	public void initialize() 
 	{
-		try {
-			databaseConnection = new DatabaseConnection();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		connectDatabase();
+	
+
 	}
 
-	
+	public void connectDatabase() 
+	{
+		try 
+		{
+			databaseConnection = new DatabaseConnection();
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
 }
