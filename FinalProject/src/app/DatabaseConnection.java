@@ -186,13 +186,19 @@ public class DatabaseConnection {
 					"SELECT * FROM DB2.Accounts WHERE user_id = " + user.getUser_id() + " ORDER BY date_created DESC");
 			while (resultSet.next()) {
 				if (resultSet != null) { // must include to avoid null pointer exception
-					accounts.add(new Account(resultSet));
+					Account newAccount = new Account(resultSet);
+					if (newAccount.isDefault) { // always show default account first
+						accounts.add(0, newAccount);
+					} else {
+						accounts.add(newAccount);
+					}
 				}
 			}
 		} catch (SQLException exception) {
 			exception.printStackTrace();
 		}
 
+		
 		return accounts;
 	}
 	

@@ -105,7 +105,7 @@ public class Account {
 		} catch (SQLException exception) {
 			exception.printStackTrace();
 		}
-
+		
 		return transactions;
 	}
 

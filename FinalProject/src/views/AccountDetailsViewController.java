@@ -91,30 +91,39 @@ public class AccountDetailsViewController {
 		}
 	}
 
-	public void initialize() throws SQLException {
-		// set balance info labels
+	public void initialize() {
+		// set labels
 		totalBalanceLabel.setText(currency.format(currentAccount.getTotalBalance()));
 		pendingDebitsLabel.setText(currency.format(currentAccount.getPendingWithdrawalsAmount().negate()));
 		pendingCreditsLabel.setText("+" + currency.format(currentAccount.getPendingDepositsAmount()));
-
-		// populate transactionsListView with ArrayList of currentAccount transactions
-		// (limit 9)
-		for (Transaction transaction : getCurrentAccount().getTransactions()) {
-			transactions.add(transaction);
-			historicalTransactions.add(transaction);
-		}
-
-		Collections.reverse(transactions); // descending order
-
-		transactionsListView.setItems(transactions);
 
 		nameLabel.setText(getCurrentAccount().getName());
 		numberLabel.setText("..." + String.format("%04d", currentAccount.getAccountNumber() % 11000));
 		balanceLabel.setText(currency.format(currentAccount.getAvailableBalance()));
 		
-
+		try {
+			buildTransactions();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		buildSeries();
+	}
+	
+	// custom TimeStampComparator for sorting transactions by Timestamp
+	public class TimeStampComparator implements Comparator<Transaction> {
+		@Override
+		public int compare(Transaction a, Transaction b) {
+			Timestamp t1 = a.getTrueTimestamp();
+			Timestamp t2 = b.getTrueTimestamp();
+			
+			return (t1.compareTo(t2) > 0) ? 1 : (t2.compareTo(t1) > 0) ? -1 : 0;
+		}
+	}
+	
+	public void buildSeries() {
 		XYChart.Series<String, BigDecimal> series = new XYChart.Series<String, BigDecimal>();
-		series.setName("transaction");
+		series.setName("Transactions");
 		
 		
 		// sort the historicalTransactions for sequential processing
@@ -134,15 +143,15 @@ public class AccountDetailsViewController {
 		accountLineChart.getData().add(series);
 	}
 	
-	
-	public class TimeStampComparator implements Comparator<Transaction> {
-		@Override
-		public int compare(Transaction a, Transaction b) {
-			// TODO Auto-generated method stub
-			Timestamp t1 = a.getTrueTimestamp();
-			Timestamp t2 = b.getTrueTimestamp();
-			
-			return (t1.compareTo(t2) > 0) ? 1 : (t2.compareTo(t1) > 0) ? -1 : 0;
+	public void buildTransactions() throws SQLException {
+		// populate transactionsListView with ArrayList of currentAccount transactions
+		for (Transaction transaction : getCurrentAccount().getTransactions()) {
+			transactions.add(transaction);
+			historicalTransactions.add(transaction);
 		}
+
+		Collections.reverse(transactions); // descending order
+
+		transactionsListView.setItems(transactions);
 	}
 }
