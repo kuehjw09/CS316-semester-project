@@ -33,10 +33,10 @@ public class AccountListCell extends ListCell<Account> {
 		vbox.getChildren().add(balanceLabel);
 		vbox.getChildren().add(label);
 		
-		nameLabel.setFont(Font.font("arial", 15 ));
-		numberLabel.setFont(Font.font("arial", 15 ));
-		defaultLabel.setFont(Font.font("arial", 12));
-		balanceLabel.setFont(Font.font("helvatica", 24));
+		nameLabel.setFont(Font.font("Arial", 15 ));
+		numberLabel.setFont(Font.font("Arial", 15 ));
+		defaultLabel.setFont(Font.font("Arial", 12));
+		balanceLabel.setFont(Font.font("Helvatica", 24));
 		
 		defaultLabel.setPadding(new Insets(1, 1, 1, 12));
 		vbox.setPadding(new Insets(1, 1, 1, 12));
