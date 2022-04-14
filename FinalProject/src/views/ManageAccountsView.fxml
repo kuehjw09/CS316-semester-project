@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.ManageAccountsViewController">
+	<children>
+      <AnchorPane layoutX="29.0" layoutY="73.0" prefHeight="543.0" prefWidth="975.0" style="-fx-background-color: linear-gradient(white, #e9e9e9); -fx-background-radius: 30;">
+         <children>
+            <VBox layoutX="564.0" layoutY="290.0" prefHeight="105.0" prefWidth="354.0" spacing="12.0">
+               <children>
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#makeDefaultButtonPressed" text="Make Default" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editNameButtonPressed" text="Rename" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteButtonPressed" text="Delete" />
+               </children>
+            </VBox>
+            <ListView fx:id="accountsListView" layoutX="86.0" layoutY="45.0" prefHeight="477.0" prefWidth="354.0" />
+            <Label layoutX="86.0" layoutY="28.0" text="Select an Account " />
+            <ListView fx:id="selectedAccountListView" layoutX="564.0" layoutY="97.0" prefHeight="175.0" prefWidth="354.0" />
+         </children>
+      </AnchorPane>
+      <HBox layoutX="29.0" prefHeight="61.0" prefWidth="975.0" spacing="9.0" style="-fx-background-color: white; -fx-background-radius: 0 0 30 30;">
+         <children>
+            <Label text="Manage Accounts" textFill="#197af7">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="18.0" top="21.0" />
+               </padding>
+            </Label>
+            <AnchorPane opacity="0.22" prefHeight="61.0" prefWidth="1.0" style="-fx-background-color: #212121;">
+               <HBox.margin>
+                  <Insets left="6.0" right="6.0" />
+               </HBox.margin>
+            </AnchorPane>
+            <Button mnemonicParsing="false" onAction="#returnButtonPressed" prefHeight="29.0" prefWidth="70.0" stylesheets="@../resources/ListStyles.css" text="back">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="9.0" top="18.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets left="15.0" />
+         </padding>
+      </HBox>
+	</children>
+</AnchorPane>

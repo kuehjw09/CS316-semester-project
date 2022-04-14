@@ -44,8 +44,17 @@ public class DashboardController {
 	}
 	
 	@FXML
-	void manageAccountsButtonPressed(ActionEvent event) {
+	void manageAccountsButtonPressed(ActionEvent event) throws IOException {
 		// route user to accounts management
+		ManageAccountsViewController.setCurrentUserSession(currentUserSession);
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("ManageAccountsView.fxml"));
+		AnchorPane centerPane = (AnchorPane) loader.load();
+		try {
+			anchorPane.getChildren().clear();
+			anchorPane.getChildren().add(centerPane);
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
 	}
 
 	@FXML
