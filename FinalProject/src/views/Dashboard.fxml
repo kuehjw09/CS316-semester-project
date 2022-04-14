@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.DashboardController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.DashboardController">
    <center>
       <AnchorPane fx:id="anchorPane" prefHeight="428.0" prefWidth="1040.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
@@ -36,7 +37,7 @@
             </Label>
             <VBox alignment="CENTER" prefHeight="650.0" prefWidth="72.0" spacing="51.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-            <Button mnemonicParsing="false" onAction="#homeButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" styleClass="navButton" stylesheets="@ButtonStyles.css">
+            <Button mnemonicParsing="false" onAction="#homeButtonPressed" prefHeight="57.0" prefWidth="57.0" style="-fx-background-color: TRANSPARENT;" styleClass="navButton">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -47,8 +48,12 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <stylesheets>
+                    
+                        <URL value="@../resources/ButtonStyles.css" />
+                     </stylesheets>
             </Button>
-                  <MenuButton mnemonicParsing="false" popupSide="TOP" prefHeight="68.0" prefWidth="60.0" style="-fx-background-color: white;" stylesheets="@ButtonStyles.css">
+                  <MenuButton mnemonicParsing="false" popupSide="TOP" prefHeight="68.0" prefWidth="60.0" style="-fx-background-color: white;">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#manageAccountsButtonPressed" text="Manage Accounts" />
                         <MenuItem mnemonicParsing="false" onAction="#logOutButtonPressed" text="Log out" />
@@ -60,8 +65,12 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <stylesheets>
+                        
+                        <URL value="@../resources/ButtonStyles.css" />
+                     </stylesheets>
                   </MenuButton>
-                  <MenuButton mnemonicParsing="false" popupSide="TOP" prefHeight="69.0" prefWidth="68.0" style="-fx-background-color: white;" stylesheets="@ButtonStyles.css">
+                  <MenuButton mnemonicParsing="false" popupSide="TOP" prefHeight="69.0" prefWidth="68.0" style="-fx-background-color: white;">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#depositButtonPressed" text="Deposit" />
                       <MenuItem mnemonicParsing="false" onAction="#withdrawalButtonPressed" text="Withdrawal" />
@@ -73,8 +82,12 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <stylesheets>
+                   
+                        <URL value="@../resources/ButtonStyles.css" />
+                     </stylesheets>
                   </MenuButton>
-                  <MenuButton mnemonicParsing="false" popupSide="TOP" prefHeight="68.0" prefWidth="60.0" style="-fx-background-color: white;" stylesheets="@ButtonStyles.css">
+                  <MenuButton mnemonicParsing="false" popupSide="TOP" prefHeight="68.0" prefWidth="60.0" style="-fx-background-color: white;">
                      <items>
                         <MenuItem mnemonicParsing="false" text="Send Money" />
                         <MenuItem mnemonicParsing="false" onAction="#transferButtonPressed" text="Transfer Funds" />
@@ -86,6 +99,10 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <stylesheets>
+                     
+                        <URL value="@../resources/ButtonStyles.css" />
+                     </stylesheets>
                   </MenuButton>
                </children>
             </VBox>

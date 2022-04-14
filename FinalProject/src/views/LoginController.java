@@ -13,13 +13,14 @@ import javafx.scene.Scene;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LoginController 
+public class LoginController
 {
 	private Stage stage;
 	private Scene scene;
@@ -36,19 +37,23 @@ public class LoginController
 	private Label errorLabel;
 
 	@FXML
-	void onLoginPress(ActionEvent event) {
-		if (usernameTextField.getText().isEmpty() || passwordField.getText().isEmpty()) 
+	private Button loginButton;
+
+	@FXML
+	void onLoginPress(ActionEvent event)
+	{
+		if (usernameTextField.getText().isEmpty() || passwordField.getText().isEmpty())
 		{
 			errorLabel.setText("Please enter a valid username and password!");
 		} 
-		else 
+		else
 		{
-			try 
+			try
 			{
 				DatabaseConnection connection = databaseConnection;
 				boolean authenticated = connection.authenticateUser(usernameTextField.getText(),
 						passwordField.getText());
-				if (authenticated == true) 
+				if (authenticated == true)
 				{
 					errorLabel.setText("Login Success!");
 					UserSession currentUserSession = connection.getUserSession();
@@ -56,12 +61,11 @@ public class LoginController
 					System.out.printf("%s", currentUserSession);
 					switchToDashboard(event);
 				} 
-				else 
+				else
 				{
 					errorLabel.setText("Unable to authenticate username or password! Please try again.");
 				}
-			} 
-			catch (Exception e) 
+			} catch (Exception e)
 			{
 				e.printStackTrace();
 			}
@@ -70,24 +74,24 @@ public class LoginController
 	}
 
 	@FXML
-	void onCreateAccountPress(ActionEvent event) 
+	void onCreateAccountPress(ActionEvent event)
 	{
-		try 
+		try
 		{
 			switchToCreateAccount(event);
 		} 
-		catch (IOException e) 
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		} 
-		catch (SQLException e) 
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
 
 	}
 
-	public void switchToDashboard(ActionEvent event) throws IOException, SQLException 
+	public void switchToDashboard(ActionEvent event) throws IOException, SQLException
 	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("Dashboard.fxml"));
@@ -104,7 +108,7 @@ public class LoginController
 		stage.show();
 	}
 
-	public void switchToCreateAccount(ActionEvent event) throws IOException, SQLException 
+	public void switchToCreateAccount(ActionEvent event) throws IOException, SQLException
 	{
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("CreateAccount.fxml"));
@@ -121,28 +125,29 @@ public class LoginController
 		stage.show();
 	}
 
-	public void creationSuccess() 
+	public void creationSuccess(String username)
 	{
 
-		Alert alert = new Alert(AlertType.NONE, "Account Created!", ButtonType.OK);
+		Alert alert = new Alert(AlertType.NONE, "Account " + username + " Created!", ButtonType.OK);
 
 		alert.show();
 	}
 
-	public void initialize() 
+	public void initialize()
 	{
 		connectDatabase();
-	
+
+		loginButton.setDefaultButton(true);
 
 	}
 
-	public void connectDatabase() 
+	public void connectDatabase()
 	{
-		try 
+		try
 		{
 			databaseConnection = new DatabaseConnection();
 		} 
-		catch (SQLException e) 
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}

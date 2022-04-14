@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -75,6 +76,9 @@ public class CreateAccountController
 
 	@FXML
 	private CheckBox ssnToggleCheckBox;
+
+	@FXML
+	private Button createButton;
 
 	@FXML
 	void onCreateAccount(ActionEvent event) throws IOException, SQLException
@@ -186,6 +190,8 @@ public class CreateAccountController
 
 		setSSNListeners();
 
+		createButton.setDefaultButton(true);
+
 	}
 
 	private static Pattern SSN_NUM_PATTERN = Pattern
@@ -240,7 +246,6 @@ public class CreateAccountController
 
 		} catch (SQLException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("User creation unsuccessful");
 		}
@@ -270,7 +275,7 @@ public class CreateAccountController
 
 		// access the controller and call a method
 		LoginController controller = loader.getController();
-		controller.creationSuccess();
+		controller.creationSuccess(usernameTextField.getText());
 		;// notifies user that account creation was successful
 
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

@@ -46,13 +46,13 @@
                   <TextField fx:id="visible_passwordTextField" layoutX="289.0" layoutY="415.0" prefHeight="25.0" prefWidth="175.0" />
                   <PasswordField fx:id="hiddenPasswordField" layoutX="288.0" layoutY="415.0" prefHeight="25.0" prefWidth="175.0" />
                   <PasswordField fx:id="hiddenSSNPasswordField" layoutX="288.0" layoutY="338.0" prefHeight="25.0" prefWidth="175.0" />
-                  <DatePicker fx:id="birthdayDatePicker" layoutX="289.0" layoutY="300.0" prefHeight="25.0" prefWidth="172.0" />
+                  <DatePicker fx:id="birthdayDatePicker" editable="false" layoutX="289.0" layoutY="300.0" prefHeight="25.0" prefWidth="172.0" />
                   <Button layoutX="439.0" layoutY="467.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onReset" text="Reset" />
-                  <Button layoutX="328.0" layoutY="467.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onCreateAccount" text="Create Account" />
+                  <Button fx:id="createButton" layoutX="328.0" layoutY="467.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onCreateAccount" text="Create Account" />
                   <CheckBox fx:id="ssnToggleCheckBox" layoutX="473.0" layoutY="342.0" mnemonicParsing="false" onAction="#toggleVisibleSSN" text="Show SSN" />
                   <CheckBox fx:id="passwordToggleCheckBox" layoutX="473.0" layoutY="419.0" mnemonicParsing="false" onAction="#toggleVisiblePassword" text="Show Password" />
                   <Button layoutX="216.0" layoutY="467.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onReturn" text="Return to Login" />
-                  <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="256.0" prefHeight="17.0" prefWidth="500.0" textAlignment="CENTER" textFill="RED" />
+                  <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="127.0" layoutY="193.0" prefHeight="17.0" prefWidth="500.0" textAlignment="CENTER" textFill="RED" />
                   <Label layoutX="250.0" layoutY="135.0" text="Create Account">
                      <font>
                         <Font size="30.0" />
