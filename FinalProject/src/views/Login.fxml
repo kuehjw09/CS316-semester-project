@@ -31,21 +31,23 @@
          <right>
             <AnchorPane prefHeight="650.0" prefWidth="630.0" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="usernameTextField" layoutX="108.0" layoutY="267.0" prefHeight="25.0" prefWidth="205.0" promptText="Username" />
-                  <PasswordField fx:id="passwordField" layoutX="108.0" layoutY="308.0" prefHeight="25.0" prefWidth="205.0" promptText="Password" />
-                  <Label alignment="CENTER" contentDisplay="TOP" layoutX="73.0" layoutY="147.0" text="Welcome to JavaATM">
+                  <TextField fx:id="usernameTextField" layoutX="213.0" layoutY="264.0" prefHeight="25.0" prefWidth="205.0" />
+                  <PasswordField fx:id="passwordField" layoutX="213.0" layoutY="313.0" prefHeight="25.0" prefWidth="205.0" />
+                  <Label alignment="CENTER" contentDisplay="TOP" layoutX="176.0" layoutY="147.0" text="Welcome to JavaATM">
                      <font>
                         <Font name="Tahoma" size="29.0" />
                      </font>
                   </Label>
-                  <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="1.0" layoutY="247.0" prefHeight="17.0" prefWidth="419.0" textAlignment="CENTER" textFill="RED" />
-                  <Button layoutX="157.0" layoutY="356.0" mnemonicParsing="false" onAction="#onLoginPress" prefHeight="25.0" prefWidth="106.0" text="Login" />
-                  <Label layoutX="56.0" layoutY="205.0" prefHeight="20.0" prefWidth="308.0" text="Please enter your username and password!">
+                  <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="104.0" layoutY="237.0" prefHeight="17.0" prefWidth="419.0" textAlignment="CENTER" textFill="RED" />
+                  <Button layoutX="260.0" layoutY="356.0" mnemonicParsing="false" onAction="#onLoginPress" prefHeight="25.0" prefWidth="106.0" text="Login" />
+                  <Label layoutX="159.0" layoutY="205.0" prefHeight="20.0" prefWidth="308.0" text="Please enter your username and password!">
                      <font>
                         <Font name="Tahoma" size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="157.0" layoutY="395.0" mnemonicParsing="false" onAction="#onCreateAccountPress" prefHeight="25.0" prefWidth="106.0" text="Create Account" />
+                  <Button layoutX="260.0" layoutY="395.0" mnemonicParsing="false" onAction="#onCreateAccountPress" prefHeight="25.0" prefWidth="106.0" text="Create Account" />
+                  <Label layoutX="131.0" layoutY="268.0" text="Username" />
+                  <Label layoutX="134.0" layoutY="317.0" text="Password" />
                </children>
             </AnchorPane>
          </right>
