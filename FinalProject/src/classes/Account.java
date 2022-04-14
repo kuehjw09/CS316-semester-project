@@ -23,7 +23,7 @@ public class Account {
 	private BigDecimal availableBalance;
 	private BigDecimal totalBalance;
 	private ArrayList<Transaction> transactions; // transactions associated with account
-	private boolean isDefault; // whether this is a default account or not
+	public boolean isDefault; // whether this is a default account or not
 
 	// constructor
 	public Account(String name, int accountNumber, BigDecimal availableBalance, BigDecimal totalBalance)
@@ -132,8 +132,8 @@ public class Account {
 		}
 	}
 	
-	public boolean getIsDefault() {
-		return isDefault;
+	public String getIsDefault() {
+		return (isDefault) ? "yes" : "no";
 	}
 	
 	public void setIsDefault(boolean isDefault) {
@@ -209,7 +209,7 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return String.format("%s...%04d%n" + "Available Balance: $%.2f%nisDefault: %b%n", getName(), getAccountNumber() % 110000,
+		return String.format("%s...%04d%n" + "Available Balance: $%.2f%nDefault: %s%n", getName(), getAccountNumber() % 110000,
 				getAvailableBalance(), getIsDefault());
 	}
 

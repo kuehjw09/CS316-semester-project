@@ -57,9 +57,9 @@
                <children>
                   <HBox alignment="CENTER" opacity="0.93" prefHeight="39.0" prefWidth="337.0" spacing="9.0" styleClass="sidebar">
                      <children>
-                        <Label fx:id="activityLabel" prefHeight="28.0" prefWidth="140.0" text="Session Activity" textFill="BLUE">
+                        <Label fx:id="activityLabel" prefHeight="28.0" prefWidth="140.0" text="Session Activity">
                            <font>
-                              <Font name="Arial Bold" size="15.0" />
+                              <Font name="Arial" size="15.0" />
                            </font>
                         </Label>
                         <Button fx:id="showHideButton" mnemonicParsing="false" onAction="#notificationsPaneButtonPressed" prefHeight="30.0" prefWidth="69.0" stylesheets="@../resources/stylesheet.css" text="Show">
