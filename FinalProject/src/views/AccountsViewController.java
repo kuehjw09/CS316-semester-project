@@ -84,7 +84,7 @@ public class AccountsViewController {
 		addAccountPageController.setCurrentUserSession(currentUserSession);
 
 		TransactionViewController.setCurrentUserSession(currentUserSession);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("addAccountPage.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddAccountPage.fxml"));
 		AnchorPane centerPane = (AnchorPane) loader.load();
 		try {
 			anchorPane.getChildren().clear();
