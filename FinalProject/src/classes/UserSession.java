@@ -58,10 +58,10 @@ public class UserSession {
 	}
 	
 	// called to insert a new account
-	public void addNewAccount(Account account) throws SQLException {
+	public void addNewAccount(String accountName, String accountType) throws SQLException {
 		// call the method to add a user
-		databaseConnection.addNewAccount(account, user);
-		
+		databaseConnection.addNewAccount(accountName, accountType, user.getUser_id());
+	
 		// create a new notififcation
 		Notification notification = new Notification(NotificationType.CREATE,
 				String.format("New account created for %s", user.getUsername()));

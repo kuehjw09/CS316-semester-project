@@ -67,6 +67,18 @@ public class AccountsViewController {
 	private final ObservableList<Account> accounts = FXCollections.observableArrayList();
 
 	@FXML
+	private ListView<Notification> notificationsListView;
+
+	@FXML
+	private final ObservableList<Notification> notifications = FXCollections.observableArrayList();
+
+	@FXML
+	private AnchorPane notificationsPane;
+
+	@FXML
+	private Button showHideButton;
+	
+	@FXML
 	void newAccountButtonPressed(ActionEvent event) throws IOException {
 		// route a user to account creation form
 		addAccountPageController.setCurrentUserSession(currentUserSession);
@@ -81,18 +93,6 @@ public class AccountsViewController {
 			exception.printStackTrace();
 		}
 	}
-
-	@FXML
-	private ListView<Notification> notificationsListView;
-
-	@FXML
-	private final ObservableList<Notification> notifications = FXCollections.observableArrayList();
-
-	@FXML
-	private AnchorPane notificationsPane;
-
-	@FXML
-	private Button showHideButton;
 
 	@FXML
 	void notificationsPaneButtonPressed(ActionEvent event) {
@@ -160,9 +160,9 @@ public class AccountsViewController {
 				accounts.add(account);
 			}
 		}
-
-		// sort the elements past the 0th index position
-		Collections.reverse(accounts.subList(1, accounts.size()));
+//
+//		// sort the elements past the 0th index position
+//		Collections.reverse(accounts.subList(1, accounts.size()));
 
 		// set ObservableList items
 		accountsListView.setItems(accounts);

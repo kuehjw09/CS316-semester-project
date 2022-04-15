@@ -197,25 +197,6 @@ public class TransactionViewController {
 		}
 	}
 
-	void switchToAccountView(ActionEvent event) throws IOException {
-		Stage stage;
-		Scene scene;
-
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("Dashboard.fxml"));
-		Parent root = loader.load();
-
-		scene = new Scene(root);
-
-		// access the controller and call a method
-		DashboardController controller = loader.getController();
-		controller.initializeData(currentUserSession);
-
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.setScene(scene);
-		stage.show();
-	}
-
 	public void initialize() {
 
 		typeLabel.setText((transactionType == TransactionType.DEPOSIT) ? "Deposit" : "Withdrawal");
@@ -235,6 +216,24 @@ public class TransactionViewController {
 				setCurrentAccount(newAccount);
 			}
 		});
+	}
 
+	void switchToAccountView(ActionEvent event) throws IOException {
+		Stage stage;
+		Scene scene;
+
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("Dashboard.fxml"));
+		Parent root = loader.load();
+
+		scene = new Scene(root);
+
+		// access the controller and call a method
+		DashboardController controller = loader.getController();
+		controller.initializeData(currentUserSession);
+
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
 	}
 }

@@ -202,25 +202,6 @@ public class DatabaseConnection {
 		return accounts;
 	}
 	
-	/**
-	 * 
-	 */
-	public void addNewAccount(Account account, User user) {
-		String createString = "CALL NEW_ACCOUNT( ? , ? , "
-				+ "( SELECT user_id FROM Users WHERE username LIKE ? );";
-		try(CallableStatement createStatement = connection.prepareCall(createString)) {
-			createStatement.setString(1, account.getName());
-			createStatement.setString(2, account.getType());
-			createStatement.setString(3, user.getUsername());
-			
-			createStatement.executeUpdate();
-			System.out.println("New Account added for user " + user.getUsername());
-			createStatement.close();
-
-		} catch (SQLException exception) {
-			exception.printStackTrace();
-		} 
-	}
 
 	/**
 	 * Static method to obtain a Connection object reference to the application's
@@ -239,6 +220,31 @@ public class DatabaseConnection {
 			exception.printStackTrace();
 		}
 		return null;
+	}
+
+	/**
+	 * 
+	 * @param accountName
+	 * @param accountType
+	 * @param user_id
+	 */
+	public void addNewAccount(String accountName, String accountType, int user_id) {
+		// TODO Auto-generated method stub
+		String createString = "CALL NEW_ACCOUNT( ? , ? , "
+				+ "( SELECT user_id FROM Users WHERE username LIKE ? );";
+		try(CallableStatement createStatement = connection.prepareCall(createString)) {
+			createStatement.setString(1, accountName);
+			createStatement.setString(2, accountType);
+			createStatement.setInt(3, user_id);
+			
+			createStatement.executeUpdate();
+			System.out.println("New Account added " );
+			createStatement.close();
+
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		} 
+		
 	}
 
 }
