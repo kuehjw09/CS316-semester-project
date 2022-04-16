@@ -59,6 +59,8 @@ public class AccountListCell extends ListCell<Account> {
 			numberLabel.setText("..." + String.format("%04d", account.getAccountNumber() % 110000));
 			if (account.isDefault) {
 				defaultLabel.setText("(Default)");
+			} else {
+				defaultLabel.setText(null);
 			}
 			balanceLabel.setText(currency.format(account.getAvailableBalance()));
 			label.setText("Available balance");

@@ -195,12 +195,42 @@ public class Account {
 			createStatement.setInt(3, accountNumber);
 
 			createStatement.executeUpdate();
-			System.out.printf("Project_Database updated successfully.%n%n");
+			System.out.printf("Database updated successfully.%n%n");
 			createStatement.close();
 
 			setTransactions(getTransactions()); // get most current transaction data
 		} catch (SQLException e) {
 			System.out.printf("UPDATE Query failed.%n");
+			e.printStackTrace();
+		} finally {
+			connection.close();
+		}
+	}
+	
+	/**
+	 * 
+	 * @param name
+	 * @throws SQLException
+	 */
+	public void renameAccount(String name) throws SQLException {
+		setName(name);
+		
+		Connection connection = DatabaseConnection.getConnection();
+
+		String createString = "UPDATE DB2.Accounts SET account_name = ? "
+				+ "WHERE account_number = ? ;";
+
+		try (PreparedStatement createStatement = connection.prepareStatement(createString)) {
+			createStatement.setString(1, name);
+			createStatement.setInt(2, accountNumber);
+
+			createStatement.executeUpdate();
+			System.out.printf("Database updated successfully.%n%n");
+			createStatement.close();
+
+			setTransactions(getTransactions()); // get most current transaction data
+		} catch (SQLException e) {
+			System.out.printf("Update failed.%n");
 			e.printStackTrace();
 		} finally {
 			connection.close();

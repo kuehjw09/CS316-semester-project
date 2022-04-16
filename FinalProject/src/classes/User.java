@@ -1,4 +1,5 @@
 package classes;
+import java.sql.Connection;
 /**
  * Class User represents an application user
  * 	- Represent relevant user information for an application session
@@ -6,8 +7,11 @@ package classes;
  *
  */
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import app.DatabaseConnection;
 
 public class User {
 	private String firstName;
@@ -84,8 +88,28 @@ public class User {
 		return default_account;
 	}
 	
-	public void setDefault_Account(int default_account) {
+	public void setDefault_Account(int default_account) throws SQLException {
 		this.default_account = default_account;
+		updateUsersTable();
+	}
+	
+	public void updateUsersTable() throws SQLException {
+		Connection connection = DatabaseConnection.getConnection();
+		String createString = "UPDATE DB2.Users SET default_account = ? WHERE user_id = ?";
+		
+		try (PreparedStatement createStatement = connection.prepareStatement(createString) ) {
+			createStatement.setInt(1, default_account);
+			createStatement.setInt(2, user_id);
+			
+			createStatement.executeUpdate();
+			System.out.printf("Database updated successfully.%n%n");
+			createStatement.close();
+		} catch (SQLException e) {
+			System.out.printf("Update failed.%n");
+			e.printStackTrace();
+		} finally {
+			connection.close();
+		}
 	}
 	
 	@Override
