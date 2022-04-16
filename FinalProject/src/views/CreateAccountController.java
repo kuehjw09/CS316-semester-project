@@ -111,23 +111,28 @@ public class CreateAccountController
 
 							switchToLoginSuccess(event);
 
-						} else
+						}
+						else
 						{
 							errorLabel.setText("Please enter a valid password!");
 						}
-					} else
+					}
+					else
 					{
 						errorLabel.setText("Please enter a valid username!");
 					}
-				} else
+				}
+				else
 				{
 					errorLabel.setText("Please enter a valid 9 digit SSN!");
 				}
-			} else
+			}
+			else
 			{
 				errorLabel.setText("Please enter a valid first and last name!");
 			}
-		} else
+		}
+		else
 		{
 			errorLabel.setText("Please complete all fields!");
 		}
@@ -244,7 +249,8 @@ public class CreateAccountController
 			cs.execute();
 			System.out.println("User successfully added!");
 
-		} catch (SQLException e)
+		}
+		catch (SQLException e)
 		{
 			e.printStackTrace();
 			System.out.println("User creation unsuccessful");
@@ -299,21 +305,23 @@ public class CreateAccountController
 		{
 			if (!newValue) // check if focus gained or lost
 			{
-				if (isValidSSN(getFormattedText(ssnValue())))
-				{
-					errorLabel.setText(" ");
-					set_ssnValue((getFormattedText(ssnValue())));
-				} else
-				{
-					errorLabel.setText("Invalid SSN");
-				}
-
+				set_ssnValue((getFormattedText(ssnValue())));
 			}
 		}
 
 		public String getFormattedText(String str)
 		{
+
 			String formattedSSN = ssnValue().replaceFirst("(\\d{3})(\\d{2})(\\d+)", "$1-$2-$3");
+
+			clearErrorLabel();
+
+			if (!isValidSSN(formattedSSN))
+			{
+				formattedSSN = str;
+				errorLabel.setText("Please enter a valid 9 digit SSN!");
+			}
+
 			return formattedSSN;
 		}
 	}
@@ -386,7 +394,8 @@ public class CreateAccountController
 				|| passwordValue() == null)
 		{
 			return true;
-		} else
+		}
+		else
 		{
 			return false;
 		}
@@ -417,6 +426,11 @@ public class CreateAccountController
 			}
 
 		});
+	}
+
+	public void clearErrorLabel()
+	{
+		errorLabel.setText("");
 	}
 
 }
