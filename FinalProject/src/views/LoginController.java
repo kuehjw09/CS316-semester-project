@@ -45,7 +45,7 @@ public class LoginController
 		if (usernameTextField.getText().isEmpty() || passwordField.getText().isEmpty())
 		{
 			errorLabel.setText("Please enter a valid username and password!");
-		} 
+		}
 		else
 		{
 			try
@@ -60,12 +60,13 @@ public class LoginController
 					userSession = currentUserSession;
 					System.out.printf("%s", currentUserSession);
 					switchToDashboard(event);
-				} 
+				}
 				else
 				{
 					errorLabel.setText("Unable to authenticate username or password! Please try again.");
 				}
-			} catch (Exception e)
+			}
+			catch (Exception e)
 			{
 				e.printStackTrace();
 			}
@@ -79,33 +80,43 @@ public class LoginController
 		try
 		{
 			switchToCreateAccount(event);
-		} 
+		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
-		} 
+		}
 		catch (SQLException e)
 		{
 			e.printStackTrace();
 		}
+	}
+
+	public void initialize()
+	{
+		connectDatabase();
+
+		loginButton.setDefaultButton(true);
 
 	}
 
-	public void switchToDashboard(ActionEvent event) throws IOException, SQLException
+	public void connectDatabase()
 	{
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("Dashboard.fxml"));
-		Parent root = loader.load();
+		try
+		{
+			databaseConnection = new DatabaseConnection();
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+	}
 
-		// access the controller and call a method
-		DashboardController controller = loader.getController();
-		controller.initializeData(userSession); // passing current account number and database
+	public void creationSuccess(String username)
+	{
 
-		scene = new Scene(root);
+		Alert alert = new Alert(AlertType.NONE, "User " + username + " Created!", ButtonType.OK);
 
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.setScene(scene);
-		stage.show();
+		alert.show();
 	}
 
 	public void switchToCreateAccount(ActionEvent event) throws IOException, SQLException
@@ -125,32 +136,21 @@ public class LoginController
 		stage.show();
 	}
 
-	public void creationSuccess(String username)
+	public void switchToDashboard(ActionEvent event) throws IOException, SQLException
 	{
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("Dashboard.fxml"));
+		Parent root = loader.load();
 
-		Alert alert = new Alert(AlertType.NONE, "Account " + username + " Created!", ButtonType.OK);
+		// access the controller and call a method
+		DashboardController controller = loader.getController();
+		controller.initializeData(userSession); // passing current account number and database
 
-		alert.show();
-	}
+		scene = new Scene(root);
 
-	public void initialize()
-	{
-		connectDatabase();
-
-		loginButton.setDefaultButton(true);
-
-	}
-
-	public void connectDatabase()
-	{
-		try
-		{
-			databaseConnection = new DatabaseConnection();
-		} 
-		catch (SQLException e)
-		{
-			e.printStackTrace();
-		}
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.show();
 	}
 
 }
