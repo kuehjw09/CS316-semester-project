@@ -1,10 +1,14 @@
-package classes;
-
 /**
- * Account class represents a bank account
+ * CS316 Final Project
+ * Account.java
+ * 
+ * Account class represents a banking application account. 
+ * 
  * @author owner
  *
  */
+
+package classes;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -88,6 +92,12 @@ public class Account {
 		this.totalBalance = totalBalance;
 	}
 
+	/**
+	 * Returns an ArrayList of Transaction objects associated with this Account object.
+	 * 
+	 * @return ArrayList<Transaction>
+	 * @throws SQLException
+	 */
 	public ArrayList<Transaction> getTransactions() throws SQLException {
 		ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 		Connection connection = DatabaseConnection.getConnection();
@@ -113,7 +123,11 @@ public class Account {
 		this.transactions = transactions;
 	}
 
-	// return whether this is a default account or not
+	/**
+	 * Determine whether this is a default account; Call setIsDefault to reflect this Account's default status.
+	 * 
+	 * @throws SQLException
+	 */
 	public void isDefault() throws SQLException {
 		Connection connection = DatabaseConnection.getConnection();
 
@@ -133,13 +147,19 @@ public class Account {
 	}
 	
 	public String getIsDefault() {
-		return (isDefault) ? "yes" : "no";
+		return (isDefault) ? "(default)" : "";
 	}
 	
 	public void setIsDefault(boolean isDefault) {
 		this.isDefault = isDefault;
 	}
 
+	/**
+	 * This method filters the ArrayList<Transaction> and reduces the total pending withdrawals 
+	 * to a BigDecimal amount.
+	 *  
+	 * @return BigDecimal amount
+	 */
 	public BigDecimal getPendingWithdrawalsAmount() {
 		// count and return the total amount of pending withdrawals with debit status
 		BigDecimal amount = transactions.stream().filter((transaction) -> {
@@ -152,6 +172,12 @@ public class Account {
 
 	}
 
+	/**
+	 * This method filters the ArrayList<Transaction> and reduces the total pending deposits 
+	 * to a BigDecimal amount.
+	 *  
+	 * @return BigDecimal amount
+	 */
 	public BigDecimal getPendingDepositsAmount() {
 		// count and return the total amount of pending deposits with credit status
 		BigDecimal amount = transactions.stream().filter((transaction) -> {
@@ -163,12 +189,23 @@ public class Account {
 		return amount;
 	}
 
+	/**
+	 * Credit this Account with the amount passed to this method; Update the database by calling UpdateTotals method.
+	 * 
+	 * @param amount
+	 * @throws SQLException
+	 */
 	public void credit(BigDecimal amount) throws SQLException {
 		setTotalBalance(totalBalance.add(amount)); // add amount to totalBalance
 		updateTotals(); // update Accounts table to reflect changes
 
 	}
 
+	/**
+	 * Debit this Account with the amount passed to this method; Update the database by calling UpdateTotals method.
+	 * @param amount
+	 * @throws SQLException
+	 */
 	public void debit(BigDecimal amount) throws SQLException {
 		setAvailableBalance(availableBalance.subtract(amount)); // subtract amount from availableBalance
 		updateTotals(); // update Accounts table to reflect changes
@@ -208,6 +245,8 @@ public class Account {
 	}
 	
 	/**
+	 * This method changes the name associated with this Account object and updates it's corresponding row in the Accounts table 
+	 * accordingly . 
 	 * 
 	 * @param name
 	 * @throws SQLException
@@ -237,10 +276,13 @@ public class Account {
 		}
 	}
 
+	/**
+	 * Return a String representation of an Account object
+	 */
 	@Override
 	public String toString() {
-		return String.format("%s...%04d%n" + "Available Balance: $%.2f%nDefault: %s%n", getName(), getAccountNumber() % 110000,
-				getAvailableBalance(), getIsDefault());
+		return String.format("%s...%04d\t%s%n" + "Available Balance: $%.2f", getName(), getAccountNumber() % 110000,
+				getIsDefault(), getAvailableBalance());
 	}
 
 }

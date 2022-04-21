@@ -74,7 +74,27 @@ public class ManageAccountsViewController {
 
 	@FXML
 	void deleteButtonPressed(ActionEvent event) {
-
+		
+		// alert the user if attempting to delete a default account.
+		if (selectedAccount.isDefault) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setTitle("Manage Accounts");
+			alert.setHeaderText("Delete Account");
+			alert.setContentText(
+					"Cannot delete an account marked as default. Please select a new default account before attempting to delete this account.");
+			
+			Optional<ButtonType> option = alert.showAndWait();
+			
+			if (option.get() == ButtonType.OK) {
+				alert.close();
+			}
+		} else { // inform the user that funds will be transferred to their default account; send a confirmation Alert to proceed. 
+			// confirmation altert; verify option selected (either OK or CANCEL)
+			
+			// call a method to transfer funds
+			
+			// call a method to remove corresponding account from the database
+		}
 	}
 
 	@FXML

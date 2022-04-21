@@ -1,3 +1,10 @@
+/**
+ * CS316 Final Project
+ * User.java
+ * 
+ * User object represents an application user.
+ */
+
 package classes;
 import java.sql.Connection;
 /**
@@ -21,6 +28,7 @@ public class User {
 	private int user_id;
 	private int default_account;
 	
+	// constructor
 	public User(String firstName, String lastName, Date birthDate, String username, int user_id) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -29,6 +37,7 @@ public class User {
 		this.user_id = user_id;
 	}
 	
+	// overloaded constructor takes a ResultSet object
 	public User(ResultSet resultSet) throws SQLException {
 		this.user_id = resultSet.getInt(1);
 		this.firstName = resultSet.getString(2);
@@ -93,6 +102,12 @@ public class User {
 		updateUsersTable();
 	}
 	
+	/**
+	 * Updates the default_account column of the Users table in the database. Called when 
+	 * a user selects to change the default account from the AccountManagementView
+	 * 
+	 * @throws SQLException
+	 */
 	public void updateUsersTable() throws SQLException {
 		Connection connection = DatabaseConnection.getConnection();
 		String createString = "UPDATE DB2.Users SET default_account = ? WHERE user_id = ?";
