@@ -79,7 +79,7 @@ public class UserSession {
 
 		// create a new notififcation
 		Notification notification = new Notification(NotificationType.CREATE,
-				String.format("New account created for %s", user.getUsername()));
+				String.format("Account %s (%s) created.", accountName, accountType));
 
 		// add the notification to the ArrayList
 		addNotification(notification);

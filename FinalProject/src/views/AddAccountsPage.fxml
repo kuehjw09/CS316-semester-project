@@ -57,7 +57,7 @@
                         <TextField fx:id="accountNumberField" promptText="0000" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
-                  <Button fx:id="createAccountButton" layoutX="272.0" layoutY="417.0" mnemonicParsing="false" text="Create Account">
+                  <Button layoutX="272.0" layoutY="417.0" mnemonicParsing="false" onAction="#createAccountButtonPressed" text="Create Account">
                      <font>
                         <Font size="20.0" />
                      </font>

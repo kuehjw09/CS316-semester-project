@@ -19,12 +19,14 @@ public class NotificationsListCell extends ListCell<Notification> {
 		vbox.setPadding(new Insets(3, 3, 3, 3));
 		vbox.getChildren().add(typeLabel);
 		vbox.getChildren().add(descriptionLabel);
-		typeLabel.setFont(Font.font("helvatica", 15));
-		descriptionLabel.setFont(Font.font("arial", 12));
+		typeLabel.setFont(Font.font("Helvatica", 15));
+		descriptionLabel.setFont(Font.font("Arial", 12));
 		
 
-
+		typeLabel.setStyle("-fx-text-fill: white");
+		descriptionLabel.setStyle("-fx-text-fill: white");
 		descriptionLabel.setWrapText(true);
+		
 		setPrefWidth(USE_PREF_SIZE);
 	}
 	
@@ -37,7 +39,8 @@ public class NotificationsListCell extends ListCell<Notification> {
 		} else {
 			typeLabel.setText(notification.getNotificationType().getMessage());
 			descriptionLabel.setText(notification.getDescription()); 
-			typeLabel.setStyle("-fx-text-fill: " + notification.getNotificationType().getColor());
+			this.setStyle("-fx-border-width: 0px 2px 0px 0px");
+			this.setStyle("-fx-border-color: " + notification.getNotificationType().getColor());
 			
 			setGraphic(vbox);
 		}

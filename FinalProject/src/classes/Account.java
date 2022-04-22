@@ -174,7 +174,6 @@ public class Account {
 		}).map(Transaction::getAmount).reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
 
 		return amount;
-
 	}
 
 	/**

@@ -229,7 +229,7 @@ public class DatabaseConnection {
 	 */
 	public void addNewAccount(String accountName, String accountType, int user_id) {
 		// TODO Auto-generated method stub
-		String createString = "CALL DB2.NEW_ACCOUNT( ? , ? , " + "( SELECT user_id FROM Users WHERE username LIKE ? ));";
+		String createString = "CALL DB2.NEW_ACCOUNT( ? , ? , ?)";
 		try (CallableStatement createStatement = connection.prepareCall(createString)) {
 			createStatement.setString(1, accountName);
 			createStatement.setString(2, accountType);

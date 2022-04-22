@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.Optional;
 
 import classes.Account;
+import classes.Notification;
+import classes.NotificationType;
 import classes.UserSession;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -22,6 +24,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import resources.AccountListCell;
@@ -62,8 +65,31 @@ public class ManageAccountsViewController {
 
 	@FXML
 	void confirmButtonPressed(ActionEvent event) throws SQLException, IOException {
-		selectedAccount.renameAccount(renameTextField.getText());
-		returnButtonPressed(event);
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Manage Accounts");
+		alert.setHeaderText("Rename Account");
+		alert.setContentText("This account's name will be changed. Are you sure you wish to continue?");
+		
+		Optional<ButtonType> option = alert.showAndWait();
+		
+		if (option.get() == ButtonType.OK) {
+			// rename the account using a method of Account class
+			selectedAccount.renameAccount(renameTextField.getText());
+			
+			// Create and add an UPDATE notification to the current UserSession ArrayList<Notification>
+			Notification notification = new Notification(NotificationType.UPDATE, 
+					String.format("Renamed Account Number %d to %s", selectedAccount.getAccountNumber(), selectedAccount.getName()));
+			currentUserSession.addNotification(notification);
+			
+			// return to the dashboard
+			returnButtonPressed(event);
+		} else {
+			renameTextField.setText(null);
+			renameTextField.setDisable(true); // enable the text field
+			confirmButton.setDisable(true);
+			renameLabel.setVisible(false);
+			alert.close();
+		}
 	}
 
 	@FXML
@@ -91,10 +117,10 @@ public class ManageAccountsViewController {
 		} else { // inform the user that funds will be transferred to their default account; send a confirmation Alert to proceed. 
 			// confirmation altert; verify option selected (either OK or CANCEL)
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-			alert.setTitle("ManageAccounts");
+			alert.setTitle("Manage Accounts");
 			alert.setTitle("Delete Account");
 			alert.setContentText(
-					"When an account is deleted, all available funds and all transactions awaiting processing will be transferred to your default account."
+					"When an account is deleted, all available funds and all pending deposits will be transferred to your default account."
 					+ "Are you sure you wish to continue?");
 			
 			Optional<ButtonType> option = alert.showAndWait();
@@ -145,7 +171,15 @@ public class ManageAccountsViewController {
 		if (option.get() == null) {
 			alert.close();
 		} else if (option.get() == ButtonType.OK) {
+			// set the default account using a UserSession method
 			currentUserSession.getUser().setDefault_Account(selectedAccount.getAccountNumber());
+			
+			// Create and add an UPDATE notification to the current UserSession ArrayList<Notification>
+			Notification notification = new Notification(NotificationType.UPDATE, 
+					String.format("Account %s set as default", selectedAccount.getName()));
+			currentUserSession.addNotification(notification);
+			
+			// return to dashboard
 			returnButtonPressed(event);
 		} else if (option.get() == ButtonType.CANCEL) {
 			alert.close();

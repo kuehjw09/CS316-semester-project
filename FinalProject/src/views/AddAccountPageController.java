@@ -63,6 +63,7 @@ public class addAccountPageController {
 		}
 	}
 
+	@FXML
 	void createAccountButtonPressed(ActionEvent event) throws SQLException, IOException   {
 		if (accountNameTextField.getLength()<= 25) {
 			
