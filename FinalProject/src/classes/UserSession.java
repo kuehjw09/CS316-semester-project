@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 import app.DatabaseConnection;
 
-public class UserSession { 
+public class UserSession {
 	private DatabaseConnection databaseConnection = new DatabaseConnection();
 	private User user; // validated user
 	private ArrayList<Account> accounts; // accounts associated with validated user
@@ -27,37 +27,36 @@ public class UserSession {
 		this.user = user;
 		this.accounts = accounts;
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
-	
+
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
 	public ArrayList<Account> getAccounts() {
 		return accounts;
 	}
-	
+
 	public void setAccounts(ArrayList<Account> accounts) {
 		this.accounts = accounts;
 	}
-	
+
 	public void addNotification(Notification notification) {
 		System.out.println("adding 1 new notification");
 		notifications.add(notification);
 	}
-	
+
 	public ArrayList<Notification> getNotifications() {
 		return notifications;
 	}
-	
+
 	public void clearNotifications() {
 		notifications.clear();
 	}
-	
+
 	public Account getDefaultAccount() {
 		for (Account account : accounts) {
 			if (account.isDefault) {
@@ -66,7 +65,7 @@ public class UserSession {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Call a DatabaseConnection method for adding a new account.
 	 * 
@@ -77,62 +76,90 @@ public class UserSession {
 	public void addNewAccount(String accountName, String accountType) throws SQLException {
 		// call the method to add a user
 		databaseConnection.addNewAccount(accountName, accountType, user.getUser_id());
-	
+
 		// create a new notififcation
 		Notification notification = new Notification(NotificationType.CREATE,
 				String.format("New account created for %s", user.getUsername()));
-		
+
 		// add the notification to the ArrayList
 		addNotification(notification);
 	}
-	
+
 	/**
-	 * Perform a transfer and call DatabaseConnection method for account deletion.
+	 * Credit the default account with the avaialable balance of the Account passed
+	 * to this method and call a DatabaseConnection method for account deletion.
 	 * 
 	 * @param account
 	 * @throws SQLException
 	 */
 	public void deleteAccount(Account account) throws SQLException {
-		
-		// credit the default account 
+
+		// credit the default account
 		credit(getDefaultAccount(), account.getAvailableBalance());
-		
+
 		// add pending deposits to ensure accurate balance
-		getDefaultAccount().setTotalBalance(getDefaultAccount().getTotalBalance().add(account.getPendingDepositsAmount()));
-		
+		getDefaultAccount()
+				.setTotalBalance(getDefaultAccount().getTotalBalance().add(account.getPendingDepositsAmount()));
+
 		// execute the update associated with account deletion
 		databaseConnection.deleteAccount(account.getAccountNumber(), getDefaultAccount().getAccountNumber());
-		
-		// create a new notification 
+
+		// create a new notification
 		Notification notification = new Notification(NotificationType.DELETE,
 				String.format("Deleted Account %s", account.getName()));
-		
+
 		// add the notification to the ArrayList
 		addNotification(notification);
 	}
-	
+
 	public void credit(Account account, BigDecimal creditAmount) throws SQLException {
+		// credit the account
 		account.credit(creditAmount);
-		Transaction transaction = new Transaction(account.getAccountNumber(),
-				"Deposit Transaction", "credit", creditAmount);
+		
+		// create a Transaction object and add it to the ArrayList<Transaction>
+		Transaction transaction = new Transaction(account.getAccountNumber(), "Deposit Transaction", "credit",
+				creditAmount);
 		transaction.addTransaction();
+		
+		// create a Notifcation object and add it to the ArrayList<Notification> 
 		Notification notification = new Notification(NotificationType.CREDIT,
 				String.format("Deposit submitted for account %s", account.getName()));
 		addNotification(notification);
 	}
 	
+	// overloaded method does not add a Notification
+	public void credit(Account account, BigDecimal creditAmount, boolean isTransfer) throws SQLException {
+		// credit the account
+		account.credit(creditAmount);
+		
+		// create a Transaction object and add it to the ArrayList<Transaction>
+		Transaction transaction = new Transaction(account.getAccountNumber(), "Deposit Transaction", "credit",
+				creditAmount);
+		transaction.addTransaction();
+
+	}
+
 	public void debit(Account account, BigDecimal debitAmount) throws SQLException {
 		account.debit(debitAmount);
-		Transaction transaction = new Transaction(account.getAccountNumber(),
-				"Withdrawal Transaction", "debit", debitAmount);
+		Transaction transaction = new Transaction(account.getAccountNumber(), "Withdrawal Transaction", "debit",
+				debitAmount);
 		transaction.addTransaction();
 		Notification notification = new Notification(NotificationType.DEBIT,
 				String.format("Withdrawal submitted for account %s", account.getName()));
 		addNotification(notification);
 	}
 	
+	// overloaded method does not add a Notification
+	public void debit(Account account, BigDecimal debitAmount, boolean isTransfer) throws SQLException {
+		account.debit(debitAmount);
+		Transaction transaction = new Transaction(account.getAccountNumber(), "Withdrawal Transaction", "debit",
+				debitAmount);
+		transaction.addTransaction();
+	}
+
 	/**
-	 * Debit the amount from the first Account passed to this method, credit the second.
+	 * Debit the amount from the first Account passed to this method, credit the
+	 * second.
 	 * 
 	 * @param fromAccount
 	 * @param toAccount
@@ -140,15 +167,14 @@ public class UserSession {
 	 * @throws SQLException
 	 */
 	public void transfer(Account fromAccount, Account toAccount, BigDecimal amount) throws SQLException {
-		debit(fromAccount, amount);
-		credit(toAccount, amount);
-		
-		Notification notification = new Notification(NotificationType.TRANSFER,
-				String.format("Transfer submitted from account %s to account %s", fromAccount.getName(), 
-						toAccount.getName()));
+		debit(fromAccount, amount, true);
+		credit(toAccount, amount, true);
+
+		Notification notification = new Notification(NotificationType.TRANSFER, String.format(
+				"Transfer submitted to account %s from account %s", toAccount.getName(), fromAccount.getName()));
 		addNotification(notification);
 	}
-	
+
 	public void updateUserSession() {
 		try {
 			setAccounts(databaseConnection.getAccounts(getUser()));
@@ -157,7 +183,7 @@ public class UserSession {
 			exception.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * return a String representation of a UserSession object
 	 */
@@ -167,7 +193,7 @@ public class UserSession {
 		for (Account account : accounts) {
 			accountString += account;
 		}
-		return String.format("UserSession for user %s:%n%snumber of accounts: %d%nnumber of notifications: %d%n%n%s", user.getUsername(), 
-				user.toString(), accounts.size(), notifications.size(), accountString);
+		return String.format("UserSession for user %s:%n%snumber of accounts: %d%nnumber of notifications: %d%n%n%s",
+				user.getUsername(), user.toString(), accounts.size(), notifications.size(), accountString);
 	}
 }

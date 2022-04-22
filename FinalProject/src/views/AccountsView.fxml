@@ -48,7 +48,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="625.0" layoutY="-8.0" opacity="0.32" prefHeight="688.0" prefWidth="416.0" style="-fx-background-color: linear-gradient(white, #212121); -fx-border-width: 0 0 0 3px; -fx-border-color: linear-gradient(#f85717, #de3154, #67008d);" />
+      <AnchorPane layoutX="625.0" layoutY="-8.0" opacity="0.32" prefHeight="688.0" prefWidth="416.0" style="-fx-background-color: linear-gradient(#f85717, #de3154, #67008d); -fx-border-width: 0 0 0 3px;" />
       <AnchorPane fx:id="sidebarPane" layoutX="624.0" layoutY="-8.0" prefHeight="566.0" prefWidth="416.0" style="-fx-background-radius: 30 0 0 30;">
    <children>
       <AnchorPane fx:id="notificationsPane" layoutX="40.0" layoutY="27.0" prefHeight="512.0" prefWidth="337.0" style="-fx-background-radius: 30;">
@@ -59,7 +59,7 @@
                      <children>
                         <Label fx:id="activityLabel" prefHeight="28.0" prefWidth="140.0" text="Session Activity">
                            <font>
-                              <Font name="Arial" size="15.0" />
+                              <Font name="Arial Bold" size="15.0" />
                            </font>
                         </Label>
                         <Button fx:id="showHideButton" mnemonicParsing="false" onAction="#notificationsPaneButtonPressed" prefHeight="30.0" prefWidth="69.0" stylesheets="@../resources/stylesheet.css" text="Show">
@@ -71,7 +71,7 @@
                   </HBox>
                   <ListView fx:id="notificationsListView" prefHeight="408.0" prefWidth="317.0" stylesheets="@../resources/stylesheet.css">
                            <padding>
-                              <Insets top="9.0" />
+                              <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
                            </padding></ListView>
                </children>
                <padding>
