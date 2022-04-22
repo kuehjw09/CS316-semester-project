@@ -23,13 +23,16 @@
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="101.00000610351563" minHeight="10.0" prefHeight="79.4" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="101.00000610351563" minHeight="10.0" prefHeight="79.4" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="87.40000000000002" minHeight="10.0" prefHeight="87.40000000000002" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ChoiceBox fx:id="accountTypeChoicebox" accessibleText="Checking" prefWidth="150.0" GridPane.columnIndex="1" />
-                  <Label text="Account Type" />
-                  <Label prefWidth="200.0" text="Account Num" GridPane.rowIndex="1" />
-                  <TextField fx:id="accountNumberField" editable="false" promptText="0000" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <ChoiceBox fx:id="accountTypeChoicebox" accessibleText="Checking" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Account Type" GridPane.rowIndex="1" />
+                  <Label prefWidth="200.0" text="Account Num" GridPane.rowIndex="2" />
+                  <TextField fx:id="accountNumberField" editable="false" promptText="0000" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="accountNameTextField" promptText="New Account" text="New Account" GridPane.columnIndex="1" />
+                  <Label text="Acount Name" />
                </children>
             </GridPane>
             <Label layoutX="22.0" layoutY="14.0" text="Account Creation">
@@ -57,11 +60,9 @@
                   <Label prefWidth="200.0" text="Pin" GridPane.rowIndex="2" />
                   <TextField fx:id="pinTextField" promptText="0000" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <DatePicker fx:id="birthdateDatePicker" prefHeight="26.0" prefWidth="116.0" GridPane.columnIndex="1" />
-                  <TextField promptText="000000000" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="SSN:" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button layoutX="319.0" layoutY="426.0" mnemonicParsing="false" text="Create Account">
+            <Button fx:id="createAccountButton" layoutX="319.0" layoutY="426.0" mnemonicParsing="false" text="Create Account">
                <font>
                   <Font size="20.0" />
                </font>
