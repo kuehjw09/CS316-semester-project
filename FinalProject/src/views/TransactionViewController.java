@@ -152,19 +152,15 @@ public class TransactionViewController {
 	void submitButtonPressed(ActionEvent event) {
 		String type = (transactionType == TransactionType.WITHDRAWAL) ? "withdrawal" : "deposit";
 		try {
-			System.out.println("submitting " + type + " for " + currency.format(amount) + " from account "
+			System.out.println("submitting " + type + " for " + currency.format(amount) + 
+					((transactionType == TransactionType.WITHDRAWAL) ? " from" : " to") + " account " +
 					+ getCurrentAccount().getAccountNumber());
 
 			if (transactionType == TransactionType.WITHDRAWAL) {
 				// perform withdraw transaction with validated amount
 				try { // debit currentAccount
 					currentUserSession.debit(getCurrentAccount(), getAmount());
-					Transaction transaction = new Transaction(getCurrentAccount().getAccountNumber(),
-							"Withdrawal Transaction", "debit", getAmount());
-					transaction.addTransaction();
-					Notification notification = new Notification(NotificationType.DEBIT,
-							String.format("Withdrawal submitted for account %s", getCurrentAccount().getName()));
-					currentUserSession.addNotification(notification);
+
 				} catch (SQLException exception) {
 					System.out.printf("Transaction failed.%n");
 					exception.printStackTrace();
@@ -173,12 +169,7 @@ public class TransactionViewController {
 				// perform deposit transaction with validated amount
 				try { // credit currentAccount
 					currentUserSession.credit(getCurrentAccount(), getAmount());
-					Transaction transaction = new Transaction(getCurrentAccount().getAccountNumber(),
-							"Deposit Transaction", "credit", getAmount());
-					transaction.addTransaction();
-					Notification notification = new Notification(NotificationType.CREDIT,
-							String.format("Deposit submitted for account %s", getCurrentAccount().getName()));
-					currentUserSession.addNotification(notification);
+
 				} catch (SQLException exception) {
 					System.out.printf("Transaction failed.%n");
 					exception.printStackTrace();

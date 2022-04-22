@@ -160,9 +160,6 @@ public class AccountsViewController {
 				accounts.add(account);
 			}
 		}
-//
-//		// sort the elements past the 0th index position
-//		Collections.reverse(accounts.subList(1, accounts.size()));
 
 		// set ObservableList items
 		accountsListView.setItems(accounts);

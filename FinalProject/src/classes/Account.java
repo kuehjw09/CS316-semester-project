@@ -90,6 +90,11 @@ public class Account {
 
 	public void setTotalBalance(BigDecimal totalBalance) {
 		this.totalBalance = totalBalance;
+		try {
+			updateTotals();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -281,7 +286,7 @@ public class Account {
 	 */
 	@Override
 	public String toString() {
-		return String.format("%s...%04d\t%s%n" + "Available Balance: $%.2f", getName(), getAccountNumber() % 110000,
+		return String.format("%s...%04d\t%s%n" + "Available Balance: $%.2f%n%n", getName(), getAccountNumber() % 110000,
 				getIsDefault(), getAvailableBalance());
 	}
 

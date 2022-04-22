@@ -26,7 +26,7 @@ public class DatabaseConnection {
 	private ResultSet resultSet;
 
 	// declare private static UserSession
-	private static UserSession currentUserSession; 
+	private static UserSession currentUserSession;
 	private User currentUser;
 
 	// final static hostname for use in AccountDatabase methods
@@ -35,7 +35,7 @@ public class DatabaseConnection {
 	// keep track of database connection status
 	private boolean connectedToDatabase = false; // use this as a flag when executing database methods to ensure
 													// connection
-	
+
 	// no-argument constructor initializes database connection
 	public DatabaseConnection() throws SQLException {
 		try {
@@ -49,27 +49,28 @@ public class DatabaseConnection {
 			exception.printStackTrace();
 		}
 	}
-	
+
 	/**
-	 * this method calls the UPDATE_TOTALS() stored procedure
-	 * defined in the schema for DB2. The stored procedure simulates
-	 * the update of pending funds to available funds in a bank database. 
+	 * this method calls the UPDATE_TOTALS() stored procedure defined in the schema
+	 * for DB2. The stored procedure simulates the update of pending funds to
+	 * available funds in a bank database.
 	 * 
 	 */
 	public void callUpdateTotalsProcedure() {
-		try {
-			// establish the database connection with credentials 
-			connection = DriverManager.getConnection(DATABASE_URL, "admin", "adminpassword");
-			
-			// call a stored procedure to update the totals in the database
-			CallableStatement cs = connection.prepareCall("CALL DB2.UPDATE_TOTALS;");
-																					
-			cs.executeUpdate();
-			System.out.printf("executed update totals procedure%n%n");
+		if (!connectedToDatabase) {
+			System.out.println("Not connected to database");
+		} else {
+			try {
+				// call a stored procedure to update the totals in the database
+				CallableStatement cs = connection.prepareCall("CALL DB2.UPDATE_TOTALS;");
 
-		} catch (SQLException exception) {
-			System.out.printf("Stored procedure call failed.");
-			exception.printStackTrace();
+				cs.executeUpdate();
+				System.out.printf("executed update totals procedure%n%n");
+
+			} catch (SQLException exception) {
+				System.out.printf("Stored procedure call failed.");
+				exception.printStackTrace();
+			}
 		}
 	}
 
@@ -103,7 +104,7 @@ public class DatabaseConnection {
 
 		return null; // if no matching username was found, return null
 	}
-	
+
 	/**
 	 * This method calls the stored procedure that checks whether the password
 	 * entered matches the password column of a row in the Users table with user_id
@@ -159,15 +160,15 @@ public class DatabaseConnection {
 	}
 
 	/**
-	 * This method will return a UserSession object with the
-	 * validated user information obtained during successful login procedure.
+	 * This method will return a UserSession object with the validated user
+	 * information obtained during successful login procedure.
 	 * 
 	 * @return
 	 * @throws SQLException
 	 */
 	public UserSession getUserSession() throws SQLException {
 		currentUserSession = new UserSession(currentUser, getAccounts(currentUser));
-		
+
 		return currentUserSession;
 	}
 
@@ -198,10 +199,8 @@ public class DatabaseConnection {
 			exception.printStackTrace();
 		}
 
-		
 		return accounts;
 	}
-	
 
 	/**
 	 * Static method to obtain a Connection object reference to the application's
@@ -230,21 +229,65 @@ public class DatabaseConnection {
 	 */
 	public void addNewAccount(String accountName, String accountType, int user_id) {
 		// TODO Auto-generated method stub
-		String createString = "CALL NEW_ACCOUNT( ? , ? , "
-				+ "( SELECT user_id FROM Users WHERE username LIKE ? );";
-		try(CallableStatement createStatement = connection.prepareCall(createString)) {
+		String createString = "CALL DB2.NEW_ACCOUNT( ? , ? , " + "( SELECT user_id FROM Users WHERE username LIKE ? ));";
+		try (CallableStatement createStatement = connection.prepareCall(createString)) {
 			createStatement.setString(1, accountName);
 			createStatement.setString(2, accountType);
 			createStatement.setInt(3, user_id);
-			
+
 			createStatement.executeUpdate();
-			System.out.println("New Account added " );
+			System.out.println("New Account added ");
 			createStatement.close();
 
 		} catch (SQLException exception) {
 			exception.printStackTrace();
-		} 
+		}
+
+	}
+
+	public void deleteAccount(int oldAccountNumber, int defaultAccountNumber) {
+
+		String updateString = "UPDATE DB2.Transactions SET account_number = ? WHERE account_number = ? AND status = ?  AND transaction_type = ?";
+
+		// transfer all pending transactions to default account
+		try (CallableStatement updateStatement = connection.prepareCall(updateString)) {
+			updateStatement.setInt(1, defaultAccountNumber);
+			updateStatement.setInt(2, oldAccountNumber);
+			updateStatement.setString(3, "pending");
+			updateStatement.setString(4, "credit");
+
+			updateStatement.executeUpdate();
+			System.out.println("pending transactions transfered to default account");
+			updateStatement.close();
+
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
 		
+		// delete all transactions associated with the account being deleted
+		String deleteString = "DELETE FROM DB2.Transactions WHERE account_number = ? ";
+		try (CallableStatement deleteStatement = connection.prepareCall(deleteString)) {
+			deleteStatement.setInt(1, oldAccountNumber);
+
+			deleteStatement.execute();
+			System.out.println("Transactions table updated");
+			deleteStatement.close();
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+
+		// perform account deletion
+		deleteString = "DELETE FROM DB2.Accounts WHERE account_number = ? ";
+
+		try (CallableStatement deleteStatement = connection.prepareCall(deleteString)) {
+			deleteStatement.setInt(1, oldAccountNumber);
+
+			deleteStatement.executeUpdate();
+			System.out.printf("Account %d deleted%n", oldAccountNumber);
+			deleteStatement.close();
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
 	}
 
 }

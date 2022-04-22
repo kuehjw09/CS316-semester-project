@@ -90,10 +90,37 @@ public class ManageAccountsViewController {
 			}
 		} else { // inform the user that funds will be transferred to their default account; send a confirmation Alert to proceed. 
 			// confirmation altert; verify option selected (either OK or CANCEL)
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+			alert.setTitle("ManageAccounts");
+			alert.setTitle("Delete Account");
+			alert.setContentText(
+					"When an account is deleted, all available funds and all transactions awaiting processing will be transferred to your default account."
+					+ "Are you sure you wish to continue?");
 			
-			// call a method to transfer funds
+			Optional<ButtonType> option = alert.showAndWait();
 			
-			// call a method to remove corresponding account from the database
+			if (option.get() == null) {
+				alert.close();
+			} else if (option.get() == ButtonType.CANCEL) {
+				alert.close();
+			} else if (option.get() == ButtonType.OK) {
+					
+				// begin chain of method calls to perform account deletion
+				try {
+					currentUserSession.deleteAccount(selectedAccount);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+								
+				// route the user back to the dashboard
+				try {
+					returnButtonPressed(event);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else {
+				alert.close();
+			}
 		}
 	}
 
@@ -110,7 +137,8 @@ public class ManageAccountsViewController {
 		alert.setTitle("Manage Accounts");
 		alert.setHeaderText("Set New Default Account");
 		alert.setContentText(
-				"This account will become your new default account.\n Default accounts always appear first and all funds sent to you will be deposited into your default account.");
+				"This account will become your new default account. Default accounts always appear first and all funds sent to you will be deposited into your default account."
+				+ "Are you sure you wish to continue?");
 		
 		Optional<ButtonType> option = alert.showAndWait();
 		

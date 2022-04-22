@@ -18,7 +18,7 @@
                <children>
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#makeDefaultButtonPressed" text="Make Default" />
                   <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#editNameButtonPressed" text="Rename" />
-                  <Button disable="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteButtonPressed" text="Delete" />
+                  <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteButtonPressed" text="Delete" />
                </children>
             </VBox>
             <Label layoutX="78.0" layoutY="46.0" text="Select an Account " />

@@ -144,18 +144,11 @@ public class TransferViewController {
     	try {
 			System.out.println("submitting transfer for " + currency.format(getTransactionAmount()) + " from account "
 					+ getCurrentFromAccount().getAccountNumber() + " to " + getCurrentToAccount().getAccountNumber());
-			currentUserSession.debit(currentFromAccount, transactionAmount);
-			currentUserSession.credit(currentToAccount, transactionAmount);
-			Transaction fromTransaction = new Transaction(getCurrentFromAccount().getAccountNumber(),
-					"Transfer", "debit", getTransactionAmount());
-			Transaction toTransaction = new Transaction(getCurrentToAccount().getAccountNumber(),
-					"Transfer", "credit", getTransactionAmount());
-			toTransaction.addTransaction();
-			fromTransaction.addTransaction();
-			Notification notification = new Notification(NotificationType.TRANSFER,
-					String.format("Transfer submitted from account %s to account %s", getCurrentFromAccount().getName(), 
-							getCurrentToAccount().getName()));
-			currentUserSession.addNotification(notification);
+			
+			// perform the transfer
+			currentUserSession.transfer(currentFromAccount, currentToAccount, transactionAmount);
+
+			
     	} catch (SQLException exception) {
     		System.out.printf("Transaction failed.%n");
 			exception.printStackTrace();
