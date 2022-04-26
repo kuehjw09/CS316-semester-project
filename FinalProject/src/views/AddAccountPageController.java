@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-public class addAccountPageController {
+public class AddAccountPageController {
 	private static UserSession currentUserSession;
 
 	public static void setCurrentUserSession(UserSession userSession) {

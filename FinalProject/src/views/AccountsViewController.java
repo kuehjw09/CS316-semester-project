@@ -81,7 +81,7 @@ public class AccountsViewController {
 	@FXML
 	void newAccountButtonPressed(ActionEvent event) throws IOException {
 		// route a user to account creation form
-		addAccountPageController.setCurrentUserSession(currentUserSession);
+		AddAccountPageController.setCurrentUserSession(currentUserSession);
 
 		TransactionViewController.setCurrentUserSession(currentUserSession);
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddAccountsPage.fxml"));
