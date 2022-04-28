@@ -53,7 +53,7 @@
    <children>
       <AnchorPane fx:id="notificationsPane" layoutX="40.0" layoutY="27.0" prefHeight="512.0" prefWidth="337.0" style="-fx-background-radius: 30;">
          <children>
-            <VBox layoutX="11.0" layoutY="-19.0" prefHeight="471.0" prefWidth="337.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox layoutX="11.0" layoutY="-19.0" prefHeight="610.0" prefWidth="337.0" AnchorPane.bottomAnchor="-98.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <HBox alignment="CENTER" opacity="0.93" prefHeight="39.0" prefWidth="337.0" spacing="9.0" styleClass="sidebar">
                      <children>
@@ -69,7 +69,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <ListView fx:id="notificationsListView" prefHeight="408.0" prefWidth="317.0" stylesheets="@../resources/stylesheet.css">
+                  <ListView fx:id="notificationsListView" prefHeight="534.0" prefWidth="317.0" stylesheets="@../resources/stylesheet.css">
                            <padding>
                               <Insets bottom="6.0" left="6.0" right="6.0" top="6.0" />
                            </padding></ListView>
