@@ -29,7 +29,7 @@
             </AnchorPane>
          </left>
          <right>
-            <AnchorPane prefHeight="650.0" prefWidth="630.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="650.0" prefWidth="630.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER">
                <children>
                   <TextField fx:id="usernameTextField" layoutX="213.0" layoutY="264.0" prefHeight="25.0" prefWidth="205.0" />
                   <PasswordField fx:id="passwordField" layoutX="213.0" layoutY="313.0" prefHeight="25.0" prefWidth="205.0" />
