@@ -36,7 +36,7 @@ public class AccountListCell extends ListCell<Account> {
 		nameLabel.setFont(Font.font("Arial", 15 ));
 		numberLabel.setFont(Font.font("Arial", 15 ));
 		defaultLabel.setFont(Font.font("Arial", 12));
-		balanceLabel.setFont(Font.font("Helvatica", 24));
+		balanceLabel.setFont(Font.font("Arial", 24));
 		
 		defaultLabel.setPadding(new Insets(1, 1, 1, 12));
 		vbox.setPadding(new Insets(1, 1, 1, 12));
