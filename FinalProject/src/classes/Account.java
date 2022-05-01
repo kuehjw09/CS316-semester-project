@@ -10,6 +10,8 @@
 
 package classes;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,6 +46,7 @@ public class Account {
 	// alternate constructor accepts a ResultSet object
 	public Account(ResultSet resultSet) throws SQLException {
 		this.name = resultSet.getString(2);
+		this.type = resultSet.getString(4);
 		this.accountNumber = resultSet.getInt(5);
 		this.availableBalance = resultSet.getBigDecimal(6);
 		this.totalBalance = resultSet.getBigDecimal(7);
@@ -191,6 +194,47 @@ public class Account {
 		}).map(Transaction::getAmount).reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
 
 		return amount;
+	}
+	
+	/**
+	 * 
+	 * @return an average of all withdrawals for this Account
+	 */
+	public BigDecimal getAverageWithdrawalAmount() {
+		MathContext mc = new MathContext(2, RoundingMode.HALF_DOWN);
+
+		BigDecimal count = BigDecimal.ZERO;
+		for (Transaction transaction : transactions) {
+			if (transaction.getType().equalsIgnoreCase("debit")) {
+				count = count.add(BigDecimal.ONE);
+			}
+		}
+		
+		BigDecimal amount = transactions.stream().filter((transaction) -> {
+			return transaction.getType().equalsIgnoreCase("debit");
+		}).map(Transaction::getAmount).reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
+		
+		return amount.divide(count, mc);
+	}
+	
+	/**
+	 * 
+	 * @return an average of all deposits for this Account
+	 */
+	public BigDecimal getAverageDepositAmount() {
+		MathContext mc = new MathContext(2, RoundingMode.HALF_DOWN);
+		BigDecimal count = BigDecimal.ZERO;
+		for (Transaction transaction : transactions) {
+			if (transaction.getType().equalsIgnoreCase("credit")) {
+				count = count.add(BigDecimal.ONE);
+			}
+		}
+		
+		BigDecimal amount = transactions.stream().filter((transaction) -> {
+			return transaction.getType().equalsIgnoreCase("credit");
+		}).map(Transaction::getAmount).reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
+		
+		return amount.divide(count, mc);
 	}
 
 	/**

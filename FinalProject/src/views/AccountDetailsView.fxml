@@ -136,7 +136,110 @@
             					</Tab>
             					<Tab style="-fx-background-radius: 10 10 0 0;" text="Account Info">
             						<content>
-            							<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            							<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <GridPane alignment="CENTER" layoutX="72.0" layoutY="61.0" prefHeight="280.5" prefWidth="353.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="144.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints maxHeight="137.0" minHeight="10.0" prefHeight="83.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="91.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="107.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0">
+                                             <children>
+                                                <Label contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Name" textFill="#000000b8">
+                                                   <font>
+                                                      <Font name="Arial Bold" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="infoNameLabel" maxWidth="1.7976931348623157E308" text="Label">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Mean Withdrawal" textFill="#000000b8" wrapText="true">
+                                                   <font>
+                                                      <Font name="Arial Bold" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="infoWithdrawalLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Label">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Type" textFill="#000000b8">
+                                                   <font>
+                                                      <Font name="Arial Bold" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="infoTypeLabel" maxWidth="1.7976931348623157E308" text="Label">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <children>
+                                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Mean Deposit" textFill="#000000b8" wrapText="true">
+                                                   <font>
+                                                      <Font name="Arial Bold" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="infoDepositLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Label">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0" GridPane.rowIndex="2">
+                                             <children>
+                                                <Label contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Account Number" textFill="#000000b8">
+                                                   <font>
+                                                      <Font name="Arial Bold" size="18.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="infoNumberLabel" maxWidth="1.7976931348623157E308" text="Label">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="18.0" left="18.0" right="18.0" top="18.0" />
+                                 </padding></AnchorPane>
             						</content>
             					</Tab>
             				</tabs>
@@ -154,7 +257,7 @@
             </LineChart>
          </children>
       </AnchorPane>
-      <HBox layoutX="29.0" prefHeight="61.0" prefWidth="975.0" spacing="9.0" style="-fx-background-color: white; -fx-background-radius: 0 0 30 30;">
+      <HBox layoutX="29.0" prefHeight="61.0" prefWidth="975.0" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 0 0 30 30;">
          <children>
             <Label text="Account Details" textFill="#197af7">
                <font>
@@ -179,7 +282,7 @@
             </Button>
          </children>
          <padding>
-            <Insets left="15.0" />
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
          </padding>
       </HBox>
 	</children>

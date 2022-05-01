@@ -63,6 +63,21 @@ public class AccountDetailsViewController {
 
 	@FXML
 	private Label pendingCreditsLabel;
+	
+	@FXML
+	private Label infoNameLabel;
+	
+	@FXML
+	private Label infoTypeLabel;
+	
+	@FXML 
+	private Label infoNumberLabel;
+	
+	@FXML
+	private Label infoWithdrawalLabel;
+	
+	@FXML
+	private Label infoDepositLabel;
 
 	@FXML
 	private ListView<Transaction> transactionsListView;
@@ -75,7 +90,7 @@ public class AccountDetailsViewController {
 	
 	@FXML
 	void viewAllTransactionsClicked() {
-
+		// not implemented 
 	}
 
 	@FXML
@@ -99,6 +114,12 @@ public class AccountDetailsViewController {
 		totalBalanceLabel.setText(currency.format(currentAccount.getTotalBalance()));
 		pendingDebitsLabel.setText(currency.format(currentAccount.getPendingWithdrawalsAmount().negate()));
 		pendingCreditsLabel.setText("+" + currency.format(currentAccount.getPendingDepositsAmount()));
+		
+		infoNameLabel.setText(currentAccount.getName());
+		infoTypeLabel.setText(currentAccount.getType());
+		infoNumberLabel.setText(String.valueOf(currentAccount.getAccountNumber()));
+ 		infoDepositLabel.setText(currency.format(currentAccount.getAverageDepositAmount()));
+ 		infoWithdrawalLabel.setText(currency.format(currentAccount.getAverageWithdrawalAmount()));
 
 		nameLabel.setText(getCurrentAccount().getName());
 		numberLabel.setText("..." + String.format("%04d", currentAccount.getAccountNumber() % 11000));
