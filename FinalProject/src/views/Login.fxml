@@ -31,23 +31,23 @@
          <right>
             <AnchorPane prefHeight="650.0" prefWidth="630.0" style="-fx-background-color: linear-gradient(#f85717, #de3154, #67008d);" BorderPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="usernameTextField" layoutX="213.0" layoutY="264.0" prefHeight="25.0" prefWidth="205.0" />
-                  <PasswordField fx:id="passwordField" layoutX="213.0" layoutY="313.0" prefHeight="25.0" prefWidth="205.0" />
-                  <Label alignment="CENTER" contentDisplay="TOP" layoutX="176.0" layoutY="147.0" text="Welcome to JavaATM">
+                  <Label alignment="CENTER" contentDisplay="TOP" layoutX="196.0" layoutY="146.0" text="Welcome to JavaATM">
                      <font>
                         <Font name="Tahoma" size="29.0" />
                      </font>
                   </Label>
                   <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="104.0" layoutY="237.0" prefHeight="17.0" prefWidth="419.0" textAlignment="CENTER" textFill="RED" />
-                  <Button fx:id="loginButton" layoutX="260.0" layoutY="356.0" mnemonicParsing="false" onAction="#onLoginPress" prefHeight="25.0" prefWidth="106.0" stylesheets="@../resources/LoginStyles.css" text="Login" />
-                  <Label layoutX="159.0" layoutY="205.0" prefHeight="20.0" prefWidth="308.0" text="Please enter your username and password!">
+                  <Label layoutX="179.0" layoutY="203.0" prefHeight="20.0" prefWidth="308.0" text="Please enter your username and password!">
                      <font>
                         <Font name="Tahoma" size="16.0" />
                      </font>
                   </Label>
-                  <Button layoutX="260.0" layoutY="395.0" mnemonicParsing="false" onAction="#onCreateAccountPress" prefHeight="25.0" prefWidth="106.0" stylesheets="@../resources/LoginStyles.css" text="Create Account" />
-                  <Label layoutX="131.0" layoutY="268.0" text="Username" />
-                  <Label layoutX="134.0" layoutY="317.0" text="Password" />
+                  <Label layoutX="176.0" layoutY="296.0" text="Username" />
+                  <TextField fx:id="usernameTextField" layoutX="283.0" layoutY="292.0" prefHeight="25.0" prefWidth="205.0" />
+                  <Label layoutX="178.0" layoutY="342.0" text="Password" />
+                  <PasswordField fx:id="passwordField" layoutX="283.0" layoutY="338.0" prefHeight="25.0" prefWidth="205.0" />
+                  <Button fx:id="loginButton" contentDisplay="CENTER" layoutX="209.0" layoutY="399.0" mnemonicParsing="false" onAction="#onLoginPress" prefHeight="25.0" prefWidth="106.0" stylesheets="@../resources/LoginStyles.css" text="Login" />
+                  <Button layoutX="364.0" layoutY="399.0" mnemonicParsing="false" onAction="#onCreateAccountPress" prefHeight="25.0" prefWidth="106.0" stylesheets="@../resources/LoginStyles.css" text="Create Account" />
                </children>
             </AnchorPane>
          </right>
