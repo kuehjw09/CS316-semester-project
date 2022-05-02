@@ -244,7 +244,7 @@ public class Account {
 		
 		return amount.divide(count, mc);
 	}
-
+	
 	/**
 	 * Credit this Account with the amount passed to this method; Update the database by calling UpdateTotals method.
 	 * 
@@ -254,6 +254,17 @@ public class Account {
 	public void credit(BigDecimal amount) throws SQLException {
 		setTotalBalance(totalBalance.add(amount)); // add amount to totalBalance
 		updateTotals(); // update Accounts table to reflect changes
+	}
+
+	// overloaded credit method for external transfers
+	public void credit(BigDecimal amount, boolean isExternal) throws SQLException {
+		setTotalBalance(totalBalance.add(amount)); // add amount to totalBalance
+		updateTotals(); // update Accounts table to reflect changes
+		
+		if (isExternal) {
+			Transaction transaction = new Transaction(accountNumber, "External Transfer", "credit", amount);
+			transaction.addTransaction();
+		}
 
 	}
 

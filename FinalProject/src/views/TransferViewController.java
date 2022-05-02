@@ -130,7 +130,9 @@ public class TransferViewController {
             	} else {
             		setTransactionAmount(input);
 					amountTextField.setText(currency.format(getTransactionAmount()));
+					amountTextField.setDisable(true);
 					submitButton.setDisable(false);
+					errorMessageLabel.setText(null);
             	}
 
         	} catch (NumberFormatException exception) {

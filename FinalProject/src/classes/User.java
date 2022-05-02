@@ -129,8 +129,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return String.format("First: %s%nLast: %s%nBirth Date: %s%nUsername: %s%nuser_id: %05d%ndefault_account: %08d%n", getFirstName(),
-				getLastName(), getBirthDate(), getUsername(), getUser_id(), getDefault_Account());
+		return String.format("%s %s%n%s", getFirstName(), getLastName(), getUsername());
 	}
 
 }

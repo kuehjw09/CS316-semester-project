@@ -66,6 +66,10 @@ public class UserSession {
 		}
 		return null;
 	}
+	
+	public DatabaseConnection getDatabaseConnection() {
+		return databaseConnection;
+	}
 
 	/**
 	 * Call a DatabaseConnection method for adding a new account.
@@ -130,9 +134,9 @@ public class UserSession {
 	
 	// overloaded method does not add a Notification
 	public void credit(Account account, BigDecimal creditAmount, boolean isTransfer) throws SQLException {
+
 		// credit the account
 		account.credit(creditAmount);
-		
 		// create a Transaction object and add it to the ArrayList<Transaction>
 		Transaction transaction = new Transaction(account.getAccountNumber(), "Deposit Transaction", "credit",
 				creditAmount);
@@ -152,10 +156,13 @@ public class UserSession {
 	
 	// overloaded method does not add a Notification
 	public void debit(Account account, BigDecimal debitAmount, boolean isTransfer) throws SQLException {
+
+		
 		account.debit(debitAmount);
 		Transaction transaction = new Transaction(account.getAccountNumber(), "Withdrawal Transaction", "debit",
 				debitAmount);
 		transaction.addTransaction();
+
 	}
 
 	/**
@@ -174,6 +181,21 @@ public class UserSession {
 		Notification notification = new Notification(NotificationType.TRANSFER, String.format(
 				"Transfer submitted to account %s from account %s", toAccount.getName(), fromAccount.getName()));
 		addNotification(notification);
+	}
+	
+	public void performExternalTransfer(Account fromAccount, User recipient, BigDecimal amount) throws SQLException {
+		try {
+			debit(fromAccount, amount, false); // debit account; do not create debit notification
+			
+			databaseConnection.performExternalTransfer(recipient, amount); //send the money
+			
+			Notification notification = new Notification(NotificationType.TRANSFER, String.format(
+					"You sent money to " + recipient.getUsername() + "!"));
+			addNotification(notification);
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+
 	}
 
 	public void updateUserSession() {
@@ -194,7 +216,7 @@ public class UserSession {
 		for (Account account : accounts) {
 			accountString += account;
 		}
-		return String.format("UserSession for user %s:%n%snumber of accounts: %d%nnumber of notifications: %d%n%n%s",
-				user.getUsername(), user.toString(), accounts.size(), notifications.size(), accountString);
+		return String.format("UserSession for user %s:%nnumber of accounts: %d%nnumber of notifications: %d%n%n%s",
+				user.getUsername(), accounts.size(), notifications.size(), accountString);
 	}
 }

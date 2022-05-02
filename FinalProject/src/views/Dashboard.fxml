@@ -91,7 +91,7 @@
                   </MenuButton>
                   <MenuButton mnemonicParsing="false" popupSide="TOP" prefHeight="68.0" prefWidth="60.0" style="-fx-background-color: white;">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Send Money" />
+                        <MenuItem mnemonicParsing="false" onAction="#sendMoneyButtonPressed" text="Send Money" />
                         <MenuItem mnemonicParsing="false" onAction="#transferButtonPressed" text="Transfer Funds" />
                      </items>
                      <graphic>

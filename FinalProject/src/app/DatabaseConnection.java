@@ -1,5 +1,6 @@
 package app;
 
+import java.math.BigDecimal;
 /**
  * DatabaseConnection class represents the database connection for an application session.
  *  - Connects to the database and provides methods for interacting with the database within the application
@@ -103,6 +104,51 @@ public class DatabaseConnection {
 		}
 
 		return null; // if no matching username was found, return null
+	}
+
+	/**
+	 * This method is called from SendMoneyViewController and is used when a user
+	 * performs a transfer to another user.
+	 * 
+	 * @return an ArrayList<User> of all Users stored in the database
+	 * @throws SQLException
+	 */
+	public ArrayList<User> getUsers() throws SQLException {
+		ArrayList<User> users = new ArrayList<>();
+		String selectString = "SELECT * FROM DB2.Users WHERE NOT username = ?";
+		try (PreparedStatement selectStatement = connection.prepareStatement(selectString)) {
+			selectStatement.setString(1, currentUser.getUsername());
+			resultSet = selectStatement.executeQuery();
+
+			while (resultSet.next()) {
+				users.add(new User(resultSet));
+			}
+
+			selectStatement.close();
+
+			return users;
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+
+		return null;
+	}
+	
+	public void performExternalTransfer(User recipient, BigDecimal amount) throws SQLException {
+		String selectString = "SELECT * FROM DB2.Accounts HAVING account_number = ?";
+		try (PreparedStatement selectStatement = connection.prepareStatement(selectString)) {
+			selectStatement.setInt(1, recipient.getDefault_Account());
+			
+			resultSet = selectStatement.executeQuery();
+			
+			resultSet.next();
+			
+			Account tempAccount = new Account(resultSet);
+			
+			tempAccount.credit(amount, true);
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
 	}
 
 	/**
@@ -249,7 +295,7 @@ public class DatabaseConnection {
 
 		String updateString = "UPDATE DB2.Transactions SET account_number = ? WHERE account_number = ? AND status = ?  AND transaction_type = ?";
 
-		// transfer all pending transactions to default account
+		// transfer all pending credit transactions to default account
 		try (CallableStatement updateStatement = connection.prepareCall(updateString)) {
 			updateStatement.setInt(1, defaultAccountNumber);
 			updateStatement.setInt(2, oldAccountNumber);
@@ -263,7 +309,7 @@ public class DatabaseConnection {
 		} catch (SQLException exception) {
 			exception.printStackTrace();
 		}
-		
+
 		// delete all transactions associated with the account being deleted
 		String deleteString = "DELETE FROM DB2.Transactions WHERE account_number = ? ";
 		try (CallableStatement deleteStatement = connection.prepareCall(deleteString)) {

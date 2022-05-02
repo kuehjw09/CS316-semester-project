@@ -21,10 +21,10 @@
             </Label>
             <VBox alignment="CENTER_LEFT" layoutX="24.0" layoutY="48.0" prefHeight="536.0" prefWidth="386.0" spacing="21.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="24.0" AnchorPane.rightAnchor="24.0" AnchorPane.topAnchor="48.0">
                <children>
-                  <Label text="Enter the username" />
-                  <TextField prefHeight="56.0" prefWidth="320.0" />
+                  <Label text="Select a User" />
+                  <ChoiceBox fx:id="userChoiceBox" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="362.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0px 0px 2px 0px;" />
                   <Label text="Select an account" />
-                  <ChoiceBox fx:id="toAccountChoiceBox" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="362.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0px 0px 2px 0px;" />
+                  <ChoiceBox fx:id="accountChoiceBox" maxWidth="1.7976931348623157E308" prefHeight="60.0" prefWidth="362.0" style="-fx-background-color: transparent; -fx-border-color: #212121; -fx-border-width: 0px 0px 2px 0px;" />
                   <Label text="Amount" />
                   <TextField fx:id="amountTextField" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="310.0" promptText="\$0.00" style="-fx-background-color: transparent; -fx-border-width: 0px 0px 2px 0px; -fx-border-radius: 3; -fx-border-color: #212121;">
                      <font>

@@ -112,6 +112,19 @@ public class DashboardController {
 			exception.printStackTrace();
 		}
 	}
+	
+	@FXML
+	void sendMoneyButtonPressed(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("SendMoneyView.fxml"));
+		SendMoneyViewController.setCurrentUserSession(getCurrentUserSession());
+		AnchorPane centerPane = (AnchorPane) loader.load();
+		try {
+			anchorPane.getChildren().clear();
+			anchorPane.getChildren().add(centerPane);
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		}
+	}
 
 	@FXML
 	void menuButtonPressed(ActionEvent event) {
