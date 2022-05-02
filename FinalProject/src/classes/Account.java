@@ -214,6 +214,10 @@ public class Account {
 			return transaction.getType().equalsIgnoreCase("debit");
 		}).map(Transaction::getAmount).reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
 		
+		if (count.equals(BigDecimal.ONE) || count.equals(BigDecimal.ZERO)) {
+			return amount;
+		}
+		
 		return amount.divide(count, mc);
 	}
 	
@@ -221,7 +225,7 @@ public class Account {
 	 * 
 	 * @return an average of all deposits for this Account
 	 */
-	public BigDecimal getAverageDepositAmount() {
+	public BigDecimal getAverageDepositAmount() {		
 		MathContext mc = new MathContext(2, RoundingMode.HALF_DOWN);
 		BigDecimal count = BigDecimal.ZERO;
 		for (Transaction transaction : transactions) {
@@ -233,6 +237,10 @@ public class Account {
 		BigDecimal amount = transactions.stream().filter((transaction) -> {
 			return transaction.getType().equalsIgnoreCase("credit");
 		}).map(Transaction::getAmount).reduce(BigDecimal.ZERO, (a, b) -> a.add(b));
+		
+		if (count.equals(BigDecimal.ONE) || count.equals(BigDecimal.ZERO)) {
+			return amount;
+		}
 		
 		return amount.divide(count, mc);
 	}
