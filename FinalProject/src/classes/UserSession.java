@@ -17,15 +17,16 @@ import java.util.function.Function;
 import app.DatabaseConnection;
 
 public class UserSession {
-	private DatabaseConnection databaseConnection = new DatabaseConnection();
+	private DatabaseConnection databaseConnection;
 	private User user; // validated user
 	private ArrayList<Account> accounts; // accounts associated with validated user
 	private ArrayList<Notification> notifications = new ArrayList<>();
 
 	// constructor
-	public UserSession(User user, ArrayList<Account> accounts) throws SQLException {
+	public UserSession(User user, ArrayList<Account> accounts, DatabaseConnection connection) throws SQLException {
 		this.user = user;
 		this.accounts = accounts;
+		this.databaseConnection = connection;
 	}
 
 	public User getUser() {

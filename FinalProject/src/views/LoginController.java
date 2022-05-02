@@ -50,13 +50,12 @@ public class LoginController
 		{
 			try
 			{
-				DatabaseConnection connection = databaseConnection;
-				boolean authenticated = connection.authenticateUser(usernameTextField.getText(),
+				boolean authenticated = databaseConnection.authenticateUser(usernameTextField.getText(),
 						passwordField.getText());
 				if (authenticated == true)
 				{
 					errorLabel.setText("Login Success!");
-					UserSession currentUserSession = connection.getUserSession();
+					UserSession currentUserSession = databaseConnection.getUserSession();
 					userSession = currentUserSession;
 					System.out.printf("%s", currentUserSession);
 					switchToDashboard(event);

@@ -167,7 +167,7 @@ public class DatabaseConnection {
 	 * @throws SQLException
 	 */
 	public UserSession getUserSession() throws SQLException {
-		currentUserSession = new UserSession(currentUser, getAccounts(currentUser));
+		currentUserSession = new UserSession(currentUser, getAccounts(currentUser), this);
 
 		return currentUserSession;
 	}

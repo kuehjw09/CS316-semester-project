@@ -12,9 +12,9 @@
 
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.TransactionViewController">
    <children>
-      <AnchorPane layoutX="347.0" layoutY="39.0" prefHeight="463.0" prefWidth="346.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+      <AnchorPane layoutX="347.0" layoutY="39.0" prefHeight="463.0" prefWidth="346.0" style="-fx-background-color: white; -fx-background-radius: 20;">
          <children>
-            <Label fx:id="typeLabel" alignment="CENTER" layoutX="21.0" layoutY="12.0" text="New Transaction">
+            <Label fx:id="typeLabel" alignment="CENTER" layoutX="24.0" layoutY="20.0" text="New Transaction">
                <font>
                   <Font name="Helvetica Neue" size="24.0" />
                </font>
