@@ -35,8 +35,9 @@
             </AnchorPane>
          </left>
          <right>
-            <AnchorPane prefHeight="650.0" prefWidth="625.0" style="-fx-background-color: linear-gradient(#f85717, #de3154, #67008d);" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="650.0" prefWidth="625.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                <children>
+                  <AnchorPane opacity="0.72" prefHeight="650.0" prefWidth="629.0" style="-fx-background-color: linear-gradient(#f85717, #de3154, #67008d);" />
                   <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="127.0" layoutY="193.0" prefHeight="17.0" prefWidth="500.0" textAlignment="CENTER" textFill="RED" />
                   <Label layoutX="213.0" layoutY="138.0" text="Create Account">
                      <font>
