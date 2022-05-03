@@ -117,7 +117,6 @@ public class ManageAccountsViewController {
 		} else { // inform the user that funds will be transferred to their default account; send a confirmation Alert to proceed. 
 			// confirmation altert; verify option selected (either OK or CANCEL)
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-			alert.setTitle("Manage Accounts");
 			alert.setTitle("Delete Account");
 			alert.setContentText(
 					"When an account is deleted, all available funds and all pending deposits will be transferred to your default account."

@@ -15,7 +15,7 @@
 }
 
 .button:hover {
-  -fx-background-color: linear-gradient(#f85717, #de3154, #67008d);
+  -fx-background-color: linear-gradient(#f85717, #de3154);
 
   -fx-text-fill: white;
 }

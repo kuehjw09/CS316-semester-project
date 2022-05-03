@@ -2,12 +2,12 @@ package classes;
 
 public enum NotificationType {
 	// declare constants of enum type
-	CREATE("Create Notification", "#3d5afe"),
+	CREATE("Create Notification", "#637bfe"),
 	UPDATE("Update Notification", "#33eaff"),
 	CREDIT("Deposit Notification", "#00e676"),
 	TRANSFER("Transfer Notification", "#00b0ff"),
 	DEBIT("Withdrawal Notification", "#ff5252"),
-	DELETE("Delete Notification", "#fb1fa2");
+	DELETE("Delete Notification", "linear-gradient(#f85717, #de3154)");
 	
 	// instance fields
 	private final String message;

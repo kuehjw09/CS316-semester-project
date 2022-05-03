@@ -125,7 +125,9 @@ public class TransferViewController {
         	try {
         		BigDecimal input = new BigDecimal(amountTextField.getText());
         		
-        		if (getCurrentFromAccount().getAvailableBalance().subtract(input).compareTo(BigDecimal.ZERO) < 0.0) {
+        		if (!(input.compareTo(BigDecimal.ZERO) > 0.0)) {
+    				errorMessageLabel.setText("Please enter a valid amount");
+    			} else if (getCurrentFromAccount().getAvailableBalance().subtract(input).compareTo(BigDecimal.ZERO) < 0.0) {
             		errorMessageLabel.setText("Amount exeeds available balance");
             	} else {
             		setTransactionAmount(input);

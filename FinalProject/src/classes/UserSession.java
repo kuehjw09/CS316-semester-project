@@ -98,9 +98,10 @@ public class UserSession {
 	 * @throws SQLException
 	 */
 	public void deleteAccount(Account account) throws SQLException {
-
-		// credit the default account
-		credit(getDefaultAccount(), account.getAvailableBalance());
+		if ((account.getAvailableBalance().compareTo(BigDecimal.ZERO) > 0.0)) {
+			// credit the default account
+			credit(getDefaultAccount(), account.getAvailableBalance());
+		}
 
 		// add pending deposits to ensure accurate balance
 		getDefaultAccount()
