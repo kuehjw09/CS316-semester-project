@@ -21,29 +21,20 @@
          <left>
             <AnchorPane prefHeight="650.0" prefWidth="473.0" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane opacity="0.65" prefHeight="650.0" prefWidth="473.0" style="-fx-background-color: linear-gradient(#f85717, #de3154, #67008d);" />
-                  <ImageView fitHeight="537.0" fitWidth="480.0" layoutX="26.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/images/Transparent_Java_Logo.png" />
-                     </image></ImageView>
-                  <Label layoutX="176.0" layoutY="567.0" text="ATM">
-                     <font>
-                        <Font name="Arial" size="47.0" />
-                     </font>
-                  </Label>
+                  <AnchorPane opacity="0.8" prefHeight="650.0" prefWidth="473.0" style="-fx-background-color: linear-gradient(#f85717, #de3154, #67008d);" />
                </children>
             </AnchorPane>
          </left>
          <right>
             <AnchorPane prefHeight="650.0" prefWidth="625.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="191.0" prefHeight="17.0" prefWidth="582.0" textAlignment="CENTER" textFill="RED" />
-                  <Label layoutX="213.0" layoutY="138.0" text="Create Account">
+                  <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="263.0" prefHeight="17.0" prefWidth="582.0" textAlignment="CENTER" textFill="RED" />
+                  <Label layoutX="215.0" layoutY="220.0" text="Create Account">
                      <font>
                         <Font name="Arial" size="30.0" />
                      </font>
                   </Label>
-                  <GridPane hgap="12.0" layoutX="88.0" layoutY="216.0" prefHeight="246.0" prefWidth="452.0">
+                  <GridPane hgap="12.0" layoutX="89.0" layoutY="280.0" prefHeight="246.0" prefWidth="452.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -80,6 +71,15 @@
                         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onReset" stylesheets="@../resources/LoginStyles.css" text="Reset" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                      </children>
                   </GridPane>
+                  <ImageView fitHeight="155.0" fitWidth="110.0" layoutX="258.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/images/Transparent_Java_Logo.png" />
+                     </image></ImageView>
+                  <Label layoutX="288.0" layoutY="149.0" text="ATM">
+                     <font>
+                        <Font name="Arial" size="28.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </right>
