@@ -14,8 +14,9 @@
    <children>
       <BorderPane layoutX="104.0" layoutY="180.0" prefHeight="583.0" prefWidth="842.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
-            <AnchorPane prefHeight="650.0" prefWidth="471.0" style="-fx-background-color: linear-gradient(white, #e9e9e9);" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="650.0" prefWidth="471.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                <children>
+                  <AnchorPane opacity="0.65" prefHeight="650.0" prefWidth="471.0" style="-fx-background-color: linear-gradient(#f85717, #de3154, #67008d);" />
                   <ImageView fitHeight="537.0" fitWidth="480.0" layoutX="26.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/images/Transparent_Java_Logo.png" />
@@ -31,24 +32,23 @@
          <right>
             <AnchorPane prefHeight="650.0" prefWidth="630.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane opacity="0.72" prefHeight="650.0" prefWidth="630.0" style="-fx-background-color: linear-gradient(#f85717, #de3154, #67008d);" />
-                  <Label alignment="CENTER" contentDisplay="TOP" layoutX="196.0" layoutY="146.0" text="Welcome to JavaATM">
+                  <Label alignment="CENTER" contentDisplay="TOP" layoutX="178.0" layoutY="146.0" text="Welcome to JavaATM">
                      <font>
                         <Font name="Tahoma" size="29.0" />
                      </font>
                   </Label>
                   <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="104.0" layoutY="237.0" prefHeight="17.0" prefWidth="419.0" textAlignment="CENTER" textFill="RED" />
-                  <Label layoutX="179.0" layoutY="203.0" prefHeight="20.0" prefWidth="308.0" text="Please enter your username and password!">
+                  <Label layoutX="161.0" layoutY="202.0" prefHeight="20.0" prefWidth="308.0" text="Please enter your username and password!">
                      <font>
                         <Font name="Tahoma" size="16.0" />
                      </font>
                   </Label>
-                  <Label layoutX="176.0" layoutY="296.0" text="Username" />
-                  <TextField fx:id="usernameTextField" layoutX="283.0" layoutY="292.0" prefHeight="25.0" prefWidth="205.0" />
-                  <Label layoutX="178.0" layoutY="342.0" text="Password" />
-                  <PasswordField fx:id="passwordField" layoutX="283.0" layoutY="338.0" prefHeight="25.0" prefWidth="205.0" />
-                  <Button fx:id="loginButton" contentDisplay="CENTER" layoutX="209.0" layoutY="399.0" mnemonicParsing="false" onAction="#onLoginPress" prefHeight="25.0" prefWidth="106.0" stylesheets="@../resources/LoginStyles.css" text="Login" />
-                  <Button layoutX="364.0" layoutY="399.0" mnemonicParsing="false" onAction="#onCreateAccountPress" prefHeight="25.0" prefWidth="106.0" stylesheets="@../resources/LoginStyles.css" text="Create Account" />
+                  <Label layoutX="161.0" layoutY="296.0" text="Username:" />
+                  <TextField fx:id="usernameTextField" layoutX="262.0" layoutY="292.0" prefHeight="25.0" prefWidth="205.0" />
+                  <Label layoutX="163.0" layoutY="342.0" text="Password:" />
+                  <PasswordField fx:id="passwordField" layoutX="262.0" layoutY="338.0" prefHeight="25.0" prefWidth="205.0" />
+                  <Button fx:id="loginButton" contentDisplay="CENTER" layoutX="189.0" layoutY="399.0" mnemonicParsing="false" onAction="#onLoginPress" prefHeight="25.0" prefWidth="106.0" stylesheets="@../resources/LoginStyles.css" text="Login" />
+                  <Button layoutX="346.0" layoutY="399.0" mnemonicParsing="false" onAction="#onCreateAccountPress" prefHeight="25.0" prefWidth="106.0" stylesheets="@../resources/LoginStyles.css" text="Create Account" />
                </children>
             </AnchorPane>
          </right>
