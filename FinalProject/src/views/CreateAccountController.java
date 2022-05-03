@@ -95,6 +95,7 @@ public class CreateAccountController
 	@FXML
 	void onReset(ActionEvent event)
 	{
+		errorLabel.setText(null);
 		clearValues(); //Method to clear all fields
 
 	}
