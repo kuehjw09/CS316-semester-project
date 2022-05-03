@@ -157,7 +157,7 @@ public class SendMoneyViewController {
     }
     
     public void initialize() {
-		submitButton.setDisable(false);
+		submitButton.setDisable(true);
 		errorMessageLabel.setText(null);
 		
 		for (Account account : currentUserSession.getAccounts()) {
