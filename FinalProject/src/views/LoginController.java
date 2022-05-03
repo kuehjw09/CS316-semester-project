@@ -110,7 +110,7 @@ public class LoginController
 		}
 	}
 
-	public void creationSuccess(String username)
+	public void creationSuccess(String username) //Alert to indicate successful account creation - to be accessed by the CreateAccountController
 	{
 
 		Alert alert = new Alert(AlertType.NONE, "User " + username + " Created!", ButtonType.OK);
