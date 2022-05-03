@@ -66,7 +66,7 @@ public class UserSession {
 		}
 		return null;
 	}
-	
+
 	public DatabaseConnection getDatabaseConnection() {
 		return databaseConnection;
 	}
@@ -120,21 +120,20 @@ public class UserSession {
 	public void credit(Account account, BigDecimal creditAmount) throws SQLException {
 		// credit the account
 		account.credit(creditAmount);
-		
+
 		// create a Transaction object and add it to the ArrayList<Transaction>
 		Transaction transaction = new Transaction(account.getAccountNumber(), "Deposit Transaction", "credit",
 				creditAmount);
 		transaction.addTransaction();
-		
-		// create a Notifcation object and add it to the ArrayList<Notification> 
+
+		// create a Notifcation object and add it to the ArrayList<Notification>
 		Notification notification = new Notification(NotificationType.CREDIT,
 				String.format("Deposit submitted for account %s", account.getName()));
 		addNotification(notification);
 	}
-	
+
 	// overloaded method does not add a Notification
 	public void credit(Account account, BigDecimal creditAmount, boolean isTransfer) throws SQLException {
-
 		// credit the account
 		account.credit(creditAmount);
 		// create a Transaction object and add it to the ArrayList<Transaction>
@@ -153,12 +152,12 @@ public class UserSession {
 				String.format("Withdrawal submitted for account %s", account.getName()));
 		addNotification(notification);
 	}
-	
+
 	// overloaded method does not add a Notification
 	public void debit(Account account, BigDecimal debitAmount, boolean isTransfer) throws SQLException {
-
-		
+		// debit the account
 		account.debit(debitAmount);
+		// add a new transaction
 		Transaction transaction = new Transaction(account.getAccountNumber(), "Withdrawal Transaction", "debit",
 				debitAmount);
 		transaction.addTransaction();
@@ -178,19 +177,27 @@ public class UserSession {
 		debit(fromAccount, amount, true);
 		credit(toAccount, amount, true);
 
+		// create a transfer notification
 		Notification notification = new Notification(NotificationType.TRANSFER, String.format(
 				"Transfer submitted to account %s from account %s", toAccount.getName(), fromAccount.getName()));
 		addNotification(notification);
 	}
-	
+
+	/**
+	 * This method performs an external transfer of funds from one user to another
+	 * @param fromAccount
+	 * @param recipient
+	 * @param amount
+	 * @throws SQLException
+	 */
 	public void performExternalTransfer(Account fromAccount, User recipient, BigDecimal amount) throws SQLException {
 		try {
 			debit(fromAccount, amount, false); // debit account; do not create debit notification
-			
-			databaseConnection.performExternalTransfer(recipient, amount); //send the money
-			
-			Notification notification = new Notification(NotificationType.TRANSFER, String.format(
-					"You sent money to " + recipient.getUsername() + "!"));
+
+			databaseConnection.performExternalTransfer(recipient, amount); // send the money
+
+			Notification notification = new Notification(NotificationType.TRANSFER,
+					String.format("You sent money to " + recipient.getUsername() + "!"));
 			addNotification(notification);
 		} catch (SQLException exception) {
 			exception.printStackTrace();
@@ -198,6 +205,9 @@ public class UserSession {
 
 	}
 
+	/**
+	 * Update the UserSession to ensure consistency with database
+	 */
 	public void updateUserSession() {
 		try {
 			setAccounts(databaseConnection.getAccounts(getUser()));
