@@ -352,7 +352,7 @@ public class CreateAccountController
 					if (isValidUsername(usernameTextField.getText()))
 						
 					{
-						System.out.printf("username %s is valid", usernameTextField.getText());
+						System.out.printf("username %s is valid%n", usernameTextField.getText());
 						if (isValidPassword(passwordValue()))
 						{
 							String firstName = firstnameTextField.getText();
