@@ -481,7 +481,7 @@ public class CreateAccountController
 		hiddenSSNPasswordField.setTooltip(ssnTip);
 		visible_ssnTextField.setTooltip(ssnTip);
 
-		usernameTip.setText("Username must contain:\n" + "3-15 characters\n" + "No special characters\n");
+		usernameTip.setText("Username must contain:\n" + "3-15 characters\n" + "No special characters or spaces\n");
 
 		usernameTextField.setTooltip(usernameTip);
 
