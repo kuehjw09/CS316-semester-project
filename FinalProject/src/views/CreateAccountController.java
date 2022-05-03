@@ -350,7 +350,9 @@ public class CreateAccountController
 				if (isValidSSN(ssnValue()))
 				{
 					if (isValidUsername(usernameTextField.getText()))
+						
 					{
+						System.out.printf("username %s is valid", usernameTextField.getText());
 						if (isValidPassword(passwordValue()))
 						{
 							String firstName = firstnameTextField.getText();
