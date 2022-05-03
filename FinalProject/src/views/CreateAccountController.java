@@ -85,10 +85,7 @@ public class CreateAccountController
 		{
 			switchToLoginSuccess(event); //If true is returned, this method is called to switch to the login screen with a message confirming the success
 		}
-		else
-		{
-			errorLabel.setText("Username already exists!"); //If false is returned, the error label changes to reflect this
-		}
+		
 
 	}
 
@@ -374,6 +371,7 @@ public class CreateAccountController
 							else
 							{
 								System.out.println("User not added");
+								errorLabel.setText("Username already exists!");
 							}
 
 						}
